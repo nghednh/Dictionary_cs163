@@ -49,9 +49,11 @@ nunit-*.xml
 # Build Results of an ATL Project
 [Dd]ebugPS/
 [Rr]eleasePS/
+dlldata.c
 
 # Benchmark Results
 BenchmarkDotNet.Artifacts/
+
 
 # .NET Core
 project.lock.json
