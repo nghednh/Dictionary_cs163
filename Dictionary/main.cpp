@@ -20,6 +20,30 @@ public:
         meaning = "";
     }
 };
+class Trie {
+private:
+    TrieNode* root;
+
+public:
+    Trie() {
+        root = new TrieNode();
+    }
+
+    void insert(const string& word, const string& meaning) {
+        TrieNode* cur = root;
+
+        for (char c : word) {
+            int index = c - 'a';
+            if (cur->children[index] == nullptr) {
+                cur->children[index] = new TrieNode();
+            }
+            cur = cur->children[index];
+        }
+
+        cur->isEndOfWord = true;
+        cur->meaning = meaning;
+    }
+};
 int main()
 {
     sf::RenderWindow window(sf::VideoMode(200, 200), "SFML works!");
