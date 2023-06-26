@@ -56,6 +56,19 @@ public:
 
         return cur->isEndOfWord;
     }
+    bool partSearch(const string& prefix) {
+        TrieNode* cur = root;
+
+        for (char c : prefix) {
+            int index = c - 'a';
+            if (cur->children[index] == nullptr) {
+                return false;
+            }
+            cur = cur->children[index];
+        }
+
+        return true;
+    }
 };
 int main()
 {
