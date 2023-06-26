@@ -1,5 +1,25 @@
 #include <SFML/Graphics.hpp>
-
+#include <iostream>
+#include <vector>
+#include <string>
+#include <fstream>
+#include <cstdlib> 
+#include <ctime> 
+#include <sstream>
+using namespace std;
+using namespace sf;
+const int sizee = 128;
+class TrieNode {
+public:
+    vector<TrieNode*> children;
+    bool isEndOfWord;
+    string meaning;
+    TrieNode() {
+        children = vector<TrieNode*>(sizee, nullptr);
+        isEndOfWord = false;
+        meaning = "";
+    }
+};
 int main()
 {
     sf::RenderWindow window(sf::VideoMode(200, 200), "SFML works!");
