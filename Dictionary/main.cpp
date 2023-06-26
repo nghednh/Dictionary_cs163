@@ -144,7 +144,7 @@ int main()
     cout << trie.partSearch("ca") << endl;
     //return 0;
     //gui
-    sf::RenderWindow window(sf::VideoMode(200, 200), "SFML works!");
+    /*sf::RenderWindow window(sf::VideoMode(200, 200), "SFML works!");
     sf::CircleShape shape(100.f);
     shape.setFillColor(sf::Color::Green);
 
@@ -162,5 +162,5 @@ int main()
         window.display();
     }
 
-    return 0;
+    return 0;*/
 }
