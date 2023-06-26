@@ -43,6 +43,19 @@ public:
         cur->isEndOfWord = true;
         cur->meaning = meaning;
     }
+    bool search(const string& word) {
+        TrieNode* cur = root;
+
+        for (char c : word) {
+            int index = c - 'a';
+            if (cur->children[index] == nullptr) {
+                return false;
+            }
+            cur = cur->children[index];
+        }
+
+        return cur->isEndOfWord;
+    }
 };
 int main()
 {
