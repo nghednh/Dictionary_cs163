@@ -130,6 +130,20 @@ void readDatasetToTrie(const string& filename, Trie& trie) {
 }
 int main()
 {
+    //debug
+    Trie trie;
+    readDatasetToTrie("words.txt", trie);
+    cout << trie.search("abaction") << endl;
+    cout << trie.search("abactor") << endl;
+    cout << trie.search("car") << endl;
+    cout << trie.search("cat:))") << endl;
+    cout << trie.search("dog") << endl;
+
+    cout << trie.partSearch("ab") << endl;
+    cout << trie.partSearch("ba") << endl;
+    cout << trie.partSearch("ca") << endl;
+    //return 0;
+    //gui
     sf::RenderWindow window(sf::VideoMode(200, 200), "SFML works!");
     sf::CircleShape shape(100.f);
     shape.setFillColor(sf::Color::Green);
