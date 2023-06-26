@@ -108,6 +108,26 @@ public:
         return false;
     }
 };
+void readDatasetToTrie(const string& filename, Trie& trie) {
+    ifstream file(filename);
+    if (!file) {
+        cout << "Failed to open the file: " << filename << endl;
+        return;
+    }
+
+    string line;
+    while (getline(file, line)) {
+        istringstream iss(line);
+        string word, meaning;
+
+        if (iss >> word) {
+            getline(iss, meaning);
+            trie.insert(word, meaning);
+        }
+    }
+
+    file.close();
+}
 int main()
 {
     sf::RenderWindow window(sf::VideoMode(200, 200), "SFML works!");
