@@ -69,6 +69,44 @@ public:
 
         return true;
     }
+    void remove(const string& word) {
+        removeOrigin(root, word, 0);
+    }
+
+    bool isEmpty(TrieNode* node) {
+        for (TrieNode* child : node->children) {
+            if (child != nullptr) {
+                return false;
+            }
+        }
+        return true;
+    }
+
+    bool removeOrigin(TrieNode* node, const string& word, int index) {
+        if (index == word.length()) {
+            if (!node->isEndOfWord) {
+                return false;
+            }
+            node->isEndOfWord = false;
+            node->meaning = "";
+            return isEmpty(node);
+        }
+
+        int charIndex = word[index] - 'a';
+        if (node->children[charIndex] == nullptr) {
+            return false;
+        }
+
+        bool shouldDelete = removeOrigin(node->children[charIndex], word, index + 1);
+
+        if (shouldDelete) {
+            delete node->children[charIndex];
+            node->children[charIndex] = nullptr;
+            return isEmpty(node);
+        }
+
+        return false;
+    }
 };
 int main()
 {
