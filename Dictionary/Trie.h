@@ -1,7 +1,13 @@
 #pragma once
 #include <SFML/Graphics.hpp>
-#include <bits/stdc++.h>
-
+#include <iostream>
+#include <vector>
+#include <string>
+#include <fstream>
+#include <cstdlib> 
+#include <ctime> 
+#include <sstream>
+#include "Trie.h"
 using namespace std;
 using namespace sf;
 
