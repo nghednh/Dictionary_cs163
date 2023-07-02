@@ -137,6 +137,7 @@
     <ClCompile Include="History.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="MainScreen.cpp" />
+    <ClCompile Include="nghe_main.cpp" />
     <ClCompile Include="restoreDictionaryScreen.cpp" />
     <ClCompile Include="viewListFavorite.cpp" />
   </ItemGroup>
