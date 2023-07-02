@@ -63,7 +63,19 @@ public:
 
         return cur->isEndOfWord;
     }
+    TrieNode* searchMeaning(const string& word) {
+        TrieNode* cur = root;
 
+        for (char c : word) {
+            int index = c - 'a';
+            if (cur->children[index] == nullptr) {
+                return NULL;
+            }
+            cur = cur->children[index];
+        }
+        if (cur->isEndOfWord)
+            return cur;
+    }
     bool partSearch(const string& prefix) {
         TrieNode* cur = root;
 
