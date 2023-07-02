@@ -278,9 +278,9 @@ void historyScene(vector<string>& historyStack, RenderWindow& window, int& page,
 	Object screen = createObject("content/historyScene.png");
 	Event event;
 	vector<Info> history;
-	for (int i = 0; i < historyStack.size(); i++) {
+	/*for (int i = 0; i < historyStack.size(); i++) {
 		history.push_back(createInfo("content/Oswald-Light.ttf", historyStack[i], 120.0f * scale, (245.0f + 50.0f * i) * scale, (26.25f + 4.75f * i) * scale));
-	}
+	}*/
 	while (window.isOpen() && page == 2)
 	{
 		Vector2f mouse = window.mapPixelToCoords(Mouse::getPosition(window));
@@ -299,8 +299,8 @@ void historyScene(vector<string>& historyStack, RenderWindow& window, int& page,
 			/*for (int i = 0; i < history.size(); i++) {
 				window.draw(history[i].text);
 			}*/
-			window.draw(history[0].text);
-			window.draw(history[1].text);
+			/*window.draw(history[0].text);
+			window.draw(history[1].text);*/
 			window.display();
 
 		}
