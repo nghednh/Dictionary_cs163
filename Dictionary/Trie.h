@@ -1,12 +1,6 @@
 #pragma once
 #include <SFML/Graphics.hpp>
-#include <iostream>
-#include <vector>
-#include <string>
-#include <fstream>
-#include <cstdlib> 
-#include <ctime> 
-#include <sstream>
+#include <bits/stdc++.h>
 
 using namespace std;
 using namespace sf;
@@ -18,6 +12,7 @@ public:
     vector<TrieNode*> children;
     bool isEndOfWord;
     string meaning;
+
     TrieNode() {
         children = vector<TrieNode*>(sizee, nullptr);
         isEndOfWord = false;
@@ -77,8 +72,8 @@ public:
         return true;
     }
 
-    void removeWord(const string& word) {
-        removeOrigin(root, word, 0);
+    bool removeWord(const string& word) {
+        return removeOrigin(root, word, 0);
     }
 
     bool isEmpty(TrieNode* node) {
@@ -90,6 +85,32 @@ public:
         return true;
     }
 
+    void readDatasetToTrie(const string& filename) {
+        ifstream file(filename);
+        if (!file) {
+            cout << "Failed to open the file: " << filename << endl;
+            return;
+        }
+
+        string line;
+        while (getline(file, line)) {
+            istringstream iss(line);
+            string word, meaning;
+
+            if (iss >> word) {
+                getline(iss, meaning);
+                insertWord(word, meaning);
+            }
+        }
+
+        file.close();
+    }
+
+    void clearAll() {
+        clearTrie(root);
+    }
+
+private:
     bool removeOrigin(TrieNode* node, const string& word, int index) {
         if (index == word.length()) {
             if (!node->isEndOfWord) {
@@ -116,37 +137,15 @@ public:
         return false;
     }
 
-    void clearTrie(TrieNode* &root) {
-        if (!root) {
+    void clearTrie(TrieNode* node) {
+        if (!node) {
             return;
         }
 
-        for (int i = 0; i < 128; ++i) {
-            clearTrie(root->children[i]);
+        for (TrieNode* child : node->children) {
+            clearTrie(child);
         }
 
-        delete root;
-        root = nullptr;
+        delete node;
     }
 };
-
-void readDatasetToTrie(const string& filename, Trie& trie) {
-    ifstream file(filename);
-    if (!file) {
-        cout << "Failed to open the file: " << filename << endl;
-        return;
-    }
-
-    string line;
-    while (getline(file, line)) {
-        istringstream iss(line);
-        string word, meaning;
-
-        if (iss >> word) {
-            getline(iss, meaning);
-            trie.insertWord(word, meaning);
-        }
-    }
-
-    file.close();
-}
