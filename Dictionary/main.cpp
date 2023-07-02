@@ -14,7 +14,7 @@ int main()
 {
     //debug
     Trie trie;
-    readDatasetToTrie("words.txt", trie);
+    trie.readDatasetToTrie("words.txt");
     cout << trie.searchWord("abaction") << endl;
     cout << trie.searchWord("abactor") << endl;
     cout << trie.searchWord("car") << endl;
