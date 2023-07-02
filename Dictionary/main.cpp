@@ -52,7 +52,7 @@ int main()
 			break;
 		}
 		case 3:
-		{
+		{editDefScene(trie, window, page, mode, scale);
 			break;
 		}
 		case 4:

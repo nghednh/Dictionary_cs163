@@ -46,3 +46,4 @@ void texting(Info*& text, Uint32 unicode, unsigned int limit);
 //-----------------Draw Scene--------------------------
 void searchScene(RenderWindow& window, int& page, int& mode, const float& scale);
 void historyScene(vector<string>& historyStack, RenderWindow& window, int& page, int& mode, const float& scale);
+void editDefScene(Trie& trie, RenderWindow& window, int& page, int& mode, const float& scale);
