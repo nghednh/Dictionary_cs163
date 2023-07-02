@@ -75,6 +75,7 @@ public:
         }
         if (cur->isEndOfWord)
             return cur;
+        else return NULL;
     }
     bool partSearch(const string& prefix) {
         TrieNode* cur = root;

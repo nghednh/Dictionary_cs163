@@ -237,10 +237,14 @@ void searchScene(RenderWindow& window, int& page, int& mode, const float& scale)
 			{
 				if (event.mouseButton.button == Mouse::Left)
 				{
-					if (isHere(searchBar.bound, mouse))
-						word.check = 1;
+					if (isHere(search.bound, mouse))
+						search.check = true;
 					if (isHere(his1.bound, mouse)) {
 						page = 2;
+						return;
+					}
+					if (isHere(edit1.bound, mouse)) {
+						page = 3;
 						return;
 					}
 				}
@@ -275,7 +279,10 @@ void searchScene(RenderWindow& window, int& page, int& mode, const float& scale)
 	}
 }
 void historyScene(vector<string>& historyStack, RenderWindow& window, int& page, int& mode, const float& scale) {
+	bool entered = 0,trigger_page = 1;
 	Object screen = createObject("content/historyScene.png");
+	Object return1 = createObject("content/return.png", 80.0f * scale, 90.0f * scale);
+	Object return2 = createObject("content/return1.png", 80.0f * scale, 90.0f * scale);
 	Event event;
 	vector<Info> history;
 	/*for (int i = 0; i < historyStack.size(); i++) {
@@ -293,6 +300,18 @@ void historyScene(vector<string>& historyStack, RenderWindow& window, int& page,
 				window.close();
 				break;
 			}
+			case Event::MouseButtonReleased:
+			{
+				if (event.mouseButton.button == Mouse::Left)
+				{
+					
+					if (isHere(return1.bound, mouse)) {
+						page = 1;
+						return;
+					}
+				}
+			}
+			default: break;
 			}
 			window.clear();
 			window.draw(screen.draw);
@@ -301,8 +320,67 @@ void historyScene(vector<string>& historyStack, RenderWindow& window, int& page,
 			}*/
 			/*window.draw(history[0].text);
 			window.draw(history[1].text);*/
+			if (isHere(return1.bound, mouse) || entered)
+				window.draw(return2.draw);
+			else
+				window.draw(return1.draw);
 			window.display();
 
 		}
 	}
+}
+void editDefScene(Trie&trie, RenderWindow& window, int& page, int& mode, const float& scale) {
+	bool entered = 0;
+	Object screen = createObject("content/editScene.png");
+	Object return1 = createObject("content/return.png", 80.0f * scale, 90.0f * scale);
+	Object return2 = createObject("content/return1.png", 80.0f * scale, 90.0f * scale);
+	Object searchBar = createObject("content/searchBar.png", 110.0f * scale, 240.0f * scale);
+	Info search = createInfo("content/Oswald-Light.ttf", "Please Enter The Edit Word", 120.0f * scale, 245.0f * scale, 26.25f * scale);
+	Event event;
+	while (window.isOpen() && page == 3)
+	{
+		Vector2f mouse = window.mapPixelToCoords(Mouse::getPosition(window));
+		while (window.pollEvent(event))
+		{
+			switch (event.type)
+			{
+			case Event::Closed:
+			{
+				window.close();
+				break;
+			}
+			case Event::MouseButtonReleased:
+			{
+				if (event.mouseButton.button == Mouse::Left)
+				{
+
+					if (isHere(return1.bound, mouse)) {
+						page = 1;
+						return;
+					}
+					if (isHere(search.bound, mouse))
+						search.check = true;
+				}
+			}break;
+			case Event::TextEntered:
+			{
+				texting(search, event.text.unicode, 10);
+				break;
+			}
+			default: break;
+			}
+			window.clear();
+			window.draw(screen.draw);
+			window.draw(searchBar.draw);
+			window.draw(search.text);
+			if (isHere(return1.bound, mouse) || entered)
+				window.draw(return2.draw);
+			else
+				window.draw(return1.draw);
+			window.draw(search.text);
+			window.display();
+			
+		}
+	}
+	cout << search.s;
 }
