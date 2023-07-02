@@ -117,6 +117,7 @@ public:
     }
 
 private:
+    // this function not return if the word is delete or not. it just use backtracking to remove the word
     bool removeOrigin(TrieNode* node, const string& word, int index) {
         if (index == word.length()) {
             if (!node->isEndOfWord) {

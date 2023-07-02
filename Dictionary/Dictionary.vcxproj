@@ -134,6 +134,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="remove.cpp" />
   </ItemGroup>
   <ItemGroup>
     <Text Include="words.txt" />
