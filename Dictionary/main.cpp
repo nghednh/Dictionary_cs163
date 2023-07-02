@@ -7,6 +7,7 @@
 #include <ctime> 
 #include <sstream>
 #include "Trie.h"
+#include "History.h"
 using namespace std;
 using namespace sf;
 
@@ -15,7 +16,7 @@ int main()
     //debug
     Trie trie;
     trie.readDatasetToTrie("words.txt");
-    cout << trie.searchWord("abaction") << endl;
+   /* cout << trie.searchWord("abaction") << endl;
     cout << trie.searchWord("abactor") << endl;
     cout << trie.searchWord("car") << endl;
     cout << trie.searchWord("cat:))") << endl;
@@ -23,26 +24,83 @@ int main()
 
     cout << trie.partSearch("ab") << endl;
     cout << trie.partSearch("ba") << endl;
-    cout << trie.partSearch("ca") << endl;
-    //return 0;
-    //gui
-    /*sf::RenderWindow window(sf::VideoMode(200, 200), "SFML works!");
-    sf::CircleShape shape(100.f);
-    shape.setFillColor(sf::Color::Green);
+    cout << trie.partSearch("ca") << endl;*/
+	// Test UI history
+	int page = 1;
+	int mode = 1;
+	vector<string> historyStack;
+	storeHistory(trie, historyStack, mode);
+	displayHistory(historyStack, mode);
+	RenderWindow window;
+	Image icon;
+	float scale = 1.5f;
+	window.create(VideoMode(1000.0f * scale, 750.0f * scale), "CS163-Dictionary", Style::Close);
 
-    while (window.isOpen())
-    {
-        sf::Event event;
-        while (window.pollEvent(event))
-        {
-            if (event.type == sf::Event::Closed)
-                window.close();
-        }
 
-        window.clear();
-        window.draw(shape);
-        window.display();
-    }
+	while (page > 0 && window.isOpen())
+	{
+		switch (page)
+		{
+		case 1:
+		{
+			searchScene(window, page, mode, scale);
+			break;
+		}
+		case 2:
+		{
+			historyScene(historyStack, window, page, mode, scale);
+			break;
+		}
+		case 3:
+		{
+			break;
+		}
+		case 4:
+		{
 
-    return 0;*/
+			break;
+		}
+		case 5:
+		{
+
+			break;
+		}
+		case 6:
+		{
+
+			break;
+		}
+		case 7:
+		{
+
+			break;
+		}
+		case 8:
+		{
+
+			break;
+		}
+		case 9:
+		{
+
+			break;
+		}
+		case 11:
+		{
+
+			break;
+		}
+		case 13:
+		{
+
+			break;
+		}
+		default:
+		{
+			break;
+		}
+		}
+	}
+	writeHistoryToFile(trie, historyStack, mode);
+	return 0;
 }
