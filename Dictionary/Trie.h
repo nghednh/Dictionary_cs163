@@ -39,7 +39,7 @@ public:
         TrieNode* cur = root;
 
         for (char c : word) {
-            int index = c - 'a';
+            int index = c - '!';
             if (cur->children[index] == nullptr) {
                 cur->children[index] = new TrieNode();
             }
@@ -54,7 +54,7 @@ public:
         TrieNode* cur = root;
 
         for (char c : word) {
-            int index = c - 'a';
+            int index = c - '!';
             if (cur->children[index] == nullptr) {
                 return false;
             }
@@ -67,7 +67,7 @@ public:
         TrieNode* cur = root;
 
         for (char c : word) {
-            int index = c - 'a';
+            int index = c - '!';
             if (cur->children[index] == nullptr) {
                 return NULL;
             }
@@ -81,7 +81,7 @@ public:
         TrieNode* cur = root;
 
         for (char c : prefix) {
-            int index = c - 'a';
+            int index = c - '!';
             if (cur->children[index] == nullptr) {
                 return false;
             }
@@ -140,7 +140,7 @@ private:
             return isEmpty(node);
         }
 
-        int charIndex = word[index] - 'a';
+        int charIndex = word[index] - '!';
         if (node->children[charIndex] == nullptr) {
             return false;
         }
