@@ -63,7 +63,7 @@ public:
 
         return cur->isEndOfWord;
     }
-    TrieNode* searchMeaning(const string& word) {
+    TrieNode* searchWordNode(const string& word) {
         TrieNode* cur = root;
 
         for (char c : word) {
