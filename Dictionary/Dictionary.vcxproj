@@ -139,7 +139,7 @@
     <ClCompile Include="MainScreen.cpp" />
     <ClCompile Include="nghe_main.cpp" />
     <ClCompile Include="restoreDictionaryScreen.cpp" />
-    <ClCompile Include="viewListFavorite.cpp" />
+    <ClCompile Include="search_saveFavorList.cpp" />
   </ItemGroup>
   <ItemGroup>
     <Text Include="words.txt" />
