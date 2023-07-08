@@ -8,6 +8,7 @@
 #include <sstream>
 #include "Trie.h"
 #include "History.h"
+#include "MainScreen.h";
 using namespace std;
 using namespace sf;
 
@@ -27,6 +28,7 @@ int main()
 //    cout << trie.partSearch("ca") << endl;*/
 //	// Test UI history
 	Trie trie;
+	Trie favor_trie;
 	trie.readDatasetToTrie("words.txt");
 	int page = 1;
 	int mode = 1;
@@ -44,7 +46,8 @@ int main()
 		{
 		case 1:
 		{
-			searchScene(window, page, mode, scale);
+			search_addfavorite(window, trie, favor_trie);
+			/*searchScene(window, page, mode, scale);*/
 			break;
 		}
 		case 2:
@@ -58,7 +61,7 @@ int main()
 		}
 		case 4:
 		{
-
+			
 			break;
 		}
 		case 5:

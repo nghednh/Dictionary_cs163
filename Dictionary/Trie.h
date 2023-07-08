@@ -17,11 +17,13 @@ class TrieNode {
 public:
     vector<TrieNode*> children;
     bool isEndOfWord;
+    bool isFavorite;
     string meaning;
 
     TrieNode() {
         children = vector<TrieNode*>(sizee, nullptr);
         isEndOfWord = false;
+        isFavorite = false;
         meaning = "";
     }
 };

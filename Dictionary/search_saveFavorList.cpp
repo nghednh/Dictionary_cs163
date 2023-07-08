@@ -1,5 +1,5 @@
-#include "MainScreen.h"
-void search_addfavorite(RenderWindow& window, Trie trie, Trie favor_trie) {
+#include "Trie.h"
+void search_addfavorite(RenderWindow& window, Trie trie, Trie &favor_trie) {
     sf::Texture scene;
     scene.loadFromFile("../Dictionary/content/scene.png");
 
@@ -47,7 +47,7 @@ void search_addfavorite(RenderWindow& window, Trie trie, Trie favor_trie) {
     cir_favor.setFillColor(sf::Color::Transparent);
 
     sf::Font font;
-    font.loadFromFile("../Font/arial_narrow_7.ttf");
+    font.loadFromFile("../Dictionary/content/Oswald-Light.ttf");
 
     string user_text;
     string meaning;
@@ -108,10 +108,10 @@ void search_addfavorite(RenderWindow& window, Trie trie, Trie favor_trie) {
                         }
                     }
                     //Check whether word is exist in trie/favor_trie or not, 
-                    if (trie.search(user_text)) {
-                        meaning = trie.search(user_text)->meaning;
-                        found.setString(trie.search(user_text)->meaning);
-                        if (!favor_trie.search(user_text)) {
+                    if (trie.searchWord(user_text)) {
+                        meaning = trie.searchWordNode(user_text)->meaning;
+                        found.setString(trie.searchWordNode(user_text)->meaning);
+                        if (!trie.searchWordNode(user_text)->isFavorite) {
                             spr_favor.setTexture(star);
                             display_star = true;
                         }
@@ -133,10 +133,18 @@ void search_addfavorite(RenderWindow& window, Trie trie, Trie favor_trie) {
                     window.setMouseCursor(cursor);
                 }
                 if (event.type == sf::Event::MouseButtonPressed && sf::Mouse::isButtonPressed(sf::Mouse::Left)) {
-                    check_save = true;
-                    trie.search(user_text)->isFavorite = true;
-                    spr_favor.setTexture(starSaved);
-                    display_star = true;
+                    if (trie.searchWordNode(user_text)->isFavorite == false) {
+                        check_save = true;
+                        trie.searchWordNode(user_text)->isFavorite = true;
+                        spr_favor.setTexture(starSaved);
+                        display_star = true;
+                    }
+                    else {
+                        check_save = false;
+                        trie.searchWordNode(user_text)->isFavorite = false;
+                        spr_favor.setTexture(star);
+                        display_star = true;
+                    }
                 }
             }
             else {
@@ -160,7 +168,7 @@ void search_addfavorite(RenderWindow& window, Trie trie, Trie favor_trie) {
         window.display();
         //Save favorite word to favorite list of words.
         if (check_save) {
-            favor_trie.insert(user_text, meaning);
+            favor_trie.insertWord(user_text, meaning);
             ofstream fout;
             fout.open("../Dictionary/favorite.txt", ios::app);
             fout << user_text << ' ' << meaning;
@@ -168,5 +176,6 @@ void search_addfavorite(RenderWindow& window, Trie trie, Trie favor_trie) {
             fout.close();
             check_save = false;
         }
+        else favor_trie.removeWord(user_text);
     }
 }
