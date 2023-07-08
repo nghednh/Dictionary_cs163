@@ -1,5 +1,9 @@
+<<<<<<< Updated upstream
 abaction 
 abaction la gi vay
 abactor thang ne
 abactor su khon ngoan
-abactorsu khon ngoan
+abactorsu khon ngoan
+=======
+abaction	su pha binh
+>>>>>>> Stashed changes
