@@ -10,7 +10,7 @@ void storeHistory(Trie& trie, vector<string>& historyStack, int mode) {
 		case 2: read.open("History/EngViet.txt"); break;
 		case 3:read.open("History/Emoji.txt"); break;
 		default:break;
-		}historyStack.push_back(searching + trie.searchMeaning(searching)->meaning);
+		}historyStack.push_back(searching + trie.searchWordNode(searching)->meaning);
 		while (getline(read, line)) {
 			historyStack.push_back(line);
 		}
@@ -264,14 +264,8 @@ void searchScene(RenderWindow& window, int& page, int& mode, const float& scale)
 			window.clear();
 			window.draw(screen.draw);
 			window.draw(searchBar.draw);
-			if (isHere(his2.bound, mouse) || entered)
-				window.draw(his1.draw);
-			else
-				window.draw(his2.draw);
-			if (isHere(edit2.bound, mouse) || entered)
-				window.draw(edit1.draw);
-			else
-				window.draw(edit2.draw);
+			drawWhich(window, his1, his2, mouse);
+			drawWhich(window, edit1, edit2, mouse);
 			window.draw(search.text);
 
 			window.display();
@@ -279,15 +273,25 @@ void searchScene(RenderWindow& window, int& page, int& mode, const float& scale)
 	}
 }
 void historyScene(vector<string>& historyStack, RenderWindow& window, int& page, int& mode, const float& scale) {
-	bool entered = 0,trigger_page = 1;
+	bool entered = 0;
+	
 	Object screen = createObject("content/historyScene.png");
 	Object return1 = createObject("content/return.png", 80.0f * scale, 90.0f * scale);
 	Object return2 = createObject("content/return1.png", 80.0f * scale, 90.0f * scale);
+	Object left = createObject("content/left.png", 492.0f * scale, 644.0f * scale);
+	Object left_point = createObject("content/left_point.png", 492.0f * scale, 644.0f * scale);
+	Object left_valid = createObject("content/left_valid.png", 492.0f * scale, 644.0f * scale);
+	Object right = createObject("content/right.png", 510.0f * scale, 644.0f * scale);
+	Object right_point = createObject("content/right_point.png", 510.0f * scale, 644.0f * scale);
+	Object right_valid = createObject("content/right_valid.png", 510.0f * scale, 644.0f * scale);
 	Event event;
+	Info test = createInfo("content/Oswald-Light.ttf",historyStack[0], 110.0f * scale, 245.0f * scale, 30.25f * scale);
+	int change = 0, count = historyStack.size();
+	bool trigger_page = true;
 	vector<Info> history;
-	/*for (int i = 0; i < historyStack.size(); i++) {
-		history.push_back(createInfo("content/Oswald-Light.ttf", historyStack[i], 120.0f * scale, (245.0f + 50.0f * i) * scale, (26.25f + 4.75f * i) * scale));
-	}*/
+	for (int i = 0; i < 8; i++) {
+	//	history[i] = createInfo("content/Oswald-Regular.ttf,");
+	}
 	while (window.isOpen() && page == 2)
 	{
 		Vector2f mouse = window.mapPixelToCoords(Mouse::getPosition(window));
@@ -304,7 +308,7 @@ void historyScene(vector<string>& historyStack, RenderWindow& window, int& page,
 			{
 				if (event.mouseButton.button == Mouse::Left)
 				{
-					
+
 					if (isHere(return1.bound, mouse)) {
 						page = 1;
 						return;
@@ -315,27 +319,30 @@ void historyScene(vector<string>& historyStack, RenderWindow& window, int& page,
 			}
 			window.clear();
 			window.draw(screen.draw);
-			/*for (int i = 0; i < history.size(); i++) {
-				window.draw(history[i].text);
-			}*/
-			/*window.draw(history[0].text);
-			window.draw(history[1].text);*/
-			if (isHere(return1.bound, mouse) || entered)
-				window.draw(return2.draw);
-			else
-				window.draw(return1.draw);
-			window.display();
+			drawWhich(window, return2, return1, mouse);
+			window.draw(test.text);
 
+			window.display();
 		}
 	}
 }
 void editDefScene(Trie&trie, RenderWindow& window, int& page, int& mode, const float& scale) {
-	bool entered = 0;
+	bool entered1 = 0;
+	int ableEdit = 0;
 	Object screen = createObject("content/editScene.png");
 	Object return1 = createObject("content/return.png", 80.0f * scale, 90.0f * scale);
 	Object return2 = createObject("content/return1.png", 80.0f * scale, 90.0f * scale);
 	Object searchBar = createObject("content/searchBar.png", 110.0f * scale, 240.0f * scale);
 	Info search = createInfo("content/Oswald-Light.ttf", "Please Enter The Edit Word", 120.0f * scale, 245.0f * scale, 26.25f * scale);
+	Info enterEdit = createInfo("content/Oswald-Light.ttf", "New Definition", 325.0f * scale, 430.0f * scale, 26.25f * scale);
+	Object canEdit = createObject("content/canEdit.png", 300.0f * scale, 350.0f * scale);
+	Object cannotEdit = createObject("content/cannotEdit.png", 300.0f * scale, 350.0f * scale);
+	Object ok1 = createObject("content/ok2.png", 470.0f * scale, 510.0f * scale);
+	Object ok2 = createObject("content/ok1.png", 470.0f * scale, 510.0f * scale);
+	Object ok3 = createObject("content/ok2.png", 390.0f * scale, 510.0f * scale);
+	Object ok4 = createObject("content/ok1.png", 390.0f * scale, 510.0f * scale);
+	Object return3 = createObject("content/return2.png", 310.0f * scale, 510.0f * scale);
+	Object return4 = createObject("content/return3.png", 310.0f * scale, 510.0f * scale);
 	Event event;
 	while (window.isOpen() && page == 3)
 	{
@@ -359,28 +366,74 @@ void editDefScene(Trie&trie, RenderWindow& window, int& page, int& mode, const f
 						return;
 					}
 					if (isHere(search.bound, mouse))
+					{
 						search.check = true;
+						enterEdit.check = false;
+					}
+
+					 if (ableEdit == 1) {
+						if (isHere(enterEdit.bound, mouse))
+						{
+							enterEdit.check = true;
+							search.check = false;
+						}
+						if (isHere(ok1.bound, mouse)) {
+							if (trie.searchWord(search.s) && ableEdit == 1) {
+								trie.searchWordNode(search.s)->meaning = " " + enterEdit.s;
+							};
+							page = 3;
+							return;
+						}
+						if (isHere(return3.bound, mouse)) {
+							page = 3;
+							return;
+						}
+					}
+					 if (ableEdit == 2) {
+						if (isHere(ok3.bound, mouse)) {
+							page = 3;
+							return;
+						}
+					}
 				}
 			}break;
 			case Event::TextEntered:
-			{
-				texting(search, event.text.unicode, 10);
+			{if (!Keyboard::isKeyPressed(Keyboard::Return))
+				texting(search, event.text.unicode, 100);
+			else
+				entered1 = 1;
+	           	if (ableEdit == 1)
+					texting(enterEdit, event.text.unicode, 100);
 				break;
 			}
 			default: break;
 			}
+			
 			window.clear();
 			window.draw(screen.draw);
 			window.draw(searchBar.draw);
 			window.draw(search.text);
-			if (isHere(return1.bound, mouse) || entered)
+			if (isHere(return1.bound, mouse) )
 				window.draw(return2.draw);
 			else
 				window.draw(return1.draw);
 			window.draw(search.text);
-			window.display();
-			
+			if (ableEdit == 1) {
+				window.draw(canEdit.draw);
+				window.draw(enterEdit.text);
+				drawWhich(window, ok2, ok1, mouse);
+				drawWhich(window, return4, return3, mouse);
+			}
+			else if (ableEdit == 2) {
+				window.draw(cannotEdit.draw);
+				drawWhich(window, ok4, ok3, mouse);
+			}
+			window.display();	
 		}
+		if (trie.searchWord(search.s) && entered1 == 1) {
+			ableEdit = 1;
+		}
+		else if(!trie.searchWord(search.s)&& entered1==1)
+			ableEdit = 2;
 	}
-	cout << search.s;
 }

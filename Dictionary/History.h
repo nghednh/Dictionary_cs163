@@ -1,5 +1,10 @@
 #pragma once
 #include "Trie.h"
+struct History {
+	string word;
+	string meaning;
+	History* pNext;
+};
 void storeHistory(Trie& trie, vector<string>& historyStack, int mode);
 void writeHistoryToFile(Trie& trie, vector<string>& historyStack, int mode);
 void displayHistory(vector<string>& historyStack, int mode);
