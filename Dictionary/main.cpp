@@ -29,7 +29,7 @@ int main()
 //	// Test UI history
 	Trie trie;
 	Trie favor_trie;
-	trie.readDatasetToTrie("words.txt");
+	trie.readDatasetToTrie("../Dictionary/EngEng/words.txt");
 	int page = 1;
 	int mode = 1;
 	vector<string> historyStack;

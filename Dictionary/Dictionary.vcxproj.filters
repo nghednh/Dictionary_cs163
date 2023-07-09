@@ -41,6 +41,9 @@
     <Text Include="words.txt">
       <Filter>Resource Files</Filter>
     </Text>
+    <Text Include="favorite.txt">
+      <Filter>Resource Files</Filter>
+    </Text>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Trie.h">

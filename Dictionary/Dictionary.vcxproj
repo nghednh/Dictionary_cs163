@@ -142,6 +142,7 @@
     <ClCompile Include="search_saveFavorList.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <Text Include="favorite.txt" />
     <Text Include="words.txt" />
   </ItemGroup>
   <ItemGroup>
