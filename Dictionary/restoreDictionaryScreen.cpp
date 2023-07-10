@@ -1,10 +1,10 @@
 #include "restoreDictionaryScreen.h"
-#include "MainScreen.h"
+#include "Operation.h"
 
-void restoreDictionary()
+void restoreDictionary(string typeDictionary)
 {
-    ifstream fin("Src/Data/backUp.txt");    // Change after create 5 main mode Vie-Eng, Eng-Vie, Eng-Eng, Slang, Emo
-    ofstream fout("Src/Data/mainDocument.txt");     // Change after create 5 main mode Vie-Eng, Eng-Vie, Eng-Eng, Slang, Emo
+    ifstream fin("Data/" + typeDictionary + "/backup.txt");
+    ofstream fout("Data/" + typeDictionary + "/document.txt");
 
     if (fin && fout) {
         string line;
@@ -20,126 +20,108 @@ void restoreDictionary()
     fout.close();
 }
 
-
-void restoreDictionaryScreen (RenderWindow &app, Trie &trie)
+void restoreDictionaryScreen(RenderWindow& window, string typeDictionary, Trie& trie)
 {
-    // Tracking
-    int state = 0;
-
-    // Clock
     Clock clickClock;
 
-    // Font
-    Font font;
-    font.loadFromFile("Src/Font/arial_narrow_7.ttf");
+    Object screen = createObject("content/scene.png");
+    Object askToReset = createObject("content/searchBar.png", 200, 360);
+    Info resetText = createInfo("arial.ttf", "Do you want to reset your " + typeDictionary + " Dictionary?", 220, 360, 40);
 
-    // Button Shape
-    RectangleShape askToRestoreButton (Vector2f (900, 50));
-    askToRestoreButton.setFillColor (Color::White);
-    askToRestoreButton.setPosition (400, 450);
-    askToRestoreButton.setOutlineThickness (2);
-    askToRestoreButton.setOutlineColor (Color (204, 204, 204));
+    Object submit = createObject("content/submit.png", 200, 700);
+    Object submitMove = createObject("content/submitMove.png", 200, 700);
+    Object submitPressed = createObject("content/submitPressed.png", 200, 700);
+    int submitState = 0;
 
-    RectangleShape submitButton (Vector2f (220, 50));
-    submitButton.setFillColor (Color::White);
-    submitButton.setPosition (400, 600);
-    submitButton.setOutlineThickness (2);
-    submitButton.setOutlineColor (Color (157, 209, 255));
+    Object back = createObject("content/back.png", 200, 780);
+    Object backMove = createObject("content/backMove.png", 200, 780);
+    Object backPressed = createObject("content/backPressed.png", 200, 780);
+    int backState = 0;
 
-    RectangleShape exitButton (Vector2f (220, 50));
-    exitButton.setFillColor (Color::White);
-    exitButton.setPosition (400, 750);
-    exitButton.setOutlineThickness (2);
-    exitButton.setOutlineColor (Color (157, 209, 255));
+    Event e;
 
-    // Button Text
-    Text askToRestoreText ("Do you want to restore your dictionary?", font, 50);
-    askToRestoreText.setPosition (410, 445);
-    askToRestoreText.setFillColor (Color (136, 136, 136));
-
-    Text submitText ("Submit", font, 50);
-    submitText.setPosition (410, 595);
-    submitText.setFillColor (Color (52, 142, 254));
-
-    Text exitText ("Exit", font, 50);
-    exitText.setPosition (410, 745);
-    exitText.setFillColor (Color (52, 142, 254));
-
-    // Screen
-    while (app.isOpen()) {
-        Event e;
-
-        while (app.pollEvent (e)) {
+    while (window.isOpen()) {
+        Vector2f mouse = window.mapPixelToCoords(Mouse::getPosition(window));
+        while (window.pollEvent(e)) {
             if (e.type == Event::Closed) {
-                trie.clearAll();
-                app.close ();
+                window.close();
             }
             else if (e.type == Event::KeyPressed && e.key.code == Keyboard::Escape) {
-                exitButton.setFillColor (Color (202, 216, 229));
-                state = 1;
+                backState = 2;
                 clickClock.restart();
             }
-            else if (e.type == Event::KeyPressed && e.key.code == Keyboard::Enter) {
-                submitButton.setFillColor(Color (202, 216, 229));
-                state = 2;
+            else if (e.type == Event::KeyPressed && e.key.code == Keyboard::Return) {
+                restoreDictionary(typeDictionary);
+                submitState = 2;
                 clickClock.restart();
             }
             else if (e.type == Event::MouseMoved) {
-                Vector2f mousePos = app.mapPixelToCoords (Mouse::getPosition(app));
-                if (submitButton.getGlobalBounds ().contains (mousePos))
-                {
-                    submitButton.setFillColor (Color (225, 241, 255));
+                if (isHere(submit.bound, mouse)) {
+                    submitState = 1;
                 }
-                else
-                {
-                    submitButton.setFillColor (Color::White);
+                else {
+                    submitState = 0;
                 }
-                if (exitButton.getGlobalBounds ().contains (mousePos))
-                {
-                    exitButton.setFillColor (Color (225, 241, 255));
+                if (isHere(back.bound, mouse)) {
+                    backState = 1;
                 }
-                else
-                {
-                    exitButton.setFillColor (Color::White);
+                else {
+                    backState = 0;
                 }
             }
             else if (e.type == Event::MouseButtonPressed) {
-                Vector2f mousePos = app.mapPixelToCoords (Mouse::getPosition(app));
-                if (exitButton.getGlobalBounds ().contains (mousePos))
-                {
-                    exitButton.setFillColor (Color (202, 216, 229));
-                    state = 1;
+                if (isHere(back.bound, mouse)) {
+                    backState = 2;
                     clickClock.restart();
                 }
-                else if (submitButton.getGlobalBounds ().contains (mousePos)) {
-                    submitButton.setFillColor(Color (202, 216, 229));
-                    state = 2;
+                else if (isHere(submit.bound, mouse)) {
+                    restoreDictionary(typeDictionary);
+                    submitState = 2;
                     clickClock.restart();
                 }
             }
         }
 
-        if (state == 1 && clickClock.getElapsedTime().asMilliseconds() >= 250) {
-            state = 0;
-            MainScreen(app, trie);
+        if (submitState == 2 && clickClock.getElapsedTime().asMilliseconds() >= 100) {
+            if (isHere(submit.bound, mouse)) {
+                submitState = 1;
+            }
+            else {
+                submitState = 0;
+            }
         }
-        else if (state == 2 && clickClock.getElapsedTime().asMilliseconds() >= 250) {
-            state = 0;
-            restoreDictionary();
-            submitButton.setFillColor(Color (225, 241, 255));
+        if (backState == 2 && clickClock.getElapsedTime().asMilliseconds() >= 100) {
+            Operation(window, typeDictionary, trie);
         }
 
-        app.clear (Color (96, 169, 255));
 
-        app.draw(askToRestoreButton);
-        app.draw(askToRestoreText);
+        window.clear();
 
-        app.draw(submitButton);
-        app.draw(submitText);
+        window.draw(screen.draw);
+        window.draw(askToReset.draw);
+        window.draw(resetText.text);
 
-        app.draw(exitButton);
-        app.draw(exitText);
+        if (submitState == 0) {
+            window.draw(submit.draw);
+        }
+        else if (submitState == 1) {
+            window.draw(submitMove.draw);
+        }
+        else {
+            window.draw(submitPressed.draw);
+        }
 
-        app.display ();
+        if (backState == 0) {
+            window.draw(back.draw);
+        }
+        else if (backState == 1) {
+            window.draw(backMove.draw);
+        }
+        else {
+            window.draw(backPressed.draw);
+        }
+
+        window.display();
     }
 }
+

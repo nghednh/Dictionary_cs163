@@ -1,3 +1,4 @@
+/*
 #include "History.h"
 void storeHistory(Trie& trie, vector<string>& historyStack, int mode) {
 	string searching, line;
@@ -437,3 +438,4 @@ void editDefScene(Trie&trie, RenderWindow& window, int& page, int& mode, const f
 			ableEdit = 2;
 	}
 }
+*/

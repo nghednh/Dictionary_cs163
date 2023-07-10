@@ -1,140 +1,375 @@
 #include "MainScreen.h"
-#include "addNewWordScreen.h"
-#include "restoreDictionaryScreen.h"
+#include "Operation.h"
 
-void MainScreen (RenderWindow &app, Trie &trie)
+//-------------------UI-----------------
+Object createObject(string s, int x, int y)
 {
-    // Ttracking
-    int state = 0;
+	Object me;
+	me.txt.loadFromFile(s);
+	me.draw.setTexture(me.txt);
+	me.draw.setPosition(x, y);
+	me.bound = me.draw.getGlobalBounds();
+	return me;
+}
 
-    // Clock
-    Clock clickClock;
+Object* createObjectTest(string s, int x, int y)
+{
+	Object* me = new Object;
+	me->txt.loadFromFile(s);
+	me->draw.setTexture(me->txt);
+	me->draw.setPosition(x, y);
+	me->bound = me->draw.getGlobalBounds();
+	return me;
+}
 
-    // Font
-    Font font;
-    font.loadFromFile("Src/Font/arial_narrow_7.ttf");
+Object createObject(string s)
+{
+	Object me;
+	me.txt.loadFromFile(s);
+	me.draw.setTexture(me.txt);
+	me.bound = me.draw.getGlobalBounds();
+	return me;
+}
 
-    // Button Shape
-    RectangleShape addNewWordButton (Vector2f (220, 50));
-    addNewWordButton.setFillColor (Color::White);
-    addNewWordButton.setPosition (400, 450);
-    addNewWordButton.setOutlineThickness (2);
-    addNewWordButton.setOutlineColor (Color (157, 209, 255));
+Object* createObjectTest(string s)
+{
+	Object* me = new Object;
+	me->txt.loadFromFile(s);
+	me->draw.setTexture(me->txt);
+	me->bound = me->draw.getGlobalBounds();
+	return me;
+}
+bool isHere(FloatRect& bound, Vector2f& mouse)
+{
+	return bound.contains(mouse);
+}
 
-    RectangleShape restoreButton (Vector2f (220, 50));
-    restoreButton.setFillColor (Color::White);
-    restoreButton.setPosition (400, 600);
-    restoreButton.setOutlineThickness (2);
-    restoreButton.setOutlineColor (Color (157, 209, 255));
+Info createInfo(string s, int x, int y, int size)
+{
+	Info a;
+	a.font.loadFromFile(s);
+	a.text.setFont(a.font);
+	a.text.setCharacterSize(size);
+	a.text.setPosition(x, y);
+	a.text.setFillColor(Color(46, 68, 112, 255));
+	a.bound = a.text.getGlobalBounds();
+	return a;
+}
 
-    RectangleShape exitButton (Vector2f (220, 50));
-    exitButton.setFillColor (Color::White);
-    exitButton.setPosition (400, 750);
-    exitButton.setOutlineThickness (2);
-    exitButton.setOutlineColor (Color (157, 209, 255));
+Info createInfo(string s, string info, int x, int y, int size)
+{
+	Info a;
+	a.font.loadFromFile(s);
+	a.text.setFont(a.font);
+	a.text.setCharacterSize(size);
+	a.text.setPosition(x, y);
+	a.text.setFillColor(Color(46, 68, 112, 255));
+	a.text.setString(info);
+	a.bound = a.text.getGlobalBounds();
+	return a;
+}
 
-    // Button Text
-    Text addNewWordText ("Add word", font, 50);
-    addNewWordText.setPosition (410, 445);
-    addNewWordText.setFillColor (Color (52, 142, 254));
+Info* createInfoTest(string s, string info, int x, int y, int size)
+{
+	Info* a = new Info;
+	a->font.loadFromFile(s);
+	a->text.setFont(a->font);
+	a->text.setCharacterSize(size);
+	a->text.setPosition(x, y);
+	a->text.setFillColor(Color(46, 68, 112, 255));
+	a->text.setString(info);
+	a->bound = a->text.getGlobalBounds();
+	return a;
+}
 
-    Text restoreText ("Restore", font, 50);
-    restoreText.setPosition (410, 595);
-    restoreText.setFillColor (Color (52, 142, 254));
+bool drawWhich(RenderWindow& window, Object a, Object b, Vector2f& mouse)
+{
+	if (isHere(a.bound, mouse))
+	{
+		window.draw(a.draw);
+		return true;
+	}
+	window.draw(b.draw);
+	return false;
+}
 
-    Text exitText ("Exit", font, 50);
-    exitText.setPosition (410, 745);
-    exitText.setFillColor (Color (52, 142, 254));
+bool drawWhich(RenderWindow& window, Object* a, Object* b, Vector2f& mouse)
+{
+	if (isHere(a->bound, mouse))
+	{
+		window.draw(a->draw);
+		return true;
+	}
+	window.draw(b->draw);
+	return false;
+}
 
-    // Generate Trie
-    trie.readDatasetToTrie("Src/Data/mainDocument.txt");    // Change after create 5 main mode Vie-Eng, Eng-Vie, Eng-Eng, Slang, Emo
+bool switchPage(FloatRect& bound, Vector2f& mouse, int k, int& page)
+{
+	if (isHere(bound, mouse))
+	{
+		page = k;
+		return true;
+	}
+	return false;
+}
 
-    // Screen
-    while (app.isOpen()) {
-        Event e;
+void changePos(Object* a, Object* b, int x, int y)
+{
+	a->draw.setPosition(x, y);
+	a->bound = a->draw.getGlobalBounds();
+	b->draw.setPosition(x, y);
+	b->bound = b->draw.getGlobalBounds();
+}
 
-        while (app.pollEvent (e)) {
-            if (e.type == Event::Closed) {
-                trie.clearAll();
-                app.close ();
-            }
-            else if (e.type == Event::KeyPressed && e.key.code == Keyboard::Escape) {
-                trie.clearAll();
-                app.close ();
-            }
-            else if (e.type == Event::MouseMoved) {
-                Vector2f mousePos = app.mapPixelToCoords (Mouse::getPosition(app));
-                if (addNewWordButton.getGlobalBounds ().contains (mousePos))
-                {
-                    addNewWordButton.setFillColor (Color (225, 241, 255));
-                }
-                else
-                {
-                    addNewWordButton.setFillColor (Color::White);
-                }
-                if (restoreButton.getGlobalBounds ().contains (mousePos))
-                {
-                    restoreButton.setFillColor (Color (225, 241, 255));
-                }
-                else
-                {
-                    restoreButton.setFillColor (Color::White);
-                }
-                if (exitButton.getGlobalBounds ().contains (mousePos))
-                {
-                    exitButton.setFillColor (Color (225, 241, 255));
-                }
-                else
-                {
-                    exitButton.setFillColor (Color::White);
-                }
-            }
-            else if (e.type == Event::MouseButtonPressed) {
-                Vector2f mousePos = app.mapPixelToCoords (Mouse::getPosition(app));
-                if (exitButton.getGlobalBounds ().contains (mousePos))
-                {
-                    exitButton.setFillColor (Color (202, 216, 229));
-                    state = 1;
-                    clickClock.restart();
-                }
-                else if (addNewWordButton.getGlobalBounds ().contains (mousePos)) {
-                    addNewWordButton.setFillColor (Color (202, 216, 229));
-                    state = 2;
-                    clickClock.restart();
-                }
-                else if (restoreButton.getGlobalBounds ().contains (mousePos)) {
-                    restoreButton.setFillColor (Color (202, 216, 229));
-                    state = 3;
-                    clickClock.restart();
-                }
-            }
-        }
+void changePos(Object* a, int x, int y)
+{
+	a->draw.setPosition(x, y);
+	a->bound = a->draw.getGlobalBounds();
+}
 
-        if (state == 1 && clickClock.getElapsedTime().asMilliseconds() >= 250) {
-            state = 0;
-            trie.clearAll();
-            app.close();
-        }
-        else if (state == 2 && clickClock.getElapsedTime().asMilliseconds() >= 250) {
-            state = 0;
-            addNewWordScreen (app, trie);
-        }
-        else if (state == 3 && clickClock.getElapsedTime().asMilliseconds() >= 250) {
-            state = 0;
-            restoreDictionaryScreen (app, trie);
-        }
+void changePos(Info* a, int x, int y)
+{
+	a->text.setPosition(x, y);
+	a->bound = a->text.getGlobalBounds();
+}
 
-        app.clear (Color (96, 169, 255));
+void texting(Info& text, Uint32 unicode, unsigned int limit)
+{
+	if (text.check && (text.s.size() < limit || unicode == 8))
+	{
+		if (unicode == 8)
+		{
+			if (!text.s.empty())
+				text.s.pop_back();
+		}
+		else
+		{
+			text.s += unicode;
+		}
+		text.text.setString(text.s);
+	}
+}
 
-        app.draw(addNewWordButton);
-        app.draw(addNewWordText);
+void texting(Info*& text, Uint32 unicode, unsigned int limit)
+{
+	if (text->check && (text->s.size() < limit || unicode == 8))
+	{
+		if (unicode == 8)
+		{
+			if (!text->s.empty())
+				text->s.pop_back();
+		}
+		else
+		{
+			text->s += unicode;
+		}
+		text->text.setString(text->s);
+	}
+}
 
-        app.draw(restoreButton);
-        app.draw(restoreText);
+//-------------------Scene-----------------
+void mainScreen(RenderWindow& window, Trie& trie)
+{
+	Clock clickClock;
+	string tmp;
 
-        app.draw(exitButton);
-        app.draw(exitText);
+	Object screen = createObject("content/scene.png");
 
-        app.display ();
-    }
+	Object engEng = createObject("content/engeng.png", 200, 400);
+	Object engEngMove = createObject("content/engengMove.png", 200, 400);
+	Object engEngPressed = createObject("content/engengPressed.png", 200, 400);
+	int engengState = 0;
+
+	Object engVie = createObject("content/engvie.png", 200, 480);
+	Object engVieMove = createObject("content/engvieMove.png", 200, 480);
+	Object engViePressed = createObject("content/engviePressed.png", 200, 480);
+	int engvieState = 0;
+
+	Object vieEng = createObject("content/vieeng.png", 200, 560);
+	Object vieEngMove = createObject("content/vieengMove.png", 200, 560);
+	Object vieEngPressed = createObject("content/vieengPressed.png", 200, 560);
+	int vieengState = 0;
+
+	Object slang = createObject("content/slang.png", 200, 640);
+	Object slangMove = createObject("content/slangMove.png", 200, 640);
+	Object slangPressed = createObject("content/slangPressed.png", 200, 640);
+	int slangState = 0;
+
+	Object emo = createObject("content/emoji.png", 200, 720);
+	Object emoMove = createObject("content/emojiMove.png", 200, 720);
+	Object emoPressed = createObject("content/emojiPressed.png", 200, 720);
+	int emoState = 0;
+
+	Object exit = createObject("content/exit.png", 200, 800);
+	Object exitMove = createObject("content/exitMove.png", 200, 800);
+	Object exitPressed = createObject("content/exitPressed.png", 200, 800);
+	int exitState = 0;
+
+	Event e;
+
+	while (window.isOpen())
+	{
+		Vector2f mouse = window.mapPixelToCoords(Mouse::getPosition(window));
+		while (window.pollEvent(e))
+		{
+			if (e.type == Event::Closed) {
+				window.close();
+			}
+			else if (e.type == Event::MouseMoved) {
+				if (isHere(engEng.bound, mouse)) {
+					engengState = 1;
+				}
+				else {
+					engengState = 0;
+				}
+				if (isHere(engVie.bound, mouse)) {
+					engvieState = 1;
+				}
+				else {
+					engvieState = 0;
+				}
+				if (isHere(vieEng.bound, mouse)) {
+					vieengState = 1;
+				}
+				else {
+					vieengState = 0;
+				}
+				if (isHere(slang.bound, mouse)) {
+					slangState= 1;
+				}
+				else {
+					slangState = 0;
+				}
+				if (isHere(emo.bound, mouse)) {
+					emoState = 1;
+				}
+				else {
+					emoState = 0;
+				}
+				if (isHere(exit.bound, mouse)) {
+					exitState = 1;
+				}
+				else {
+					exitState = 0;
+				}
+			}
+			else if (e.type == Event::MouseButtonPressed)
+			{
+				if (isHere(engEng.bound, mouse)) {
+					tmp = "EngEng";
+					engengState = 2;
+					clickClock.restart();
+				}
+				else if (isHere(engVie.bound, mouse)) {
+					tmp = "EngVie";
+					engvieState = 2;
+					clickClock.restart();
+				}
+				else if (isHere(vieEng.bound, mouse)) {
+					tmp = "VieEng";
+					vieengState = 2;
+					clickClock.restart();
+				}
+				else if (isHere(slang.bound, mouse)) {
+					tmp = "Slang";
+					slangState = 2;
+					clickClock.restart();
+				}
+				else if (isHere(emo.bound, mouse)) {
+					tmp = "Emoji";
+					emoState = 2;
+					clickClock.restart();
+				}
+				else if (isHere(exit.bound, mouse)) {
+					exitState = 2;
+					clickClock.restart();
+				}
+			}
+		}
+		if (engengState == 2 && clickClock.getElapsedTime().asMilliseconds() >= 100) {
+			Operation(window, tmp, trie);
+		}
+		if (engvieState == 2 && clickClock.getElapsedTime().asMilliseconds() >= 100) {
+			Operation(window, tmp, trie);
+		}
+		if (vieengState == 2 && clickClock.getElapsedTime().asMilliseconds() >= 100) {
+			Operation(window, tmp, trie);
+		}
+		if (slangState == 2 && clickClock.getElapsedTime().asMilliseconds() >= 100) {
+			Operation(window, tmp, trie);
+		}
+		if (emoState == 2 && clickClock.getElapsedTime().asMilliseconds() >= 100) {
+			Operation(window, tmp, trie);
+		}
+		if (exitState == 2 && clickClock.getElapsedTime().asMilliseconds() >= 100) {
+			window.close();
+		}
+
+		window.clear();
+
+		window.draw(screen.draw);
+
+		if (engengState == 0) {
+			window.draw(engEng.draw);
+		}
+		else if (engengState == 1) {
+			window.draw(engEngMove.draw);
+		}
+		else {
+			window.draw(engEngPressed.draw);
+		}
+
+		if (engvieState == 0) {
+			window.draw(engVie.draw);
+		}
+		else if (engvieState == 1) {
+			window.draw(engVieMove.draw);
+		}
+		else {
+			window.draw(engViePressed.draw);
+		}
+
+		if (vieengState == 0) {
+			window.draw(vieEng.draw);
+		}
+		else if (vieengState == 1) {
+			window.draw(vieEngMove.draw);
+		}
+		else {
+			window.draw(vieEngPressed.draw);
+		}
+
+		if (slangState == 0) {
+			window.draw(slang.draw);
+		}
+		else if (slangState == 1) {
+			window.draw(slangMove.draw);
+		}
+		else {
+			window.draw(slangPressed.draw);
+		}
+
+		if (emoState == 0) {
+			window.draw(emo.draw);
+		}
+		else if (emoState == 1) {
+			window.draw(emoMove.draw);
+		}
+		else {
+			window.draw(emoPressed.draw);
+		}
+
+		if (exitState == 0) {
+			window.draw(exit.draw);
+		}
+		else if (exitState == 1) {
+			window.draw(exitMove.draw);
+		}
+		else {
+			window.draw(exitPressed.draw);
+		}
+
+		window.display();
+	}
 }

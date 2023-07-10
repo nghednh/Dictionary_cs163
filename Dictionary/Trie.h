@@ -50,19 +50,21 @@ public:
         cur->meaning = meaning;
     }
 
-    bool searchWord(const string& word) {
+    TrieNode* searchWord(const string& word) {
         TrieNode* cur = root;
 
         for (char c : word) {
             int index = c - '!';
             if (cur->children[index] == nullptr) {
-                return false;
+                cur = nullptr;
+                return cur;
             }
             cur = cur->children[index];
         }
 
-        return cur->isEndOfWord;
+        return cur;
     }
+
     TrieNode* searchWordNode(const string& word) {
         TrieNode* cur = root;
 

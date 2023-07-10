@@ -2,11 +2,7 @@
 <Project>
   <ProjectOutputs>
     <ProjectOutput>
-<<<<<<< Updated upstream
-      <FullPath>D:\CS163\Debug\Dictionary.exe</FullPath>
-=======
-      <FullPath>D:\Dictionary_cs163\Debug\Dictionary.exe</FullPath>
->>>>>>> Stashed changes
+      <FullPath>C:\Users\ASUS\OneDrive - VNU-HCMUS\Desktop\Dictionary_cs163\Debug\Dictionary.exe</FullPath>
     </ProjectOutput>
   </ProjectOutputs>
   <ContentFiles />

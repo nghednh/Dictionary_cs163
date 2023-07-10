@@ -138,6 +138,7 @@
     <ClCompile Include="main.cpp" />
     <ClCompile Include="MainScreen.cpp" />
     <ClCompile Include="nghe_main.cpp" />
+    <ClCompile Include="Operation.cpp" />
     <ClCompile Include="restoreDictionaryScreen.cpp" />
     <ClCompile Include="search_saveFavorList.cpp" />
   </ItemGroup>
@@ -148,6 +149,7 @@
     <ClInclude Include="addNewWordScreen.h" />
     <ClInclude Include="History.h" />
     <ClInclude Include="MainScreen.h" />
+    <ClInclude Include="Operation.h" />
     <ClInclude Include="restoreDictionaryScreen.h" />
     <ClInclude Include="Trie.h" />
   </ItemGroup>

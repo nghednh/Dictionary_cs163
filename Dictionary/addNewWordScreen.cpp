@@ -1,248 +1,231 @@
 #include "addNewWordScreen.h"
-#include "MainScreen.h"
+#include "Operation.h"
 
-void submitAdding (string word, string def, Trie &trie)
+void submitAdding (string word, string def, string typeDictionary, Trie &trie)
 {
-    ofstream fout("Src/Data/mainDocument.txt", ios::app);    // Change after create 5 main mode Vie-Eng, Eng-Vie, Eng-Eng, Slang, Emo
+    ofstream fout("Data/" + typeDictionary + "/document.txt", ios::app);
     fout << word << " " << def << '\n';
     fout.close();
 
     trie.insertWord(word, def);
 }
 
-void addNewWordScreen(RenderWindow &app, Trie &trie)
+//-------------------Scene-----------------
+void addNewWordScreen(RenderWindow& window, string typeDictionary, Trie& trie)
 {
-    // Tracking
-    string tmp;
-    int state = 0;      // change button color
-    int check = 0;      // change text box input
-
-    // Clock
     Clock clickClock;
+    string tmp = "";
+    int check = 0;
 
-    // Font
-    Font font;
-    font.loadFromFile("Src/Font/arial_narrow_7.ttf");
+    Object screen = createObject("content/scene.png");
 
-    // Button
-    RectangleShape requireToEnter (Vector2f (700, 75));
-    requireToEnter.setFillColor (Color::White);
-    requireToEnter.setPosition (400, 300);
-    requireToEnter.setOutlineThickness (2);
-    requireToEnter.setOutlineColor (Color (204, 204, 204));
+    Object enterWordBar = createObject("content/searchBar.png", 200, 360);
+    Object enterWordBarMove = createObject("content/searchBarMove.png", 200, 360);
+    Object enterWordBarPressed = createObject("content/searchBarPressed.png", 200, 360);
+    int enterWordState = 0;
 
-    RectangleShape enterWordButton (Vector2f (500, 30));
-    enterWordButton.setFillColor (Color::White);
-    enterWordButton.setPosition (400, 450);
-    enterWordButton.setOutlineThickness (2);
-    enterWordButton.setOutlineColor (Color (157, 209, 255));
+    Object enterDefBar = createObject("content/searchBar.png", 200, 440);
+    Object enterDefBarMove = createObject("content/searchBarMove.png", 200, 440);
+    Object enterDefBarPressed = createObject("content/searchBarPressed.png", 200, 440);
+    int enterDefState = 0;
 
-    RectangleShape defButton (Vector2f (500, 30));
-    defButton.setFillColor (Color::White);
-    defButton.setPosition (400, 550);
-    defButton.setOutlineThickness (2);
-    defButton.setOutlineColor (Color (157, 209, 255));
+    Object submit = createObject("content/submit.png", 200, 700);
+    Object submitMove = createObject("content/submitMove.png", 200, 700);
+    Object submitPressed = createObject("content/submitPressed.png", 200, 700);
+    int submitState = 0;
 
-    RectangleShape submitButton (Vector2f (200, 30));
-    submitButton.setFillColor (Color::White);
-    submitButton.setPosition (400, 850);
-    submitButton.setOutlineThickness (2);
-    submitButton.setOutlineColor (Color (157, 209, 255));
+    Object back = createObject("content/back.png", 200, 780);
+    Object backMove = createObject("content/backMove.png", 200, 780);
+    Object backPressed = createObject("content/backPressed.png", 200, 780);
+    int backState = 0;
 
-    RectangleShape exitButton (Vector2f (200, 30));
-    exitButton.setFillColor (Color::White);
-    exitButton.setPosition (400, 1000);
-    exitButton.setOutlineThickness (2);
-    exitButton.setOutlineColor(Color (157, 209, 255));
+    Info wordText = createInfo("arial.ttf", "Enter your word please!", 220, 360, 40);
+    Info defText = createInfo("arial.ttf", "Enter your definition please!", 220, 440, 40);
 
-    // Text
-    Text requireToEnterText ("Please enter your word and def", font, 50);
-    requireToEnterText.setPosition (410, 305);
-    requireToEnterText.setFillColor (Color (136, 136, 136));
+    Event e;
 
-    Text enterWordText ("Enter your word!", font, 25);
-    enterWordText.setPosition (410, 450);
-    enterWordText.setFillColor (Color (52, 142, 254));
-
-    Text defText ("Definition of the word!", font, 25);
-    defText.setPosition (410, 550);
-    defText.setFillColor (Color (52, 142, 254));
-
-    Text submitText ("Submit!", font, 25);
-    submitText.setPosition (410, 850);
-    submitText.setFillColor (Color (52, 142, 254));
-
-    Text exitText ("Return", font, 25);
-    exitText.setPosition (410, 1000);
-    exitText.setFillColor (Color (52, 142, 254));
-
-    Text warning ("", font, 15);
-    warning.setPosition (410, 885);
-    warning.setFillColor (Color (198, 40, 40));
-
-    // Screen
-    while (app.isOpen()) {
-        Event e;
-
-        while (app.pollEvent (e)) {
+    while (window.isOpen()) {
+        Vector2f mouse = window.mapPixelToCoords(Mouse::getPosition(window));
+        while (window.pollEvent(e)) {
             if (e.type == Event::Closed) {
-                trie.clearAll();
-                app.close ();
+                window.close();
             }
             else if (e.type == Event::KeyPressed && e.key.code == Keyboard::Escape) {
-                exitButton.setFillColor (Color (202, 216, 229));
-                state = 1;
+                backState = 2;
                 clickClock.restart();
             }
-            else if (e.type == Event::KeyPressed && e.key.code == Keyboard::Enter) {
-                submitButton.setFillColor(Color (202, 216, 229));
-                state = 2;
+            else if (e.type == Event::KeyPressed && e.key.code == Keyboard::Return) {
                 check = 0;
+                submitState = 2;
                 clickClock.restart();
+                if (wordText.text.getString() != "Enter your word please!" && defText.text.getString() != "Enter your definition please!" && !trie.searchWord(wordText.text.getString())) {
+                    submitAdding(wordText.text.getString(), defText.text.getString(), typeDictionary, trie);
+                }
             }
             else if (e.type == Event::MouseMoved) {
-                Vector2f mousePos = app.mapPixelToCoords (Mouse::getPosition(app));
-                if (submitButton.getGlobalBounds ().contains (mousePos))
-                {
-                    submitButton.setFillColor (Color (225, 241, 255));
+                if (isHere(enterWordBar.bound, mouse)) {
+                    enterWordState = 1;
                 }
-                else
-                {
-                    submitButton.setFillColor (Color::White);
+                else {
+                    enterWordState = 0;
                 }
-                if (exitButton.getGlobalBounds ().contains (mousePos))
-                {
-                    exitButton.setFillColor (Color (225, 241, 255));
+                if (isHere(enterDefBar.bound, mouse)) {
+                    enterDefState = 1;
                 }
-                else
-                {
-                    exitButton.setFillColor (Color::White);
+                else {
+                    enterDefState = 0;
                 }
-                if (enterWordButton.getGlobalBounds ().contains (mousePos))
-                {
-                    enterWordButton.setFillColor (Color (225, 241, 255));
+                if (isHere(submit.bound, mouse)) {
+                    submitState = 1;
                 }
-                else
-                {
-                    enterWordButton.setFillColor (Color::White);
+                else {
+                    submitState = 0;
                 }
-                if (defButton.getGlobalBounds ().contains (mousePos))
-                {
-                    defButton.setFillColor (Color (225, 241, 255));
+                if (isHere(back.bound, mouse)) {
+                    backState = 1;
                 }
-                else
-                {
-                    defButton.setFillColor (Color::White);
+                else {
+                    backState = 0;
                 }
             }
             else if (e.type == Event::MouseButtonPressed) {
-                Vector2f mousePos = app.mapPixelToCoords (Mouse::getPosition(app));
-                if (exitButton.getGlobalBounds ().contains (mousePos))
-                {
-                    exitButton.setFillColor (Color (202, 216, 229));
-                    state = 1;
+                if (isHere(back.bound, mouse)) {
+                    backState = 2;
                     clickClock.restart();
                 }
-                else if (submitButton.getGlobalBounds ().contains (mousePos)) {
-                    submitButton.setFillColor(Color (202, 216, 229));
-                    state = 2;
+                else if (isHere(submit.bound, mouse)) {
                     check = 0;
+                    submitState = 2;
                     clickClock.restart();
+                    if (wordText.text.getString() != "Enter your word please!" && defText.text.getString() != "Enter your definition please!" && !trie.searchWord(wordText.text.getString())) {
+                        submitAdding(wordText.text.getString(), defText.text.getString(), typeDictionary, trie);
+                    }
                 }
-                else if (enterWordButton.getGlobalBounds ().contains (mousePos)) {
-                    enterWordButton.setFillColor(Color (202, 216, 229));
-                    state = 3;
+                else if (isHere(enterWordBar.bound, mouse)) {
+                    enterWordState = 2;
+                    clickClock.restart();
                     if (check != 1) {
                         check = 1;
                         tmp = "";
-                        enterWordText.setString(tmp);
+                        wordText.text.setString(tmp);
                     }
-                    clickClock.restart();
                 }
-                else if (defButton.getGlobalBounds ().contains (mousePos)) {
-                    defButton.setFillColor(Color (202, 216, 229));
-                    state = 4;
+                else if (isHere(enterDefBar.bound, mouse)) {
+                    enterDefState = 2;
+                    clickClock.restart();
                     if (check != 2) {
                         check = 2;
                         tmp = "";
-                        defText.setString(tmp);
+                        defText.text.setString(tmp);
                     }
-                    clickClock.restart();
                 }
             }
-            else if (e.type == Event::TextEntered && check == 1)
-            {
+            else if (e.type == Event::TextEntered && check == 1) {
                 if (e.text.unicode < 128 && e.text.unicode != '\b') {
                     tmp += e.text.unicode;
-                    enterWordText.setString (tmp);
+                    wordText.text.setString(tmp);
                 }
-                else if (e.text.unicode == '\b' && !enterWordText.getString().isEmpty()) {
+                else if (e.text.unicode == '\b' && !wordText.text.getString().isEmpty()) {
                     if (tmp.size() > 0) {
-                        tmp.pop_back ();
-                        enterWordText.setString (tmp);
+                        tmp.pop_back();
+                        wordText.text.setString(tmp);
                     }
                     else {
-                        enterWordText.setString ("");
+                        wordText.text.setString("");
                     }
                 }
             }
-            else if (e.type == Event::TextEntered && check == 2)
-            {
+            else if (e.type == Event::TextEntered && check == 2) {
                 if (e.text.unicode < 128 && e.text.unicode != '\b') {
                     tmp += e.text.unicode;
-                    defText.setString (tmp);
+                    defText.text.setString(tmp);
                 }
-                else if (e.text.unicode == '\b' && !defText.getString().isEmpty()) {
+                else if (e.text.unicode == '\b' && !defText.text.getString().isEmpty()) {
                     if (tmp.size() > 0) {
-                        tmp.pop_back ();
-                        defText.setString (tmp);
+                        tmp.pop_back();
+                        defText.text.setString(tmp);
                     }
                     else {
-                        defText.setString ("");
+                        defText.text.setString("");
                     }
                 }
             }
         }
-
-        if (state == 1 && clickClock.getElapsedTime().asMilliseconds() >= 250) {
-            state = 0;
-            MainScreen(app, trie);
-        }
-        else if (state == 2 && clickClock.getElapsedTime().asMilliseconds() >= 250) {
-            state = 0;
-            if (enterWordText.getString() != "Enter your word!" && defText.getString() != "Definition of the word!" && !trie.searchWord(enterWordText.getString())) {
-                submitAdding(enterWordText.getString(), defText.getString(), trie);
+        if (enterWordState == 2 && clickClock.getElapsedTime().asMilliseconds() >= 100) {
+            if (isHere(enterWordBar.bound, mouse)) {
+                enterWordState = 1;
             }
-            submitButton.setFillColor(Color (225, 241, 255));
+            else {
+                enterWordState = 0;
+            }
         }
-        else if (state == 3 && clickClock.getElapsedTime().asMilliseconds() >= 250) {
-            state = 0;
-
-            enterWordButton.setFillColor(Color (225, 241, 255));
+        if (enterDefState == 2 && clickClock.getElapsedTime().asMilliseconds() >= 100) {
+            if (isHere(enterDefBar.bound, mouse)) {
+                enterDefState = 1;
+            }
+            else {
+                enterDefState = 0;
+            }
         }
-        else if (state == 4 && clickClock.getElapsedTime().asMilliseconds() >= 250) {
-            state = 0;
-
-            defButton.setFillColor(Color (225, 241, 255));
+        if (submitState == 2 && clickClock.getElapsedTime().asMilliseconds() >= 100) {
+            if (isHere(submit.bound, mouse)) {
+                submitState = 1;
+            }
+            else {
+                submitState = 0;
+            }
+        }
+        if (backState == 2 && clickClock.getElapsedTime().asMilliseconds() >= 100) {
+            Operation(window, typeDictionary, trie);
         }
 
-        app.clear (Color (96, 169, 255));
+        window.clear();
 
-        app.draw(requireToEnter);
-        app.draw(requireToEnterText);
+        window.draw(screen.draw);
 
-        app.draw(submitButton);
-        app.draw(submitText);
+        if (enterWordState == 0) {
+            window.draw(enterWordBar.draw);
+        }
+        else if (enterWordState == 1) {
+            window.draw(enterWordBarMove.draw);
+        }
+        else {
+            window.draw(enterWordBarPressed.draw);
+        }
 
-        app.draw(exitButton);
-        app.draw(exitText);
+        if (enterDefState == 0) {
+            window.draw(enterDefBar.draw);
+        }
+        else if (enterDefState == 1) {
+            window.draw(enterDefBarMove.draw);
+        }
+        else {
+            window.draw(enterDefBarPressed.draw);
+        }
 
-        app.draw(enterWordButton);
-        app.draw(enterWordText);
+        if (submitState == 0) {
+            window.draw(submit.draw);
+        }
+        else if (submitState == 1) {
+            window.draw(submitMove.draw);
+        }
+        else {
+            window.draw(submitPressed.draw);
+        }
 
-        app.draw(defButton);
-        app.draw(defText);
+        if (backState == 0) {
+            window.draw(back.draw);
+        }
+        else if (backState == 1) {
+            window.draw(backMove.draw);
+        }
+        else {
+            window.draw(backPressed.draw);
+        }
 
-        app.display ();
+        window.draw(wordText.text);
+        window.draw(defText.text);
+
+        window.display();
     }
 }

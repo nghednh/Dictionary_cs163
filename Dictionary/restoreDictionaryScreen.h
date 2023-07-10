@@ -1,5 +1,9 @@
 #pragma once
 #include "Trie.h"
+#include "MainScreen.h"
 
-void restoreDictionary ();
-void restoreDictionaryScreen (RenderWindow &app, Trie &trie);
+//-----------------Function--------------------------
+void restoreDictionary (string typeDictionary);
+
+//-----------------Draw Scene--------------------------
+void restoreDictionaryScreen (RenderWindow& window, string typeDictionary, Trie& trie);
