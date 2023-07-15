@@ -15,7 +15,7 @@ using namespace sf;
 int main()
 {
 	Trie trie;
-	RenderWindow window(VideoMode(1920, 1080), "CS163-Dictionary", Style::Close);
+	RenderWindow window(VideoMode(1920, 1080), "CS163-Dictionary", Style::Default);
 
 	mainScreen(window, trie);
 
