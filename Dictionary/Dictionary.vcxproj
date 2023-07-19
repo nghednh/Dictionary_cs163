@@ -140,6 +140,7 @@
     <ClCompile Include="nghe_main.cpp" />
     <ClCompile Include="restoreDictionaryScreen.cpp" />
     <ClCompile Include="search_saveFavorList.cpp" />
+    <ClCompile Include="viewListFavor.cpp" />
   </ItemGroup>
   <ItemGroup>
     <Text Include="favorite.txt" />

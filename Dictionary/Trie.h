@@ -16,15 +16,14 @@ const int sizee = 128;
 class TrieNode {
 public:
     vector<TrieNode*> children;
+    vector<string> meaning;
     bool isEndOfWord;
     bool isFavorite;
-    string meaning;
 
     TrieNode() {
         children = vector<TrieNode*>(sizee, nullptr);
         isEndOfWord = false;
         isFavorite = false;
-        meaning = "";
     }
 };
 
@@ -37,6 +36,12 @@ public:
         root = new TrieNode();
     }
 
+    bool def_is_exist(vector<string> meaning, string s) {
+        for (int i = 0; i < meaning.size(); i++) {
+            if (meaning[i] == s) return false;
+        }
+        return true;
+    }
     void insertWord(const string& word, const string& meaning) {
         TrieNode* cur = root;
 
@@ -49,7 +54,8 @@ public:
         }
 
         cur->isEndOfWord = true;
-        cur->meaning = meaning;
+        cur->isFavorite = false;
+        if (def_is_exist(cur->meaning, meaning)) cur->meaning.push_back(meaning);
     }
 
     bool searchWord(const string& word) {
@@ -120,10 +126,10 @@ public:
 
             if (iss >> word) {
                 getline(iss, meaning);
+                meaning.erase(meaning.begin());
                 insertWord(word, meaning);
             }
         }
-
         file.close();
     }
 
@@ -138,7 +144,7 @@ private:
                 return false;
             }
             node->isEndOfWord = false;
-            node->meaning = "";
+            node->meaning.clear();
             return isEmpty(node);
         }
 

@@ -36,6 +36,9 @@
     <ClCompile Include="search_saveFavorList.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="viewListFavor.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Text Include="words.txt">
