@@ -36,12 +36,19 @@
     <ClCompile Include="search_saveFavorList.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+<<<<<<< HEAD:Dictionary/Dictionary.vcxproj.filters.txt
     <ClCompile Include="Operation.cpp">
+=======
+    <ClCompile Include="viewListFavor.cpp">
+>>>>>>> 75920e3dfe17013def7d6d2cd0b6e989f2d93e37:Dictionary/Dictionary.vcxproj.filters
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Text Include="words.txt">
+      <Filter>Resource Files</Filter>
+    </Text>
+    <Text Include="favorite.txt">
       <Filter>Resource Files</Filter>
     </Text>
   </ItemGroup>
