@@ -1,4 +1,26 @@
 #include "Trie.h"
+void wrapped_text(RectangleShape shape, Text& text) {
+    float hei, wid;
+    string s = "";
+    wid = shape.getGlobalBounds().width;
+    hei = shape.getGlobalBounds().height;
+    string originalText = text.getString();
+    string word;
+    string testString = "";
+    istringstream iss(originalText);
+
+    while (iss >> word) {
+        sf::Text tempText = text;
+        testString += word + ' ';
+        tempText.setString(testString);
+        if (tempText.getGlobalBounds().width > wid - 10) {
+            s += '\n';
+            testString = word + ' ';
+        }
+        s += word + ' ';
+    }
+    text.setString(s + "\n");
+}
 void search_addfavorite(RenderWindow& window, Trie trie, Trie favor_trie) {
     sf::Texture scene;
     scene.loadFromFile("../Dictionary/content/scene.png");
