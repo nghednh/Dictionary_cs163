@@ -1,7 +1,7 @@
 #include "addNewWordScreen.h"
 #include "Operation.h"
 
-void submitAdding (string word, string def, string typeDictionary, Trie &trie)
+void submitAdding(string word, string def, string typeDictionary, Trie& trie)
 {
     ofstream fout("Data/" + typeDictionary + "/document.txt", ios::app);
     fout << word << " " << def << '\n';
@@ -11,7 +11,7 @@ void submitAdding (string word, string def, string typeDictionary, Trie &trie)
 }
 
 //-------------------Scene-----------------
-void addNewWordScreen(RenderWindow& window, string typeDictionary, Trie& trie)
+void addNewWordScreen(RenderWindow& window, string typeDictionary, Trie& trie, Trie& favor_trie)
 {
     Clock clickClock;
     string tmp = "";
@@ -295,23 +295,23 @@ void addNewWordScreen(RenderWindow& window, string typeDictionary, Trie& trie)
             warning.text.setString("");
         }
         if (backState == 2 && clickClock.getElapsedTime().asMilliseconds() >= 100) {
-            Operation(window, typeDictionary, trie);
+            Operation(window, typeDictionary, trie, favor_trie);
         }
         if (engengState == 2 && clickClock.getElapsedTime().asMilliseconds() >= 100) {
             cout << 1 << endl;
-            Operation(window, "EngEng", trie);
+            Operation(window, "EngEng", trie, favor_trie);
         }
         if (engvieState == 2 && clickClock.getElapsedTime().asMilliseconds() >= 100) {
-            Operation(window, "EngVie", trie);
+            Operation(window, "EngVie", trie, favor_trie);
         }
         if (vieengState == 2 && clickClock.getElapsedTime().asMilliseconds() >= 100) {
-            Operation(window, "VieEng", trie);
+            Operation(window, "VieEng", trie, favor_trie);
         }
         if (slangState == 2 && clickClock.getElapsedTime().asMilliseconds() >= 100) {
-            Operation(window, "Slang", trie);
+            Operation(window, "Slang", trie, favor_trie);
         }
         if (emoState == 2 && clickClock.getElapsedTime().asMilliseconds() >= 100) {
-            Operation(window, "Emoji", trie);
+            Operation(window, "Emoji", trie, favor_trie);
         }
         if (menuState == 2 && clickClock.getElapsedTime().asMilliseconds() >= 100) {
             if (menu.draw.getGlobalBounds().contains(mouse)) {

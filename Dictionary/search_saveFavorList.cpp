@@ -1,4 +1,5 @@
-#include "Trie.h"
+#include "search_saveFavorList.h"
+
 void wrapped_text(RectangleShape shape, Text& text) {
     float hei, wid;
     string s = "";
@@ -21,7 +22,8 @@ void wrapped_text(RectangleShape shape, Text& text) {
     }
     text.setString(s + "\n");
 }
-void search_addfavorite(RenderWindow& window, Trie trie, Trie favor_trie) {
+
+void search_addfavorite(RenderWindow& window, Trie trie, string typeDictionary, Trie favor_trie) {
     sf::Texture scene;
     scene.loadFromFile("../Dictionary/content/scene.png");
 
@@ -72,13 +74,13 @@ void search_addfavorite(RenderWindow& window, Trie trie, Trie favor_trie) {
     window.setView(static_view);
 
     sf::View view(sf::FloatRect(170, 450, 1000, 400));
-    view.setViewport(sf::FloatRect(0.1180f, 0.4411f, 0.6944, 0.3921f));
+    view.setViewport(sf::FloatRect(0.1180f, 0.4411f, 0.6944f, 0.3921f));
     window.setView(view);
 
     float scrollSpeed = 20.0f;
 
     sf::Font font;
-    font.loadFromFile("../Font/Oswald-Light.ttf");
+    font.loadFromFile("arial.ttf");
     string user_text;
     bool check_save = false;
     //Text
@@ -254,7 +256,7 @@ void search_addfavorite(RenderWindow& window, Trie trie, Trie favor_trie) {
         //Save favorite word to favorite list of words.
         if (check_save) {
             ofstream fout;
-            fout.open("../Dictionary/favorite.txt", ios::app);
+            fout.open("Data/" + typeDictionary + "/favorite.txt", ios::app);
             for (int i = 0; i < meaning.size(); i++) {
                 favor_trie.insertWord(user_text, meaning[i]);
                 fout << user_text << ' ' << '\t' << meaning[i];

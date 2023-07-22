@@ -41,4 +41,4 @@ void texting(Info& text, Uint32 unicode, unsigned int limit);
 void texting(Info*& text, Uint32 unicode, unsigned int limit);
 
 //-----------------Draw Scene--------------------------
-void mainScreen(RenderWindow& window, Trie& trie);
+void mainScreen(RenderWindow& window, Trie& trie, Trie& favor_trie);

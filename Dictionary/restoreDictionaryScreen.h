@@ -3,7 +3,7 @@
 #include "MainScreen.h"
 
 //-----------------Function--------------------------
-void restoreDictionary (string typeDictionary);
+void restoreDictionary(string typeDictionary);
 
 //-----------------Draw Scene--------------------------
-void restoreDictionaryScreen (RenderWindow& window, string typeDictionary, Trie& trie);
+void restoreDictionaryScreen(RenderWindow& window, string typeDictionary, Trie& trie, Trie& favor_trie);

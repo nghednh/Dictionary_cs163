@@ -144,15 +144,12 @@
     <ClCompile Include="viewListFavor.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <Text Include="favorite.txt" />
-    <Text Include="words.txt" />
-  </ItemGroup>
-  <ItemGroup>
     <ClInclude Include="addNewWordScreen.h" />
     <ClInclude Include="History.h" />
     <ClInclude Include="MainScreen.h" />
     <ClInclude Include="Operation.h" />
     <ClInclude Include="restoreDictionaryScreen.h" />
+    <ClInclude Include="search_saveFavorList.h" />
     <ClInclude Include="Trie.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

@@ -15,10 +15,12 @@ using namespace sf;
 int main()
 {
 	Trie trie;
+	Trie favor_trie;
 	RenderWindow window(VideoMode(1920, 1080), "CS163-Dictionary", Style::Default);
 
-	mainScreen(window, trie);
+	mainScreen(window, trie, favor_trie);
 
 	trie.clearAll();
+	favor_trie.clearAll();
 	return 0;
 }

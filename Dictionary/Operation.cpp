@@ -1,9 +1,10 @@
 #include "Operation.h"
 #include "addNewWordScreen.h"
 #include "restoreDictionaryScreen.h"
+#include "search_saveFavorList.h"
 
 //-------------------Scene-----------------
-void Operation(RenderWindow& window, string typeDictionary, Trie& trie)
+void Operation(RenderWindow& window, string typeDictionary, Trie& trie, Trie& favor_trie)
 {
 	Clock clickClock;
 
@@ -18,6 +19,11 @@ void Operation(RenderWindow& window, string typeDictionary, Trie& trie)
 	Object resetDicitonaryMove = createObject("content/resetMove.png", 200, 580);
 	Object resetDicitonaryPressed = createObject("content/resetPressed.png", 200, 580);
 	int resetState = 0;
+
+	Object saveFavor = createObject("content/reset.png", 200, 660);
+	Object saveFavorMove = createObject("content/resetMove.png", 200, 660);
+	Object saveFavorPressed = createObject("content/resetPressed.png", 200, 660);
+	int saveFavorState = 0;
 
 	Object back = createObject("content/back.png", 200, 780);
 	Object backMove = createObject("content/backMove.png", 200, 780);
@@ -64,6 +70,7 @@ void Operation(RenderWindow& window, string typeDictionary, Trie& trie)
 
 	trie.clearAll();
 	trie.readDatasetToTrie("Data/" + typeDictionary + "/document.txt");
+	cout << 1 << endl;
 
 	while (window.isOpen())
 	{
@@ -89,6 +96,12 @@ void Operation(RenderWindow& window, string typeDictionary, Trie& trie)
 				}
 				else {
 					resetState = 0;
+				}
+				if (isHere(saveFavor.bound, mouse)) {
+					saveFavorState = 1;
+				}
+				else {
+					saveFavorState = 0;
 				}
 				if (isHere(back.bound, mouse)) {
 					backState = 1;
@@ -133,7 +146,7 @@ void Operation(RenderWindow& window, string typeDictionary, Trie& trie)
 					menuState = 0;
 				}
 			}
-			else if (e.type == Event::MouseButtonPressed) {	
+			else if (e.type == Event::MouseButtonPressed) {
 				if (menu.draw.getGlobalBounds().contains(mouse)) {
 					menuState = 2;
 					clickClock.restart();
@@ -150,6 +163,10 @@ void Operation(RenderWindow& window, string typeDictionary, Trie& trie)
 				}
 				else if (isHere(resetDicitonary.bound, mouse)) {
 					resetState = 2;
+					clickClock.restart();
+				}
+				else if (isHere(saveFavor.bound, mouse)) {
+					saveFavorState = 2;
 					clickClock.restart();
 				}
 				else if (isHere(back.bound, mouse)) {
@@ -179,29 +196,32 @@ void Operation(RenderWindow& window, string typeDictionary, Trie& trie)
 			}
 		}
 		if (addState == 2 && clickClock.getElapsedTime().asMilliseconds() >= 100) {
-			addNewWordScreen(window, typeDictionary, trie);
+			addNewWordScreen(window, typeDictionary, trie, favor_trie);
 		}
 		if (resetState == 2 && clickClock.getElapsedTime().asMilliseconds() >= 100) {
-			restoreDictionaryScreen(window, typeDictionary, trie);
+			restoreDictionaryScreen(window, typeDictionary, trie, favor_trie);
+		}
+		if (saveFavorState == 2 && clickClock.getElapsedTime().asMilliseconds() >= 100) {
+			search_addfavorite(window, trie, typeDictionary, favor_trie);
 		}
 		if (backState == 2 && clickClock.getElapsedTime().asMilliseconds() >= 100) {
-			mainScreen(window, trie);
+			mainScreen(window, trie, favor_trie);
 		}
 		if (engengState == 2 && clickClock.getElapsedTime().asMilliseconds() >= 100) {
 			cout << 1 << endl;
-			Operation(window, "EngEng", trie);
+			Operation(window, "EngEng", trie, favor_trie);
 		}
 		if (engvieState == 2 && clickClock.getElapsedTime().asMilliseconds() >= 100) {
-			Operation(window, "EngVie", trie);
+			Operation(window, "EngVie", trie, favor_trie);
 		}
 		if (vieengState == 2 && clickClock.getElapsedTime().asMilliseconds() >= 100) {
-			Operation(window, "VieEng", trie);
+			Operation(window, "VieEng", trie, favor_trie);
 		}
 		if (slangState == 2 && clickClock.getElapsedTime().asMilliseconds() >= 100) {
-			Operation(window, "Slang", trie);
+			Operation(window, "Slang", trie, favor_trie);
 		}
 		if (emoState == 2 && clickClock.getElapsedTime().asMilliseconds() >= 100) {
-			Operation(window, "Emoji", trie);
+			Operation(window, "Emoji", trie, favor_trie);
 		}
 		if (menuState == 2 && clickClock.getElapsedTime().asMilliseconds() >= 100) {
 			if (menu.draw.getGlobalBounds().contains(mouse)) {
@@ -329,6 +349,16 @@ void Operation(RenderWindow& window, string typeDictionary, Trie& trie)
 		}
 		else {
 			window.draw(resetDicitonaryPressed.draw);
+		}
+
+		if (saveFavorState == 0) {
+			window.draw(saveFavor.draw);
+		}
+		else if (saveFavorState == 1) {
+			window.draw(saveFavorMove.draw);
+		}
+		else {
+			window.draw(saveFavorPressed.draw);
 		}
 
 		if (backState == 0) {

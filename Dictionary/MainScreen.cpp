@@ -169,7 +169,7 @@ void texting(Info*& text, Uint32 unicode, unsigned int limit)
 }
 
 //-------------------Scene-----------------
-void mainScreen(RenderWindow& window, Trie& trie)
+void mainScreen(RenderWindow& window, Trie& trie, Trie& favor_trie)
 {
 	Clock clickClock;
 	string tmp;
@@ -236,7 +236,7 @@ void mainScreen(RenderWindow& window, Trie& trie)
 					vieengState = 0;
 				}
 				if (isHere(slang.bound, mouse)) {
-					slangState= 1;
+					slangState = 1;
 				}
 				else {
 					slangState = 0;
@@ -288,19 +288,19 @@ void mainScreen(RenderWindow& window, Trie& trie)
 			}
 		}
 		if (engengState == 2 && clickClock.getElapsedTime().asMilliseconds() >= 100) {
-			Operation(window, tmp, trie);
+			Operation(window, tmp, trie, favor_trie);
 		}
 		if (engvieState == 2 && clickClock.getElapsedTime().asMilliseconds() >= 100) {
-			Operation(window, tmp, trie);
+			Operation(window, tmp, trie, favor_trie);
 		}
 		if (vieengState == 2 && clickClock.getElapsedTime().asMilliseconds() >= 100) {
-			Operation(window, tmp, trie);
+			Operation(window, tmp, trie, favor_trie);
 		}
 		if (slangState == 2 && clickClock.getElapsedTime().asMilliseconds() >= 100) {
-			Operation(window, tmp, trie);
+			Operation(window, tmp, trie, favor_trie);
 		}
 		if (emoState == 2 && clickClock.getElapsedTime().asMilliseconds() >= 100) {
-			Operation(window, tmp, trie);
+			Operation(window, tmp, trie, favor_trie);
 		}
 		if (exitState == 2 && clickClock.getElapsedTime().asMilliseconds() >= 100) {
 			window.close();
