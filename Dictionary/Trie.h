@@ -129,6 +129,7 @@ public:
 
     void clearAll() {
         clearTrie(root);
+        root = nullptr;
     }
 
 private:
