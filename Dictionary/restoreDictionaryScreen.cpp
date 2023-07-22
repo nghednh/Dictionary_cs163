@@ -222,7 +222,7 @@ void restoreDictionaryScreen(RenderWindow& window, string typeDictionary, Trie& 
             Operation(window, "Emoji", trie);
         }
         if (menuState == 2 && clickClock.getElapsedTime().asMilliseconds() >= 100) {
-            if (isHere(menu.bound, mouse)) {
+            if (menu.draw.getGlobalBounds().contains(mouse)) {
                 menuState = 1;
             }
             else {

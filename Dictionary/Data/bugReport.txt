@@ -1,1 +1,1 @@
-a word starts with 'a' sometimes cannot be added
+word with space ' ' cannnot be added
