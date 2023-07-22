@@ -46,7 +46,7 @@ public:
         TrieNode* cur = root;
 
         for (char c : word) {
-            int index = c - '!';
+            int index = c - ' ';
             if (cur->children[index] == nullptr) {
                 cur->children[index] = new TrieNode();
             }
@@ -62,7 +62,7 @@ public:
         TrieNode* cur = root;
 
         for (char c : word) {
-            int index = c - '!';
+            int index = c - ' ';
             if (cur->children[index] == nullptr) {
                 cur = nullptr;
                 return cur;
@@ -77,7 +77,7 @@ public:
         TrieNode* cur = root;
 
         for (char c : word) {
-            int index = c - '!';
+            int index = c - ' ';
             if (cur->children[index] == nullptr) {
                 return NULL;
             }
@@ -91,7 +91,7 @@ public:
         TrieNode* cur = root;
 
         for (char c : prefix) {
-            int index = c - '!';
+            int index = c - ' ';
             if (cur->children[index] == nullptr) {
                 return false;
             }
@@ -120,17 +120,23 @@ public:
             cout << "Failed to open the file: " << filename << endl;
             return;
         }
-
         string line;
-        while (getline(file, line)) {
-            istringstream iss(line);
-            string word, meaning;
+        while (getline(file, line, '\n')) {
 
-            if (iss >> word) {
-                getline(iss, meaning);
-                meaning.erase(meaning.begin());
-                insertWord(word, meaning);
+            int i = 0;
+            string word = "", meaning = "";
+            while (line[i] != '\0') {
+                if (line[i] != '\t') word += line[i];
+                else break;
+                i++;
             }
+            i++;
+            while (line[i] != '\0') {
+                meaning += line[i];
+                i++;
+            }
+            if (word == "abandon") cout << "YES" << '\n';
+            insertWord(word, meaning);
         }
         file.close();
     }
@@ -151,7 +157,7 @@ private:
             return isEmpty(node);
         }
 
-        int charIndex = word[index] - '!';
+        int charIndex = word[index] - ' ';
         if (node->children[charIndex] == nullptr) {
             return false;
         }
