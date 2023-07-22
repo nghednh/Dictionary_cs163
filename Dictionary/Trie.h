@@ -87,6 +87,20 @@ public:
             return cur;
         else return NULL;
     }
+    void replaceDefinition(string newDef, string word) {
+        string tmpstr = "";
+        TrieNode* tmp = searchWordNode(word);
+        tmp->meaning.clear();
+        for (int i = 0; i < newDef.length(); i++)
+        {
+            if (newDef[i] != ',') {
+                tmpstr += newDef[i];
+            }
+            else tmpstr += newDef[i];
+            tmp->meaning.push_back(tmpstr);
+            tmpstr = "";
+        }
+    }
     bool partSearch(const string& prefix) {
         TrieNode* cur = root;
 
