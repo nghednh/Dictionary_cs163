@@ -2,11 +2,7 @@
 <Project>
   <ProjectOutputs>
     <ProjectOutput>
-<<<<<<< HEAD
       <FullPath>C:\Users\ASUS\OneDrive - VNU-HCMUS\Desktop\Dictionary_cs163\Debug\Dictionary.exe</FullPath>
-=======
-      <FullPath>D:\Dictionary_cs163\Debug\Dictionary.exe</FullPath>
->>>>>>> 75920e3dfe17013def7d6d2cd0b6e989f2d93e37
     </ProjectOutput>
   </ProjectOutputs>
   <ContentFiles />
