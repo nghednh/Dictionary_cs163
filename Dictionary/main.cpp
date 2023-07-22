@@ -6,8 +6,9 @@
 #include <cstdlib> 
 #include <ctime> 
 #include <sstream>
-#include "MainScreen.h"
-
+#include "Trie.h"
+#include "History.h"
+#include "MainScreen.h";
 using namespace std;
 using namespace sf;
 
