@@ -58,19 +58,18 @@ public:
         if (def_is_exist(cur->meaning, meaning)) cur->meaning.push_back(meaning);
     }
 
-    TrieNode* searchWord(const string& word) {
+    bool searchWord(const string& word) {
         TrieNode* cur = root;
 
         for (char c : word) {
             int index = c - ' ';
             if (cur->children[index] == nullptr) {
-                cur = nullptr;
-                return cur;
+                return false;
             }
             cur = cur->children[index];
         }
 
-        return cur;
+        return cur->isEndOfWord;
     }
 
     TrieNode* searchWordNode(const string& word) {
@@ -149,7 +148,6 @@ public:
                 meaning += line[i];
                 i++;
             }
-            if (word == "abandon") cout << "YES" << '\n';
             insertWord(word, meaning);
         }
         file.close();

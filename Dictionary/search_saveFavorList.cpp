@@ -1,5 +1,5 @@
 #include "search_saveFavorList.h"
-
+#include "Operation.h"
 void wrapped_text(RectangleShape shape, Text& text) {
     float hei, wid;
     string s = "";
@@ -24,20 +24,30 @@ void wrapped_text(RectangleShape shape, Text& text) {
 }
 
 void search_addfavorite(RenderWindow& window, Trie trie, string typeDictionary, Trie favor_trie) {
+    Clock clickClock;
+    //Scene
     sf::Texture scene;
     scene.loadFromFile("../Dictionary/content/scene.png");
-
+    //Search_bar
     sf::Texture search_bar;
     search_bar.loadFromFile("../Dictionary/content/searchBar.png");
-
+    sf::Texture bar_move;
+    bar_move.loadFromFile("../Dictionary/content/searchBarMove.png");
+    sf::Texture bar_press;
+    bar_press.loadFromFile("../Dictionary/content/searchBarPressed.png");
+    //Magni
     sf::Texture magni;
     magni.loadFromFile("../Dictionary/content/magnifier.png");
-
+    //Star
     sf::Texture star;
     star.loadFromFile("../Dictionary/content/star.png");
-
     sf::Texture starSaved;
     starSaved.loadFromFile("../Dictionary/content/starSaved.png");
+    //Back
+    Object back = createObject("content/back.png", 200, 980);
+    Object backMove = createObject("content/backMove.png", 200, 980);
+    Object backPressed = createObject("content/backPressed.png", 200, 980);
+    int backState = 0;
     //Sprite
     sf::Sprite spr_scene;
     spr_scene.setTexture(scene);
@@ -56,25 +66,21 @@ void search_addfavorite(RenderWindow& window, Trie trie, string typeDictionary, 
 
     //Button
     sf::RectangleShape rec_enter;
-    rec_enter.setSize(sf::Vector2f(1000, 57));
+    rec_enter.setSize(sf::Vector2f(1000, 60));
     rec_enter.setPosition(170, 350);
     rec_enter.setFillColor(sf::Color::Transparent);
 
     sf::RectangleShape rec_result;
-    rec_result.setSize(sf::Vector2f(1000, 400));
+    rec_result.setSize(sf::Vector2f(1000, 500));
     rec_result.setPosition(170, 450);
     rec_result.setFillColor(sf::Color(175, 211, 226));
 
-    sf::CircleShape cir_favor;
-    cir_favor.setRadius(30);
-    cir_favor.setPosition(1200, 450);
-    cir_favor.setFillColor(sf::Color::Transparent);
     //View
-    sf::View static_view(sf::FloatRect(0, 0, 1440, 1020));
+    sf::View static_view(sf::FloatRect(0, 0, 1740, 1080));
     window.setView(static_view);
 
-    sf::View view(sf::FloatRect(170, 450, 1000, 400));
-    view.setViewport(sf::FloatRect(0.1180f, 0.4411f, 0.6944f, 0.3921f));
+    sf::View view(sf::FloatRect(170, 450, 1000, 500));
+    view.setViewport(sf::FloatRect(0.0977f, 0.4166f, 0.5747f, 0.4629f));
     window.setView(view);
 
     float scrollSpeed = 20.0f;
@@ -112,11 +118,29 @@ void search_addfavorite(RenderWindow& window, Trie trie, string typeDictionary, 
         }
         while (window.pollEvent(event))
         {
-            if (event.type == sf::Event::Closed) window.close();
-
             Vector2f mousePos = window.mapPixelToCoords(sf::Mouse::getPosition(window));
+            if (event.type == sf::Event::Closed) window.close();
+            else if (event.type == Event::KeyPressed && event.key.code == Keyboard::Escape) {
+                backState = 2;
+                clickClock.restart();
+            }
+            else if (event.type == Event::MouseMoved) {
+                if (isHere(back.bound, mousePos)) {
+                    backState = 1;
+                }
+                else {
+                    backState = 0;
+                }
+            }
+            //Check Touch Search_bar
+            if (rec_enter.getGlobalBounds().contains(mousePos)) spr_bar.setTexture(bar_move);
+            else spr_bar.setTexture(search_bar);
             //Check Press
             if (event.type == sf::Event::MouseButtonPressed) {
+                if (isHere(back.bound, mousePos)) {
+                    clickClock.restart();
+                    backState = 2;
+                }
                 if (rec_enter.getGlobalBounds().contains(mousePos)) enter = true;
                 else enter = false;
             }
@@ -145,7 +169,8 @@ void search_addfavorite(RenderWindow& window, Trie trie, string typeDictionary, 
                         found.clear();
                         cnt_move = 0;
                         totalHeight = 0.0f;
-                        for (const auto& data : trie.searchWordNode(user_text)->meaning)
+                        meaning = trie.searchWordNode(user_text)->meaning;
+                        for (const auto& data : meaning)
                         {
                             sf::Text text(data, font, 30);
                             text.setFillColor(sf::Color::Black);
@@ -158,6 +183,7 @@ void search_addfavorite(RenderWindow& window, Trie trie, string typeDictionary, 
 
                         view.setCenter(1000 / 2, (totalHeight) / 2);
                         y_text = view.getCenter().y - view.getSize().y / 2;
+
                         if (!favor_trie.searchWord(user_text)) {
                             spr_favor.setTexture(star);
                             display_star = true;
@@ -190,13 +216,12 @@ void search_addfavorite(RenderWindow& window, Trie trie, string typeDictionary, 
                         {
                             float delta = scrollSpeed * event.mouseWheelScroll.delta;
                             cnt_move += delta;
-                            cout << cnt_move << ' ' << totalHeight << '\n';
                             if (cnt_move > 0) {
                                 cnt_move -= delta;
                                 continue;
                             }
                             if (cnt_move < 0) {
-                                if (cnt_move < -totalHeight + rec_result.getSize().y - scrollSpeed - 10) {
+                                if (cnt_move < -totalHeight + rec_result.getSize().y - scrollSpeed - 20) {
                                     cnt_move -= delta;
                                     continue;
                                 }
@@ -213,16 +238,18 @@ void search_addfavorite(RenderWindow& window, Trie trie, string typeDictionary, 
                     window.setMouseCursor(cursor);
                 }
                 if (event.type == sf::Event::MouseButtonPressed && sf::Mouse::isButtonPressed(sf::Mouse::Left)) {
-                    check_save = true;
-                    trie.searchWordNode(user_text)->isFavorite = true;
-                    spr_favor.setTexture(starSaved);
-                    display_star = true;
-                }
-                else {
-                    check_save = false;
-                    trie.searchWordNode(user_text)->isFavorite = false;
-                    spr_favor.setTexture(star);
-                    display_star = true;
+                    if (trie.searchWordNode(user_text)->isFavorite == false) {
+                        check_save = true;
+                        trie.searchWordNode(user_text)->isFavorite = true;
+                        spr_favor.setTexture(starSaved);
+                        display_star = true;
+                    }
+                    else {
+                        check_save = false;
+                        trie.searchWordNode(user_text)->isFavorite = false;
+                        spr_favor.setTexture(star);
+                        display_star = true;
+                    }
                 }
             }
             else {
@@ -230,6 +257,9 @@ void search_addfavorite(RenderWindow& window, Trie trie, string typeDictionary, 
                     window.setMouseCursor(cursor);
                 }
             }
+        }
+        if (backState == 2 && clickClock.getElapsedTime().asMilliseconds() >= 100) {
+            Operation(window, typeDictionary, trie, favor_trie);
         }
         window.clear();
         window.draw(spr_scene);
@@ -239,7 +269,6 @@ void search_addfavorite(RenderWindow& window, Trie trie, string typeDictionary, 
         window.draw(dis_text);
         window.draw(rec_result);
         if (display_star) {
-            //window.draw(cir_favor);
             window.draw(spr_favor);
         }
         window.setView(view);
@@ -252,6 +281,15 @@ void search_addfavorite(RenderWindow& window, Trie trie, string typeDictionary, 
             window.draw(found[i]);
         }
         window.setView(static_view);
+        if (backState == 0) {
+            window.draw(back.draw);
+        }
+        else if (backState == 1) {
+            window.draw(backMove.draw);
+        }
+        else {
+            window.draw(backPressed.draw);
+        }
         window.display();
         //Save favorite word to favorite list of words.
         if (check_save) {
@@ -259,12 +297,11 @@ void search_addfavorite(RenderWindow& window, Trie trie, string typeDictionary, 
             fout.open("Data/" + typeDictionary + "/favorite.txt", ios::app);
             for (int i = 0; i < meaning.size(); i++) {
                 favor_trie.insertWord(user_text, meaning[i]);
-                fout << user_text << ' ' << '\t' << meaning[i];
+                fout << user_text << '\t' << meaning[i];
                 fout << '\n';
             }
             fout.close();
             check_save = false;
         }
-        else favor_trie.removeWord(user_text);
     }
 }

@@ -70,7 +70,7 @@ void Operation(RenderWindow& window, string typeDictionary, Trie& trie, Trie& fa
 
 	trie.clearAll();
 	trie.readDatasetToTrie("Data/" + typeDictionary + "/document.txt");
-	cout << 1 << endl;
+	favor_trie.readDatasetToTrie("Data/" + typeDictionary + "/favorite.txt");
 
 	while (window.isOpen())
 	{
@@ -208,7 +208,6 @@ void Operation(RenderWindow& window, string typeDictionary, Trie& trie, Trie& fa
 			mainScreen(window, trie, favor_trie);
 		}
 		if (engengState == 2 && clickClock.getElapsedTime().asMilliseconds() >= 100) {
-			cout << 1 << endl;
 			Operation(window, "EngEng", trie, favor_trie);
 		}
 		if (engvieState == 2 && clickClock.getElapsedTime().asMilliseconds() >= 100) {
@@ -320,7 +319,6 @@ void Operation(RenderWindow& window, string typeDictionary, Trie& trie, Trie& fa
 			emoState = 3;
 		}
 
-		cout << menuState << endl;
 		if (menuState == 0) {
 			window.draw(menu.draw);
 		}
