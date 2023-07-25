@@ -22,7 +22,25 @@ void wrapped_text(RectangleShape shape, Text& text) {
     }
     text.setString(s + "\n");
 }
-
+void display(TrieNode* root, string str, ofstream &fout)
+{
+    if (root->isEndOfWord)
+    {   
+        for (int j = 0; j < root->meaning.size(); j++) {
+            fout << str << '\t' << root->meaning[j] << '\n';
+        }  
+    }
+    int i;
+    for (i = 0; i < sizee; i++)
+    {
+        if (root->children[i])
+        {
+            str.push_back(i + ' ');
+            display(root->children[i], str, fout);
+            str.pop_back();
+        }
+    }
+}
 void search_addfavorite(RenderWindow& window, Trie trie, string typeDictionary, Trie favor_trie) {
     Clock clickClock;
     //Scene
@@ -88,7 +106,6 @@ void search_addfavorite(RenderWindow& window, Trie trie, string typeDictionary, 
     sf::Font font;
     font.loadFromFile("arial.ttf");
     string user_text;
-    bool check_save = false;
     //Text
     sf::Text dis_text("Search", font, 40);
     dis_text.setPosition(250, 355);
@@ -192,6 +209,7 @@ void search_addfavorite(RenderWindow& window, Trie trie, string typeDictionary, 
                             spr_favor.setTexture(starSaved);
                             display_star = true;
                         }
+
                     }
                     else {
                         found.clear();
@@ -239,14 +257,16 @@ void search_addfavorite(RenderWindow& window, Trie trie, string typeDictionary, 
                 }
                 if (event.type == sf::Event::MouseButtonPressed && sf::Mouse::isButtonPressed(sf::Mouse::Left)) {
                     if (trie.searchWordNode(user_text)->isFavorite == false) {
-                        check_save = true;
                         trie.searchWordNode(user_text)->isFavorite = true;
+                        for (int i = 0; i < meaning.size(); i++) {
+                            favor_trie.insertWord(user_text, meaning[i]);
+                        }
                         spr_favor.setTexture(starSaved);
                         display_star = true;
                     }
                     else {
-                        check_save = false;
                         trie.searchWordNode(user_text)->isFavorite = false;
+                        favor_trie.removeWord(user_text);
                         spr_favor.setTexture(star);
                         display_star = true;
                     }
@@ -259,6 +279,11 @@ void search_addfavorite(RenderWindow& window, Trie trie, string typeDictionary, 
             }
         }
         if (backState == 2 && clickClock.getElapsedTime().asMilliseconds() >= 100) {
+            string str = "";
+            ofstream fout;
+            fout.open("Data/" + typeDictionary + "/favorite.txt");
+            if (fout.is_open()) display(favor_trie.getRoot(), str, fout);
+            fout.close();
             Operation(window, typeDictionary, trie, favor_trie);
         }
         window.clear();
@@ -291,17 +316,5 @@ void search_addfavorite(RenderWindow& window, Trie trie, string typeDictionary, 
             window.draw(backPressed.draw);
         }
         window.display();
-        //Save favorite word to favorite list of words.
-        if (check_save) {
-            ofstream fout;
-            fout.open("Data/" + typeDictionary + "/favorite.txt", ios::app);
-            for (int i = 0; i < meaning.size(); i++) {
-                favor_trie.insertWord(user_text, meaning[i]);
-                fout << user_text << '\t' << meaning[i];
-                fout << '\n';
-            }
-            fout.close();
-            check_save = false;
-        }
     }
 }

@@ -35,7 +35,9 @@ public:
     Trie() {
         root = new TrieNode();
     }
-
+    TrieNode* getRoot() {
+        return root;
+    }
     bool def_is_exist(vector<string> meaning, string s) {
         for (int i = 0; i < meaning.size(); i++) {
             if (meaning[i] == s) return false;
