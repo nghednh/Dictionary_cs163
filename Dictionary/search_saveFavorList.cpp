@@ -104,7 +104,7 @@ void search_addfavorite(RenderWindow& window, Trie trie, string typeDictionary, 
     float scrollSpeed = 20.0f;
 
     sf::Font font;
-    font.loadFromFile("arial.ttf");
+    font.loadFromFile("content/Oswald-Light.ttf");
     string user_text;
     //Text
     sf::Text dis_text("Search", font, 40);

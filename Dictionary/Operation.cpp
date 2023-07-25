@@ -2,6 +2,7 @@
 #include "addNewWordScreen.h"
 #include "restoreDictionaryScreen.h"
 #include "search_saveFavorList.h"
+#include "viewListFavor.h"
 
 //-------------------Scene-----------------
 void Operation(RenderWindow& window, string typeDictionary, Trie& trie, Trie& favor_trie)

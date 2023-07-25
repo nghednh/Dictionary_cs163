@@ -151,6 +151,7 @@
     <ClInclude Include="restoreDictionaryScreen.h" />
     <ClInclude Include="search_saveFavorList.h" />
     <ClInclude Include="Trie.h" />
+    <ClInclude Include="viewListFavor.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
