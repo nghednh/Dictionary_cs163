@@ -7,7 +7,7 @@
 #include <cstdlib> 
 #include <ctime> 
 #include <sstream>
-#include "Trie.h"
+
 using namespace std;
 using namespace sf;
 

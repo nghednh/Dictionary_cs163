@@ -134,6 +134,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="addNewWordScreen.cpp" />
+    <ClCompile Include="gui.cpp" />
     <ClCompile Include="History.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="MainScreen.cpp" />
@@ -146,6 +147,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="addNewWordScreen.h" />
+    <ClInclude Include="gui.h" />
     <ClInclude Include="History.h" />
     <ClInclude Include="MainScreen.h" />
     <ClInclude Include="Operation.h" />

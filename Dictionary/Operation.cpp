@@ -69,8 +69,6 @@ void Operation(RenderWindow& window, string typeDictionary, Trie& trie, Trie& fa
 
 	Event e;
 
-	trie.clearAll();
-	trie.readDatasetToTrie("Data/" + typeDictionary + "/document.txt");
 	favor_trie.readDatasetToTrie("Data/" + typeDictionary + "/favorite.txt");
 
 	while (window.isOpen())
