@@ -4,7 +4,7 @@
 void submitAdding(string word, string def, string typeDictionary, Trie& trie)
 {
     ofstream fout("Data/" + typeDictionary + "/document.txt", ios::app);
-    fout << word << " " << def << '\n';
+    fout << word << "\t" << def << '\n';
     fout.close();
 
     trie.insertWord(word, def);
