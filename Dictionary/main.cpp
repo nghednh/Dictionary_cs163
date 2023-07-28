@@ -218,8 +218,6 @@ void insertWordScreen(RenderWindow &window, Trie &trie) {
 int main() {
     Trie trie;
     trie.readDatasetToTrie("words.txt");
-    trie.removeWord("3213");
-    trie.insertWord("231", "fsdf");
     cout << trie.searchWord("abaction") << endl;
     cout << trie.searchWord("abactor") << endl;
     cout << trie.searchWord("car") << endl;
