@@ -21,7 +21,7 @@ string hiden_text(float width, Text text) {
     }
     return s;
 }
-void viewlistFavor(RenderWindow& window, string typeDictionary, Trie favor_trie) {
+void viewlistFavor(RenderWindow& window, string typeDictionary, Trie& trie, Trie favor_trie) {
     vector<string> favor_word;
     vector<string> favor_def;
     ifstream fin;
@@ -147,6 +147,9 @@ void viewlistFavor(RenderWindow& window, string typeDictionary, Trie favor_trie)
             display_def = false;
             Vector2f mousePos = window.mapPixelToCoords(sf::Mouse::getPosition(window));
             if (event.type == sf::Event::Closed) window.close();
+            if (event.type == Event::KeyPressed && event.key.code == Keyboard::Escape) {
+                Operation(window, typeDictionary, trie, favor_trie);
+            }
             if (prev.getGlobalBounds().contains(mousePos)) {
                 if (event.type == sf::Event::MouseButtonPressed) {
                     if (page > 1) {

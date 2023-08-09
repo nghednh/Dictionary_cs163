@@ -1,5 +1,6 @@
 #include "Operation.h"
 #include "addNewWordScreen.h"
+#include "removeWordScreen.h"
 #include "restoreDictionaryScreen.h"
 #include "search_saveFavorList.h"
 #include "viewListFavor.h"
@@ -11,24 +12,34 @@ void Operation(RenderWindow& window, string typeDictionary, Trie& trie, Trie& fa
 
 	Object screen = createObject("content/scene.png");
 
+	Object searchWord = createObject("content/searchWord.png", 200, 420);
+	Object searchWordMove = createObject("content/searchWordMove.png", 200, 420);
+	Object searchWordPressed = createObject("content/searchWordPressed.png", 200, 420);
+	int searchWordState = 0;
+
 	Object addWord = createObject("content/addWord.png", 200, 500);
 	Object addWordMove = createObject("content/addWordMove.png", 200, 500);
 	Object addWordPressed = createObject("content/addWordPressed.png", 200, 500);
 	int addState = 0;
 
-	Object resetDicitonary = createObject("content/reset.png", 200, 580);
-	Object resetDicitonaryMove = createObject("content/resetMove.png", 200, 580);
-	Object resetDicitonaryPressed = createObject("content/resetPressed.png", 200, 580);
+	Object remove = createObject("content/removeWord.png", 200, 580);
+	Object removeMove = createObject("content/removeWordMove.png", 200, 580);
+	Object removePressed = createObject("content/removeWordPressed.png", 200, 580);
+	int removeState = 0;
+
+	Object resetDicitonary = createObject("content/reset.png", 200, 660);
+	Object resetDicitonaryMove = createObject("content/resetMove.png", 200, 660);
+	Object resetDicitonaryPressed = createObject("content/resetPressed.png", 200, 660);
 	int resetState = 0;
 
-	Object saveFavor = createObject("content/reset.png", 200, 660);
-	Object saveFavorMove = createObject("content/resetMove.png", 200, 660);
-	Object saveFavorPressed = createObject("content/resetPressed.png", 200, 660);
-	int saveFavorState = 0;
+	Object favor = createObject("content/favor.png", 200, 740);
+	Object favorMove = createObject("content/favorMove.png", 200, 740);
+	Object favorPressed = createObject("content/favorPressed.png", 200, 740);
+	int favorState = 0;
 
-	Object back = createObject("content/back.png", 200, 780);
-	Object backMove = createObject("content/backMove.png", 200, 780);
-	Object backPressed = createObject("content/backPressed.png", 200, 780);
+	Object back = createObject("content/back.png", 200, 820);
+	Object backMove = createObject("content/backMove.png", 200, 820);
+	Object backPressed = createObject("content/backPressed.png", 200, 820);
 	int backState = 0;
 
 	Object engeng = createObject("content/engengMenu.png", 120, 30);
@@ -84,23 +95,35 @@ void Operation(RenderWindow& window, string typeDictionary, Trie& trie, Trie& fa
 				clickClock.restart();
 			}
 			else if (e.type == Event::MouseMoved) {
+				if (isHere(searchWord.bound, mouse)) {
+					searchWordState = 1;
+				}
+				else {
+					searchWordState = 0;
+				}
+				if (isHere(favor.bound, mouse)) {
+					favorState = 1;
+				}
+				else {
+					favorState = 0;
+				}
 				if (isHere(addWord.bound, mouse)) {
 					addState = 1;
 				}
 				else {
 					addState = 0;
 				}
+				if (isHere(remove.bound, mouse)) {
+					removeState = 1;
+				}
+				else {
+					removeState = 0;
+				}
 				if (isHere(resetDicitonary.bound, mouse)) {
 					resetState = 1;
 				}
 				else {
 					resetState = 0;
-				}
-				if (isHere(saveFavor.bound, mouse)) {
-					saveFavorState = 1;
-				}
-				else {
-					saveFavorState = 0;
 				}
 				if (isHere(back.bound, mouse)) {
 					backState = 1;
@@ -160,12 +183,20 @@ void Operation(RenderWindow& window, string typeDictionary, Trie& trie, Trie& fa
 					addState = 2;
 					clickClock.restart();
 				}
+				else if (isHere(remove.bound, mouse)) {
+					removeState = 2;
+					clickClock.restart();
+				}
+				else if (isHere(favor.bound, mouse)) {
+					favorState = 2;
+					clickClock.restart();
+				}
 				else if (isHere(resetDicitonary.bound, mouse)) {
 					resetState = 2;
 					clickClock.restart();
 				}
-				else if (isHere(saveFavor.bound, mouse)) {
-					saveFavorState = 2;
+				else if (isHere(searchWord.bound, mouse)) {
+					searchWordState = 2;
 					clickClock.restart();
 				}
 				else if (isHere(back.bound, mouse)) {
@@ -197,10 +228,16 @@ void Operation(RenderWindow& window, string typeDictionary, Trie& trie, Trie& fa
 		if (addState == 2 && clickClock.getElapsedTime().asMilliseconds() >= 100) {
 			addNewWordScreen(window, typeDictionary, trie, favor_trie);
 		}
+		if (removeState == 2 && clickClock.getElapsedTime().asMilliseconds() >= 100) {
+			removeWordScreen(window, typeDictionary, trie, favor_trie);
+		}
+		if (favorState == 2 && clickClock.getElapsedTime().asMilliseconds() >= 100) {
+			viewlistFavor(window, typeDictionary, trie, favor_trie);
+		}
 		if (resetState == 2 && clickClock.getElapsedTime().asMilliseconds() >= 100) {
 			restoreDictionaryScreen(window, typeDictionary, trie, favor_trie);
 		}
-		if (saveFavorState == 2 && clickClock.getElapsedTime().asMilliseconds() >= 100) {
+		if (searchWordState == 2 && clickClock.getElapsedTime().asMilliseconds() >= 100) {
 			search_addfavorite(window, trie, typeDictionary, favor_trie);
 		}
 		if (backState == 2 && clickClock.getElapsedTime().asMilliseconds() >= 100) {
@@ -328,6 +365,16 @@ void Operation(RenderWindow& window, string typeDictionary, Trie& trie, Trie& fa
 			window.draw(menuPressed.draw);
 		}
 
+		if (favorState == 0) {
+			window.draw(favor.draw);
+		}
+		else if (favorState == 1) {
+			window.draw(favorMove.draw);
+		}
+		else {
+			window.draw(favorPressed.draw);
+		}
+
 		if (addState == 0) {
 			window.draw(addWord.draw);
 		}
@@ -336,6 +383,16 @@ void Operation(RenderWindow& window, string typeDictionary, Trie& trie, Trie& fa
 		}
 		else {
 			window.draw(addWordPressed.draw);
+		}
+
+		if (removeState == 0) {
+			window.draw(remove.draw);
+		}
+		else if (removeState == 1) {
+			window.draw(removeMove.draw);
+		}
+		else {
+			window.draw(removePressed.draw);
 		}
 
 		if (resetState == 0) {
@@ -348,14 +405,14 @@ void Operation(RenderWindow& window, string typeDictionary, Trie& trie, Trie& fa
 			window.draw(resetDicitonaryPressed.draw);
 		}
 
-		if (saveFavorState == 0) {
-			window.draw(saveFavor.draw);
+		if (searchWordState == 0) {
+			window.draw(searchWord.draw);
 		}
-		else if (saveFavorState == 1) {
-			window.draw(saveFavorMove.draw);
+		else if (searchWordState == 1) {
+			window.draw(searchWordMove.draw);
 		}
 		else {
-			window.draw(saveFavorPressed.draw);
+			window.draw(searchWordPressed.draw);
 		}
 
 		if (backState == 0) {
