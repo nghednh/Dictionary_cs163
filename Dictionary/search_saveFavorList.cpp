@@ -48,11 +48,11 @@ void search_addfavorite(RenderWindow& window, Trie trie, string typeDictionary, 
     scene.loadFromFile("../Dictionary/content/scene.png");
     //Search_bar
     sf::Texture search_bar;
-    search_bar.loadFromFile("../Dictionary/content/searchBar.png");
+    search_bar.loadFromFile("../Dictionary/content/search_barBig.png");
     sf::Texture bar_move;
-    bar_move.loadFromFile("../Dictionary/content/searchBarMove.png");
+    bar_move.loadFromFile("../Dictionary/content/search_barPressBig.png");
     sf::Texture bar_press;
-    bar_press.loadFromFile("../Dictionary/content/searchBarPressed.png");
+    bar_press.loadFromFile("../Dictionary/content/search_barPressBig.png");
     //Magni
     sf::Texture magni;
     magni.loadFromFile("../Dictionary/content/magnifier.png");
@@ -76,7 +76,7 @@ void search_addfavorite(RenderWindow& window, Trie trie, string typeDictionary, 
 
     sf::Sprite spr_magni;
     spr_magni.setTexture(magni);
-    spr_magni.setPosition(sf::Vector2f(180, 357));
+    spr_magni.setPosition(sf::Vector2f(180, 365));
 
     sf::Sprite spr_favor;
     spr_favor.setTexture(star);
@@ -107,8 +107,8 @@ void search_addfavorite(RenderWindow& window, Trie trie, string typeDictionary, 
     font.loadFromFile("content/Oswald-Light.ttf");
     string user_text;
     //Text
-    sf::Text dis_text("Search", font, 40);
-    dis_text.setPosition(250, 355);
+    sf::Text dis_text("Search", font, 50);
+    dis_text.setPosition(250, 360);
     dis_text.setFillColor(sf::Color(107, 114, 142));
 
     vector<sf::Text> found;
@@ -198,7 +198,7 @@ void search_addfavorite(RenderWindow& window, Trie trie, string typeDictionary, 
                         sf::Text line("\n", font, 30);
                         totalHeight -= line.getLocalBounds().height;
 
-                        view.setCenter(1250 / 2, (totalHeight) / 2);
+                        view.setCenter(rec_result.getSize().x / 2, (totalHeight) / 2);
                         y_text = view.getCenter().y - view.getSize().y / 2;
 
                         if (!favor_trie.searchWord(user_text)) {
@@ -301,7 +301,7 @@ void search_addfavorite(RenderWindow& window, Trie trie, string typeDictionary, 
         float sum = y_text + 10;
         for (int i = 0; i < found.size(); i++)
         {
-            found[i].setPosition(viewBounds.left, sum);
+            found[i].setPosition(viewBounds.left*100, sum);
             sum += found[i].getLocalBounds().height;
             window.draw(found[i]);
         }

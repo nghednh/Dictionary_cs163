@@ -59,7 +59,7 @@ void viewlistFavor(RenderWindow& window, string typeDictionary, Trie& trie, Trie
 
     sf::Sprite prev;
     prev.setTexture(b_pre1);
-    prev.setPosition(625, 855);
+    prev.setPosition(825, 1005);
     prev.scale(Vector2f(2, 2));
 
     //Next & Click_next
@@ -70,14 +70,14 @@ void viewlistFavor(RenderWindow& window, string typeDictionary, Trie& trie, Trie
 
     sf::Sprite nxt;
     nxt.setTexture(b_next1);
-    nxt.setPosition(760, 855);
+    nxt.setPosition(960, 1005);
     nxt.scale(Vector2f(2, 2));
     //Bin 
     sf::Texture bin;
     bin.loadFromFile("../Dictionary/content/bin.png");
     
-    Sprite* bins = new Sprite[8];
-    for (int i = 0; i < 8; i++) {
+    Sprite* bins = new Sprite[11];
+    for (int i = 0; i < 11; i++) {
         bins[i].setTexture(bin);
     }
     //Font
@@ -103,9 +103,9 @@ void viewlistFavor(RenderWindow& window, string typeDictionary, Trie& trie, Trie
     button def;
     def.set_up("Definition", font1, 30, color, 500, 350, 720, 365, Vector2f(950, 70));
 
-    button item[9];
-    button item_def[9];
-    string full_def[9];
+    button item[11];
+    button item_def[11];
+    string full_def[11];
 
     bool display_def = false;
     sf::RectangleShape rec_dis;
@@ -114,25 +114,26 @@ void viewlistFavor(RenderWindow& window, string typeDictionary, Trie& trie, Trie
 
     sf::Text dis_text("", font, 30);
     dis_text.setFillColor(sf::Color::White);
+    //Back
     float x = 430;
-    for (int i = 0; i < 8; i++) {
+    for (int i = 0; i < 11; i++) {
         if (i < favor_word.size()) {
             item[i].set_up(favor_word[i], font, 30, color, 200, x, 220, x + 5, Vector2f(300, 50));
             sf::Text text(favor_def[i], font, 30);
-            item_def[i].set_up(hiden_text(700, text), font, 30, color, 500, x, 520, x + 5, Vector2f(700, 50));
-            bins[i].setPosition(1210, x + 5);
+            item_def[i].set_up(hiden_text(950, text), font, 30, color, 500, x, 520, x + 5, Vector2f(950, 50));
+            bins[i].setPosition(1460, x + 5);
             full_def[i] = favor_def[i];
         }
         else {
             item[i].set_up("", font, 30, color, 200, x, 220, x + 5, Vector2f(300, 50));
-            item_def[i].set_up("", font, 30, color, 500, x, 520, x + 5, Vector2f(700, 50));
+            item_def[i].set_up("", font, 30, color, 500, x, 520, x + 5, Vector2f(950, 50));
         }
         if (i % 2 != 0) swap(color[0], color[1]);
         else swap(color[1], color[0]);
         x += 50;
     }
     button mid;
-    mid.set_up("Page 1", font, 25, color, 670, 850, 680, 855, Vector2f(80, 50));
+    mid.set_up("Page 1", font, 25, color, 870, 1000, 880, 1005, Vector2f(80, 50));
 
     int page = 1;
     int sizeofFavor_word = favor_word.size();
@@ -155,10 +156,10 @@ void viewlistFavor(RenderWindow& window, string typeDictionary, Trie& trie, Trie
                         int cnt = 0;
                         mid.text.setString("Page " + to_string(page));
                         prev.setTexture(b_pre3);
-                        for (int i = 8 * (page - 1); i < 8 * page; i++) {
+                        for (int i = 11 * (page - 1); i < 11 * page; i++) {
                             item[cnt].set_up(favor_word[i], font, 30, color, 200, x, 220, x + 5, Vector2f(500, 50));
                             sf::Text text(favor_def[i], font, 30);
-                            item_def[cnt].set_up(hiden_text(700, text), font, 30, color, 500, x, 520, x + 5, Vector2f(700, 50));
+                            item_def[cnt].set_up(hiden_text(950, text), font, 30, color, 500, x, 520, x + 5, Vector2f(950, 50));
                             full_def[cnt] = favor_def[i];
                             if (i % 2 != 0) swap(color[0], color[1]);
                             else swap(color[1], color[0]);
@@ -172,17 +173,17 @@ void viewlistFavor(RenderWindow& window, string typeDictionary, Trie& trie, Trie
             }
             else if (nxt.getGlobalBounds().contains(mousePos)) {
                 if (event.type == sf::Event::MouseButtonPressed) {
-                    if (8 * page < favor_word.size()) {
+                    if (11 * page < favor_word.size()) {
                         ++page;
                         float x = 430;
                         int cnt = 0;
                         mid.text.setString("Page " + to_string(page));
                         nxt.setTexture(b_next3);
-                        for (int i = 8 * (page - 1); i < 8 * page; i++) {
+                        for (int i = 11 * (page - 1); i < 11 * page; i++) {
                             if (i < favor_word.size()) {
                                 item[cnt].set_up(favor_word[i], font, 30, color, 200, x, 220, x + 5, Vector2f(500, 50));
                                 sf::Text text(favor_def[i], font, 30);
-                                item_def[cnt].set_up(hiden_text(700, text), font, 30, color, 500, x, 520, x + 5, Vector2f(700, 50));
+                                item_def[cnt].set_up(hiden_text(950, text), font, 30, color, 500, x, 520, x + 5, Vector2f(950, 50));
                                 full_def[cnt] = favor_def[i];
                                 if (i % 2 != 0) swap(color[0], color[1]);
                                 else swap(color[1], color[0]);
@@ -191,7 +192,7 @@ void viewlistFavor(RenderWindow& window, string typeDictionary, Trie& trie, Trie
                             }
                             else {
                                 item[cnt].set_up("", font, 30, color, 200, x, 220, x + 5, Vector2f(500, 50));
-                                item_def[cnt].set_up("", font, 30, color, 500, x, 520, x + 5, Vector2f(700, 50));
+                                item_def[cnt].set_up("", font, 30, color, 500, x, 520, x + 5, Vector2f(950, 50));
                                 if (i % 2 != 0) swap(color[0], color[1]);
                                 else swap(color[1], color[0]);
                                 x += 50;
@@ -203,7 +204,7 @@ void viewlistFavor(RenderWindow& window, string typeDictionary, Trie& trie, Trie
                 }
                 else nxt.setTexture(b_next1);
             }
-            for (int i = 0; i < 8; i++) {
+            for (int i = 0; i < 11; i++) {
                 if (item_def[i].isTouched(window, event) && item_def[i].text.getString() != "") {
                     item_def[i].color[0] = color_touch[(i + 1) % 2];
                     display_def = true;
@@ -233,7 +234,7 @@ void viewlistFavor(RenderWindow& window, string typeDictionary, Trie& trie, Trie
         def.drawButton(window, event);
         def.text.setFont(font1);
         window.draw(def.text);
-        for (int i = 0; i < 8; i++) {
+        for (int i = 0; i < 11; i++) {
             item[i].drawButton(window, event);
             item[i].text.setFont(font);
             window.draw(item[i].text);
