@@ -57,7 +57,9 @@ public:
 
         cur->isEndOfWord = true;
         cur->isFavorite = false;
-        if (def_is_exist(cur->meaning, meaning)) cur->meaning.push_back(meaning);
+        if (def_is_exist(cur->meaning, meaning)) {
+            cur->meaning.push_back(meaning);
+        }
     }
 
     bool searchWord(const string& word) {

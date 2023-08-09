@@ -148,6 +148,7 @@
   <ItemGroup>
     <ClInclude Include="addNewWordScreen.h" />
     <ClInclude Include="gui.h" />
+    <ClInclude Include="HashTable.h" />
     <ClInclude Include="History.h" />
     <ClInclude Include="MainScreen.h" />
     <ClInclude Include="Operation.h" />
