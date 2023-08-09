@@ -7,6 +7,7 @@
 #include <cstdlib> 
 #include <ctime> 
 #include <sstream>
+#include "random.h"
 
 using namespace std;
 using namespace sf;
@@ -17,6 +18,7 @@ class TrieNode {
 public:
     vector<TrieNode*> children;
     vector<string> meaning;
+    string word;
     bool isEndOfWord;
     bool isFavorite;
 
@@ -56,6 +58,7 @@ public:
         }
 
         cur->isEndOfWord = true;
+        cur->word = word;
         cur->isFavorite = false;
         if (def_is_exist(cur->meaning, meaning)) {
             cur->meaning.push_back(meaning);
@@ -161,7 +164,44 @@ public:
         clearTrie(root);
         root = new TrieNode();
     }
-
+    TrieNode *getRandomWordTrue() {
+        TrieNode* cur = root;
+        TrieNode* pre = nullptr;
+        int n = randominrange(10);
+        for (int i = 0; i < n; i++) {
+            int m = randominrange2(65, 90);
+            if (cur->children[m])
+            {
+                cur = cur->children[m];
+                if (cur->isEndOfWord) pre = cur;
+            }
+        }
+        if (pre != nullptr) {
+            return pre;
+        }
+        else {
+            return getRandomWordTrue();
+        }
+    }
+    TrieNode* getRandomWordWrong(TrieNode* x, TrieNode* y, TrieNode*z) {
+        TrieNode* cur = root;
+        TrieNode* pre = nullptr;
+        int n = randominrange(10);
+        for (int i = 0; i < n; i++) {
+            int m = randominrange2(65, 90);
+            if (cur->children[m])
+            {
+                cur = cur->children[m];
+                if (cur->isEndOfWord) pre = cur;
+            }
+        }
+        if (pre != nullptr && pre != x && pre != y && pre != z) {
+            return pre;
+        }
+        else {
+            return getRandomWordWrong(x,y,z);
+        }
+    }
 private:
     bool removeOrigin(TrieNode* node, const string& word, int index) {
         if (index == word.length()) {
@@ -169,6 +209,7 @@ private:
                 return false;
             }
             node->isEndOfWord = false;
+            node->word.clear();
             node->meaning.clear();
             return isEmpty(node);
         }
