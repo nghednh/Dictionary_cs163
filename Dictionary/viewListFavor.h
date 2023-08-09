@@ -57,4 +57,4 @@ struct button {
 
 string hiden_text(float width, Text text);
 //-----------------Draw Scene--------------------------
-void viewlistFavor(RenderWindow& window, string typeDictionary, Trie favor_trie);
+void viewlistFavor(RenderWindow& window, string typeDictionary, Trie& trie, Trie favor_trie);
