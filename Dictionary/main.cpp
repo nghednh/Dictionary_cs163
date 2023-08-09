@@ -16,7 +16,7 @@ int main()
 {
 	Trie trie;
 	Trie favor_trie;
-	RenderWindow window(VideoMode(1920, 1080), "CS163-Dictionary", Style::Default);
+	RenderWindow window(VideoMode(1740, 1080), "CS163-Dictionary", Style::Default);
 
 	mainScreen(window, trie, favor_trie);
 

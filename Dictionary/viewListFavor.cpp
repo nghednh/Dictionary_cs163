@@ -47,7 +47,7 @@ void viewlistFavor(RenderWindow& window, string typeDictionary, Trie& trie, Trie
     fin.close();
     //Background
     sf::Texture scene;
-    scene.loadFromFile("../Dictionary/content/scene.png");
+    scene.loadFromFile("../Dictionary/content/favorite_scene.png");
 
     sf::Sprite spr_scene;
     spr_scene.setTexture(scene);
@@ -97,14 +97,11 @@ void viewlistFavor(RenderWindow& window, string typeDictionary, Trie& trie, Trie
     color_touch[1] = Color(226, 246, 202);
     color_touch[0] = Color(248, 253, 207);
 
-    button title;
-    title.set_up("Favorite list", font, 60, color, 200, 200, 320, 210, Vector2f(500, 100));
-
     button word;
     word.set_up("Word", font1, 30, color, 200, 350, 220, 365, Vector2f(300, 70));
 
     button def;
-    def.set_up("Definition", font1, 30, color, 500, 350, 720, 365, Vector2f(700, 70));
+    def.set_up("Definition", font1, 30, color, 500, 350, 720, 365, Vector2f(950, 70));
 
     button item[9];
     button item_def[9];
@@ -228,10 +225,7 @@ void viewlistFavor(RenderWindow& window, string typeDictionary, Trie& trie, Trie
         }
         window.clear();
         window.draw(spr_scene);
-        title.drawButton(window, event);
-        title.text.setFont(font1);
-        window.draw(title.text);
-
+ 
         word.drawButton(window, event);
         word.text.setFont(font1);
         window.draw(word.text);

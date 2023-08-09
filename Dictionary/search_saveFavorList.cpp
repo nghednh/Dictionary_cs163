@@ -62,9 +62,9 @@ void search_addfavorite(RenderWindow& window, Trie trie, string typeDictionary, 
     sf::Texture starSaved;
     starSaved.loadFromFile("../Dictionary/content/starSaved.png");
     //Back
-    Object back = createObject("content/back.png", 200, 980);
-    Object backMove = createObject("content/backMove.png", 200, 980);
-    Object backPressed = createObject("content/backPressed.png", 200, 980);
+    Object back = createObject("content/back.png", 200, 970);
+    Object backMove = createObject("content/backMove.png", 200, 970);
+    Object backPressed = createObject("content/backPressed.png", 200, 970);
     int backState = 0;
     //Sprite
     sf::Sprite spr_scene;
@@ -80,16 +80,16 @@ void search_addfavorite(RenderWindow& window, Trie trie, string typeDictionary, 
 
     sf::Sprite spr_favor;
     spr_favor.setTexture(star);
-    spr_favor.setPosition(1200, 450);
+    spr_favor.setPosition(1450, 450);
 
     //Button
     sf::RectangleShape rec_enter;
-    rec_enter.setSize(sf::Vector2f(1000, 60));
+    rec_enter.setSize(sf::Vector2f(1250, 60));
     rec_enter.setPosition(170, 350);
     rec_enter.setFillColor(sf::Color::Transparent);
 
     sf::RectangleShape rec_result;
-    rec_result.setSize(sf::Vector2f(1000, 500));
+    rec_result.setSize(sf::Vector2f(1250, 500));
     rec_result.setPosition(170, 450);
     rec_result.setFillColor(sf::Color(175, 211, 226));
 
@@ -97,8 +97,8 @@ void search_addfavorite(RenderWindow& window, Trie trie, string typeDictionary, 
     sf::View static_view(sf::FloatRect(0, 0, 1740, 1080));
     window.setView(static_view);
 
-    sf::View view(sf::FloatRect(170, 450, 1000, 500));
-    view.setViewport(sf::FloatRect(0.0977f, 0.4166f, 0.5747f, 0.4629f));
+    sf::View view(sf::FloatRect(170, 450, 1250, 500));
+    view.setViewport(sf::FloatRect(0.0977f, 0.4166f, 0.7184f, 0.4629f));
     window.setView(view);
 
     float scrollSpeed = 20.0f;
@@ -198,7 +198,7 @@ void search_addfavorite(RenderWindow& window, Trie trie, string typeDictionary, 
                         sf::Text line("\n", font, 30);
                         totalHeight -= line.getLocalBounds().height;
 
-                        view.setCenter(1000 / 2, (totalHeight) / 2);
+                        view.setCenter(1250 / 2, (totalHeight) / 2);
                         y_text = view.getCenter().y - view.getSize().y / 2;
 
                         if (!favor_trie.searchWord(user_text)) {
@@ -301,7 +301,7 @@ void search_addfavorite(RenderWindow& window, Trie trie, string typeDictionary, 
         float sum = y_text + 10;
         for (int i = 0; i < found.size(); i++)
         {
-            found[i].setPosition(viewBounds.left * 100, sum);
+            found[i].setPosition(viewBounds.left, sum);
             sum += found[i].getLocalBounds().height;
             window.draw(found[i]);
         }
