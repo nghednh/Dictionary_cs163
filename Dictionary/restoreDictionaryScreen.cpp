@@ -1,7 +1,7 @@
 #include "restoreDictionaryScreen.h"
 #include "Operation.h"
 
-void restoreDictionary(string typeDictionary, Trie& trie)
+void restoreDictionary(string& typeDictionary, Trie& trie)
 {
     ifstream fin("Data/" + typeDictionary + "/backup.txt");
     ofstream fout("Data/" + typeDictionary + "/document.txt");
@@ -16,14 +16,11 @@ void restoreDictionary(string typeDictionary, Trie& trie)
         cout << "Error opening files." << endl;
     }
 
-    trie.clearAll();
-    trie.readDatasetToTrie("Data/" + typeDictionary + "/document.txt");
-
     fin.close();
     fout.close();
 }
 
-void restoreDictionaryScreen(RenderWindow& window, string typeDictionary, Trie& trie, Trie& favor_trie)
+void restoreDictionaryScreen(RenderWindow& window, string& typeDictionary, Trie& trie, Trie& favor_trie)
 {
     Clock clickClock;
 
@@ -166,6 +163,8 @@ void restoreDictionaryScreen(RenderWindow& window, string typeDictionary, Trie& 
                 }
                 else if (isHere(submit.bound, mouse)) {
                     restoreDictionary(typeDictionary, trie);
+                    trie.clearAll();
+                    trie.readDatasetToTrie("Data/" + typeDictionary + "/document.txt");
                     warning.text.setString("Reset successfully!");
                     warningState = 1;
                     submitState = 2;
