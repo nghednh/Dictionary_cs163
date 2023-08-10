@@ -81,7 +81,7 @@ void Operation(RenderWindow& window, string typeDictionary, Trie& trie, Trie& fa
 	Event e;
 
 	favor_trie.readDatasetToTrie("Data/" + typeDictionary + "/favorite.txt");
-	cout << trie.getRandomWordTrue()->word << " " << trie.getRandomWordTrue()->meaning[0];
+	cout <<endl <<trie.getRandomWordTrue()->word << " " << trie.getRandomWordTrue()->meaning[0];
 	TrieNode* x = trie.getRandomWordWrong(nullptr, nullptr, nullptr);
 	cout << endl << endl << x->word << x->meaning[0];
 

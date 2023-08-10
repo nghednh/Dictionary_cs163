@@ -32,10 +32,15 @@ public:
 class Trie {
 private:
     TrieNode* root;
+    bool isChanged;
 
 public:
     Trie() {
         root = new TrieNode();
+        isChanged = false;
+    }
+    bool checkisChanged() {
+        return isChanged;
     }
     TrieNode* getRoot() {
         return root;
@@ -211,6 +216,7 @@ private:
             node->isEndOfWord = false;
             node->word.clear();
             node->meaning.clear();
+            isChanged = true;
             return isEmpty(node);
         }
 
