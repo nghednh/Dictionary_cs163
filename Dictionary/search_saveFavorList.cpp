@@ -172,7 +172,7 @@ void search_addfavorite(RenderWindow& window, Trie trie, string typeDictionary, 
                 }
                 //Input the word
                 if (event.type == Event::TextEntered) {
-                    if (event.text.unicode < 128 && event.text.unicode != '\b' && sf::Keyboard::isKeyPressed(sf::Keyboard::Enter) == false) {
+                    if (event.text.unicode < 128 && event.text.unicode != '\b' && sf::Keyboard::isKeyPressed(sf::Keyboard::Enter) == false && sf::Keyboard::isKeyPressed(sf::Keyboard::Escape) == false) {
                         user_text += event.text.unicode;
                         dis_text.setString(user_text + "_");
                     }
