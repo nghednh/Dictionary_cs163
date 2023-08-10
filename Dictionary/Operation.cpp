@@ -81,6 +81,9 @@ void Operation(RenderWindow& window, string typeDictionary, Trie& trie, Trie& fa
 	Event e;
 
 	favor_trie.readDatasetToTrie("Data/" + typeDictionary + "/favorite.txt");
+	cout << trie.getRandomWordTrue()->word << " " << trie.getRandomWordTrue()->meaning[0];
+	TrieNode* x = trie.getRandomWordWrong(nullptr, nullptr, nullptr);
+	cout << endl << endl << x->word << x->meaning[0];
 
 	while (window.isOpen())
 	{
@@ -241,6 +244,7 @@ void Operation(RenderWindow& window, string typeDictionary, Trie& trie, Trie& fa
 			search_addfavorite(window, trie, typeDictionary, favor_trie);
 		}
 		if (backState == 2 && clickClock.getElapsedTime().asMilliseconds() >= 100) {
+			trie.clearAll();
 			mainScreen(window, trie, favor_trie);
 		}
 		if (engengState == 2 && clickClock.getElapsedTime().asMilliseconds() >= 100) {

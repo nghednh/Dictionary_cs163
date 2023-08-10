@@ -125,20 +125,20 @@ void mainScreen(RenderWindow& window, Trie& trie, Trie& favor_trie)
 			Operation(window, tmp, trie, favor_trie);
 		}
 		if (engvieState == 2 && clickClock.getElapsedTime().asMilliseconds() >= 100) {
-			Operation(window, tmp, trie, favor_trie);
 			trie.readDatasetToTrie("Data/" + tmp + "/document.txt");
+			Operation(window, tmp, trie, favor_trie);
 		}
 		if (vieengState == 2 && clickClock.getElapsedTime().asMilliseconds() >= 100) {
-			Operation(window, tmp, trie, favor_trie);
 			trie.readDatasetToTrie("Data/" + tmp + "/document.txt");
+			Operation(window, tmp, trie, favor_trie);
 		}
 		if (slangState == 2 && clickClock.getElapsedTime().asMilliseconds() >= 100) {
-			Operation(window, tmp, trie, favor_trie);
 			trie.readDatasetToTrie("Data/" + tmp + "/document.txt");
+			Operation(window, tmp, trie, favor_trie);
 		}
 		if (emoState == 2 && clickClock.getElapsedTime().asMilliseconds() >= 100) {
-			Operation(window, tmp, trie, favor_trie);
 			trie.readDatasetToTrie("Data/" + tmp + "/document.txt");
+			Operation(window, tmp, trie, favor_trie);
 		}
 		if (exitState == 2 && clickClock.getElapsedTime().asMilliseconds() >= 100) {
 			window.close();
