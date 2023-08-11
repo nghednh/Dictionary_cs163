@@ -172,9 +172,9 @@ public:
     TrieNode *getRandomWordTrue() {
         TrieNode* cur = root;
         TrieNode* pre = nullptr;
-        int n = randominrange(10);
+        int n = randominrange2(100,200);
         for (int i = 0; i < n; i++) {
-            int m = randominrange2(65, 90);
+            int m = randominrange2(1, 90);
             if (cur->children[m])
             {
                 cur = cur->children[m];
@@ -191,9 +191,9 @@ public:
     TrieNode* getRandomWordWrong(TrieNode* x, TrieNode* y, TrieNode*z) {
         TrieNode* cur = root;
         TrieNode* pre = nullptr;
-        int n = randominrange(10);
+        int n = randominrange2(100,200);
         for (int i = 0; i < n; i++) {
-            int m = randominrange2(65, 90);
+            int m = randominrange2(1, 90);
             if (cur->children[m])
             {
                 cur = cur->children[m];
