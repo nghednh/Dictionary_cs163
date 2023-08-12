@@ -4,6 +4,7 @@
 #include "restoreDictionaryScreen.h"
 #include "search_saveFavorList.h"
 #include "viewListFavor.h"
+#include "game.h"
 
 //-------------------Scene-----------------
 void Operation(RenderWindow& window, string typeDictionary, Trie& trie, Trie& favor_trie)
@@ -37,9 +38,14 @@ void Operation(RenderWindow& window, string typeDictionary, Trie& trie, Trie& fa
 	Object favorPressed = createObject("content/favorPressed.png", 200, 740);
 	int favorState = 0;
 
-	Object back = createObject("content/back.png", 200, 820);
-	Object backMove = createObject("content/backMove.png", 200, 820);
-	Object backPressed = createObject("content/backPressed.png", 200, 820);
+	Object game = createObject("content/game.png", 200, 820);
+	Object gameMove = createObject("content/gameMove.png", 200, 820);
+	Object gamePressed = createObject("content/gamePressed.png", 200, 820);
+	int gameState = 0;
+
+	Object back = createObject("content/back.png", 200, 900);
+	Object backMove = createObject("content/backMove.png", 200, 900);
+	Object backPressed = createObject("content/backPressed.png", 200, 900);
 	int backState = 0;
 
 	Object engeng = createObject("content/engengMenu.png", 120, 30);
@@ -81,9 +87,11 @@ void Operation(RenderWindow& window, string typeDictionary, Trie& trie, Trie& fa
 	Event e;
 
 	favor_trie.readDatasetToTrie("Data/" + typeDictionary + "/favorite.txt");
-	cout <<endl <<trie.getRandomWordTrue()->word << " " << trie.getRandomWordTrue()->meaning[0];
-	TrieNode* x = trie.getRandomWordWrong(nullptr, nullptr, nullptr);
-	cout << endl << endl << x->word << x->meaning[0];
+
+	TrieNode* tmp1 = trie.getRandomWordTrue();
+	TrieNode* tmp2 = trie.getRandomWordWrong(nullptr, nullptr, nullptr);
+	cout << tmp1->word << " " << tmp1->meaning[0] << endl;
+	cout << tmp2->word << " " << tmp2->meaning[0] << endl;
 
 	while (window.isOpen())
 	{
@@ -127,6 +135,12 @@ void Operation(RenderWindow& window, string typeDictionary, Trie& trie, Trie& fa
 				}
 				else {
 					resetState = 0;
+				}
+				if (isHere(game.bound, mouse)) {
+					gameState = 1;
+				}
+				else {
+					gameState = 0;
 				}
 				if (isHere(back.bound, mouse)) {
 					backState = 1;
@@ -202,6 +216,10 @@ void Operation(RenderWindow& window, string typeDictionary, Trie& trie, Trie& fa
 					searchWordState = 2;
 					clickClock.restart();
 				}
+				else if (isHere(game.bound, mouse)) {
+					gameState = 2;
+					clickClock.restart();
+				}
 				else if (isHere(back.bound, mouse)) {
 					backState = 2;
 					clickClock.restart();
@@ -242,6 +260,9 @@ void Operation(RenderWindow& window, string typeDictionary, Trie& trie, Trie& fa
 		}
 		if (searchWordState == 2 && clickClock.getElapsedTime().asMilliseconds() >= 100) {
 			search_addfavorite(window, trie, typeDictionary, favor_trie);
+		}
+		if (gameState == 2 && clickClock.getElapsedTime().asMilliseconds() >= 100) {
+			gameMenu(window, typeDictionary, trie, favor_trie);
 		}
 		if (backState == 2 && clickClock.getElapsedTime().asMilliseconds() >= 100) {
 			trie.clearAll();
@@ -427,6 +448,16 @@ void Operation(RenderWindow& window, string typeDictionary, Trie& trie, Trie& fa
 		}
 		else {
 			window.draw(searchWordPressed.draw);
+		}
+
+		if (gameState == 0) {
+			window.draw(game.draw);
+		}
+		else if (gameState == 1) {
+			window.draw(gameMove.draw);
+		}
+		else {
+			window.draw(gamePressed.draw);
 		}
 
 		if (backState == 0) {

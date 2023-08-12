@@ -41,7 +41,7 @@ void display(TrieNode* root, string str, ofstream &fout)
         }
     }
 }
-void search_addfavorite(RenderWindow& window, Trie trie, string typeDictionary, Trie favor_trie) {
+void search_addfavorite(RenderWindow& window, Trie& trie, string typeDictionary, Trie& favor_trie) {
     Clock clickClock;
     //Scene
     sf::Texture scene;
@@ -155,8 +155,8 @@ void search_addfavorite(RenderWindow& window, Trie trie, string typeDictionary, 
             //Check Press
             if (event.type == sf::Event::MouseButtonPressed) {
                 if (isHere(back.bound, mousePos)) {
-                    clickClock.restart();
                     backState = 2;
+                    clickClock.restart();
                 }
                 if (rec_enter.getGlobalBounds().contains(mousePos)) enter = true;
                 else enter = false;
