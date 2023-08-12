@@ -242,6 +242,7 @@ void Operation(RenderWindow& window, string typeDictionary, Trie& trie, Trie& fa
 		}
 		if (searchWordState == 2 && clickClock.getElapsedTime().asMilliseconds() >= 100) {
 			search_addfavorite(window, trie, typeDictionary, favor_trie);
+			//searchByDef(window, trie, typeDictionary, favor_trie);
 		}
 		if (backState == 2 && clickClock.getElapsedTime().asMilliseconds() >= 100) {
 			trie.clearAll();

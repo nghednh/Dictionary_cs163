@@ -1,47 +1,29 @@
 #include "search_saveFavorList.h"
 #include "Operation.h"
-void wrapped_text(RectangleShape shape, Text& text) {
-    float hei, wid;
-    string s = "";
-    wid = shape.getGlobalBounds().width;
-    hei = shape.getGlobalBounds().height;
-    string originalText = text.getString();
-    string word;
-    string testString = "";
-    istringstream iss(originalText);
-
-    while (iss >> word) {
-        sf::Text tempText = text;
-        testString += word + ' ';
-        tempText.setString(testString);
-        if (tempText.getGlobalBounds().width > wid - 10) {
-            s += '\n';
-            testString = word + ' ';
+void findDef(TrieNode* root, string input, vector<pair<string, string>>& ans) {
+    if (root->isEndOfWord) {
+        for (int i = 0; i < root->meaning.size(); i++) {
+            if (i <= 4) {
+                istringstream iss(input);
+                string s;
+                int cnt = 0;
+                int lenght = 0;
+                while (iss >> s) {
+                    if (root->hashTable[i].get(s) == true) cnt++;
+                    lenght++;
+                }
+                if (cnt == lenght) ans.push_back({ root->word, root->meaning[i] });
+            }
         }
-        s += word + ' ';
     }
-    text.setString(s + "\n");
-}
-void display(TrieNode* root, string str, ofstream &fout)
-{
-    if (root->isEndOfWord)
-    {   
-        for (int j = 0; j < root->meaning.size(); j++) {
-            fout << str << '\t' << root->meaning[j] << '\n';
-        }  
-    }
-    int i;
-    for (i = 0; i < sizee; i++)
-    {
+    for (int i = 0; i < sizee; i++) {
         if (root->children[i])
         {
-            str.push_back(i + ' ');
-            display(root->children[i], str, fout);
-            str.pop_back();
+            findDef(root->children[i], input, ans);
         }
     }
 }
-void search_addfavorite(RenderWindow& window, Trie &trie, string typeDictionary, Trie &favor_trie) {
+void searchByDef(RenderWindow& window, Trie &trie, string typeDictionary, Trie &favor_trie) {
     Clock clickClock;
     //Scene
     sf::Texture scene;
@@ -112,7 +94,7 @@ void search_addfavorite(RenderWindow& window, Trie &trie, string typeDictionary,
     dis_text.setFillColor(sf::Color(107, 114, 142));
 
     vector<sf::Text> found;
-    vector<string> meaning;
+    vector<pair<string, string>> meaning;
     Color* color = new Color[1];
     color[0] = sf::Color::Black;
 
@@ -170,9 +152,8 @@ void search_addfavorite(RenderWindow& window, Trie &trie, string typeDictionary,
                     if (cursor.loadFromSystem(sf::Cursor::Arrow))
                         window.setMouseCursor(cursor);
                 }
-                //Input the word
                 if (event.type == Event::TextEntered) {
-                    if (event.text.unicode < 128 && event.text.unicode != '\b' && sf::Keyboard::isKeyPressed(sf::Keyboard::Enter) == false && sf::Keyboard::isKeyPressed(sf::Keyboard::Escape) == false) {
+                    if (event.text.unicode < 128 && event.text.unicode != '\b' && sf::Keyboard::isKeyPressed(sf::Keyboard::Enter) == false) {
                         user_text += event.text.unicode;
                         dis_text.setString(user_text + "_");
                     }
@@ -181,15 +162,18 @@ void search_addfavorite(RenderWindow& window, Trie &trie, string typeDictionary,
                             user_text.pop_back();
                         }
                     }
-                    //Check whether word is exist in trie/favor_trie or not, 
-                    if (trie.searchWord(user_text)) {
-                        found.clear();
+                    else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Enter) == true) {
                         cnt_move = 0;
                         totalHeight = 0.0f;
-                        meaning = trie.searchWordNode(user_text)->meaning;
+                        meaning.clear();
+                        findDef(trie.getRoot(),user_text, meaning);
+                        found.clear();
+
                         for (const auto& data : meaning)
                         {
-                            sf::Text text(data, font, 30);
+                            string s;
+                            s = data.first + " " + data.second;
+                            sf::Text text(s, font, 30);
                             text.setFillColor(sf::Color::Black);
                             wrapped_text(rec_result, text);
                             totalHeight += text.getLocalBounds().height;
@@ -198,26 +182,8 @@ void search_addfavorite(RenderWindow& window, Trie &trie, string typeDictionary,
                         sf::Text line("\n", font, 30);
                         totalHeight -= line.getLocalBounds().height;
 
-                        view.setCenter(rec_result.getSize().x / 2, (totalHeight) / 2);
+                        view.setCenter(1000 / 2, (totalHeight) / 2);
                         y_text = view.getCenter().y - view.getSize().y / 2;
-
-                        if (!favor_trie.searchWord(user_text)) {
-                            spr_favor.setTexture(star);
-                            display_star = true;
-                        }
-                        else {
-                            spr_favor.setTexture(starSaved);
-                            display_star = true;
-                        }
-
-                    }
-                    else {
-                        found.clear();
-                        totalHeight = 0.0f;
-                        sf::Text text("This word is not exist!", font, 30);
-                        text.setFillColor(sf::Color::Black);
-                        found.push_back(text);
-                        display_star = false;
                     }
                 }
                 dis_text.setString(user_text + "_");
@@ -251,7 +217,7 @@ void search_addfavorite(RenderWindow& window, Trie &trie, string typeDictionary,
                 }
             }
             //Press favorite button
-            if (spr_favor.getGlobalBounds().contains(mousePos)) {
+            /*if (spr_favor.getGlobalBounds().contains(mousePos)) {
                 if (cursor.loadFromSystem(sf::Cursor::Hand)) {
                     window.setMouseCursor(cursor);
                 }
@@ -276,14 +242,14 @@ void search_addfavorite(RenderWindow& window, Trie &trie, string typeDictionary,
                 if (cursor.loadFromSystem(sf::Cursor::Arrow)) {
                     window.setMouseCursor(cursor);
                 }
-            }
+            }*/
         }
         if (backState == 2 && clickClock.getElapsedTime().asMilliseconds() >= 100) {
-            string str = "";
+            /*string str = "";
             ofstream fout;
             fout.open("Data/" + typeDictionary + "/favorite.txt");
             if (fout.is_open()) display(favor_trie.getRoot(), str, fout);
-            fout.close();
+            fout.close();*/
             Operation(window, typeDictionary, trie, favor_trie);
         }
         window.clear();
@@ -293,15 +259,15 @@ void search_addfavorite(RenderWindow& window, Trie &trie, string typeDictionary,
         window.draw(rec_enter);
         window.draw(dis_text);
         window.draw(rec_result);
-        if (display_star) {
+       /* if (display_star) {
             window.draw(spr_favor);
-        }
+        }*/
         window.setView(view);
         sf::FloatRect viewBounds = view.getViewport();
         float sum = y_text + 10;
         for (int i = 0; i < found.size(); i++)
         {
-            found[i].setPosition(viewBounds.left*100, sum);
+            found[i].setPosition(viewBounds.left * 100, sum);
             sum += found[i].getLocalBounds().height;
             window.draw(found[i]);
         }

@@ -7,7 +7,7 @@
 #include <ctime> 
 #include <sstream>
 using namespace std;
-const int TABLE_SIZE = 1001;
+const int TABLE_SIZE = 101;
 const int BASE = 31;
 
 // Hash table class
@@ -21,25 +21,19 @@ public:
         return table;
     }
     unsigned long long hashString(const string& s) {
-        unsigned long long hashValue = 0;
-        unsigned long long power = 1;
-        for (char ch : s) {
-            hashValue = (hashValue + (ch - 'a' + 1) * power) % TABLE_SIZE;
-            power = (power * BASE) % TABLE_SIZE;
-        }
-        return hashValue;
+        if (s[0] < 101) return s[0];
+        return s[0] % TABLE_SIZE;
     }
     void insert(const string& key) {
         unsigned long long hashValue = hashString(key);
-        int index = hashValue % TABLE_SIZE;
 
-        table[index].push_back(key);
+        table[hashValue].push_back(key);
     }
     bool get(const string& key) {
         unsigned long long hashValue = hashString(key);
-        int index = hashValue % TABLE_SIZE;
+        /*int index = hashValue % TABLE_SIZE;*/
 
-        for (auto entry : table[index]) {
+        for (auto entry : table[hashValue]){
             if (entry == key) return true;
         }
         return false;

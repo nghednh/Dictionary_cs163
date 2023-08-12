@@ -21,30 +21,52 @@ string hiden_text(float width, Text text) {
     }
     return s;
 }
-void viewlistFavor(RenderWindow& window, string typeDictionary, Trie& trie, Trie favor_trie) {
-    vector<string> favor_word;
-    vector<string> favor_def;
+void displayinFile(TrieNode* root, string str, ofstream& fout)
+{
+    if (root->isEndOfWord)
+    {
+        for (int j = 0; j < root->meaning.size(); j++) {
+            fout << str << '\t' << root->meaning[j] << '\n';
+        }
+    }
+    int i;
+    for (i = 0; i < sizee; i++)
+    {
+        if (root->children[i])
+        {
+            str.push_back(i + ' ');
+            display(root->children[i], str, fout);
+            str.pop_back();
+        }
+    }
+}
+void readDisplayListFavor(string typeDictionary, vector<string>& favor_word, vector<string>& favor_def) {
     ifstream fin;
-    fin.open("Data/" + typeDictionary +  "/favorite.txt");
-    cout << fin.is_open(); 
-    string line;
-    while (getline(fin, line, '\n')) {
-        int i = 0;
-        string word = "", meaning = "";
-        while (line[i] != '\0') {
-            if (line[i] != '\t') word += line[i];
-            else break;
-            i++;
+    fin.open("Data/" + typeDictionary + "/favorite.txt");
+    while (!fin.eof()) {
+        string word = "";
+        string meaning = "";
+        getline(fin, word, '\t');
+        getline(fin, meaning, '\n');
+        if (word != "") {
+            favor_word.push_back(word);
+            favor_def.push_back(meaning);
         }
-        i++;
-        while (line[i] != '\0') {
-            meaning += line[i];
-            i++;
-        }
-        favor_word.push_back(word);
-        favor_def.push_back(meaning);
     }
     fin.close();
+}
+void viewlistFavor(RenderWindow& window, string typeDictionary, Trie& trie, Trie &favor_trie) {
+    //Save favorite word to two vectors.
+    vector<string> favor_word;
+    vector<string> favor_def;
+    readDisplayListFavor(typeDictionary, favor_word, favor_def);
+    //Clock
+    Clock clickClock;
+    //Back
+    Object back = createObject("content/back.png", 1320, 1000);
+    Object backMove = createObject("content/backMove.png", 1320, 1000);
+    Object backPressed = createObject("content/backPressed.png", 1320, 1000);
+    int backState = 0;
     //Background
     sf::Texture scene;
     scene.loadFromFile("../Dictionary/content/favorite_scene.png");
@@ -137,6 +159,7 @@ void viewlistFavor(RenderWindow& window, string typeDictionary, Trie& trie, Trie
 
     int page = 1;
     int sizeofFavor_word = favor_word.size();
+    sf::Cursor cursor;
     while (window.isOpen())
     {
         sf::Event event;
@@ -145,10 +168,28 @@ void viewlistFavor(RenderWindow& window, string typeDictionary, Trie& trie, Trie
             display_def = false;
             Vector2f mousePos = window.mapPixelToCoords(sf::Mouse::getPosition(window));
             if (event.type == sf::Event::Closed) window.close();
-            if (event.type == Event::KeyPressed && event.key.code == Keyboard::Escape) {
-                Operation(window, typeDictionary, trie, favor_trie);
+            else if (event.type == Event::KeyPressed && event.key.code == Keyboard::Escape) {
+                backState = 2;
+                clickClock.restart();
+            }
+            else if (event.type == Event::MouseMoved) {
+                if (isHere(back.bound, mousePos)) {
+                    backState = 1;
+                }
+                else {
+                    backState = 0;
+                }
+            }
+            if (event.type == sf::Event::MouseButtonPressed) {
+                if (isHere(back.bound, mousePos)) {
+                    clickClock.restart();
+                    backState = 2;
+                }
             }
             if (prev.getGlobalBounds().contains(mousePos)) {
+                if (cursor.loadFromSystem(sf::Cursor::Hand)) {
+                       window.setMouseCursor(cursor);
+                   }
                 if (event.type == sf::Event::MouseButtonPressed) {
                     if (page > 1) {
                         --page;
@@ -172,9 +213,12 @@ void viewlistFavor(RenderWindow& window, string typeDictionary, Trie& trie, Trie
                 else prev.setTexture(b_pre1);
             }
             else if (nxt.getGlobalBounds().contains(mousePos)) {
+                if (cursor.loadFromSystem(sf::Cursor::Hand)) {
+                    window.setMouseCursor(cursor);
+                }
                 if (event.type == sf::Event::MouseButtonPressed) {
                     if (11 * page < favor_word.size()) {
-                        ++page;
+                        page++;
                         float x = 430;
                         int cnt = 0;
                         mid.text.setString("Page " + to_string(page));
@@ -204,6 +248,11 @@ void viewlistFavor(RenderWindow& window, string typeDictionary, Trie& trie, Trie
                 }
                 else nxt.setTexture(b_next1);
             }
+            else {
+                if (cursor.loadFromSystem(sf::Cursor::Arrow)) {
+                    window.setMouseCursor(cursor);
+                }
+            }
             for (int i = 0; i < 11; i++) {
                 if (item_def[i].isTouched(window, event) && item_def[i].text.getString() != "") {
                     item_def[i].color[0] = color_touch[(i + 1) % 2];
@@ -223,6 +272,65 @@ void viewlistFavor(RenderWindow& window, string typeDictionary, Trie& trie, Trie
                 }
                 else item_def[i].color[0] = color[(i)%2];
             }
+            for (int i = 0; i < 11; i++) {
+                if (bins[i].getGlobalBounds().contains(mousePos)) {
+                    if (cursor.loadFromSystem(sf::Cursor::Hand)) {
+                        window.setMouseCursor(cursor);
+                    }
+                    if (event.type == sf::Event::MouseButtonPressed && sf::Mouse::isButtonPressed(sf::Mouse::Left)) {
+                        string s = item[i].text.getString();
+                        if (favor_trie.searchWord(s) == true) {
+                            favor_trie.removeWord(s);
+                            trie.searchWordNode(s)->isFavorite = false;
+                            ofstream fout;
+                            fout.open("Data/" + typeDictionary + "/favorite.txt");
+                            displayinFile(favor_trie.getRoot(), "", fout);
+                            fout.close();
+                            favor_def.clear();
+                            favor_word.clear();
+                            readDisplayListFavor(typeDictionary, favor_word, favor_def);
+                            //Check after delete word, page is empty or not.
+                            bool pageEmpty = true;
+                            for (int i = 11 * (page - 1); i < 11 * page; i++) {
+                                if (i < favor_word.size()) pageEmpty = false;
+                            }
+                            if (pageEmpty == true) page--;
+                            float x = 430;
+                            int cnt = 0;
+                            mid.text.setString("Page " + to_string(page));
+                            nxt.setTexture(b_next3);
+                            for (int i = 11 * (page - 1); i < 11 * page; i++) {
+                                if (i < favor_word.size()) {
+                                    cout << favor_word[i] << '\n';
+                                    item[cnt].set_up(favor_word[i], font, 30, color, 200, x, 220, x + 5, Vector2f(500, 50));
+                                    sf::Text text(favor_def[i], font, 30);
+                                    item_def[cnt].set_up(hiden_text(950, text), font, 30, color, 500, x, 520, x + 5, Vector2f(950, 50));
+                                    full_def[cnt] = favor_def[i];
+                                    if (i % 2 != 0) swap(color[0], color[1]);
+                                    else swap(color[1], color[0]);
+                                    x += 50;
+                                    cnt++;
+                                }
+                                else {
+                                    item[cnt].set_up("", font, 30, color, 200, x, 220, x + 5, Vector2f(500, 50));
+                                    item_def[cnt].set_up("", font, 30, color, 500, x, 520, x + 5, Vector2f(950, 50));
+                                    if (i % 2 != 0) swap(color[0], color[1]);
+                                    else swap(color[1], color[0]);
+                                    x += 50;
+                                    cnt++;
+                                    if (cnt == 11) pageEmpty = true;
+                                }
+                            }
+                            nxt.setTexture(b_next1);
+                            prev.setTexture(b_pre1);
+                            continue;
+                        }
+                    }
+                }
+            }
+        }
+        if (backState == 2 && clickClock.getElapsedTime().asMilliseconds() >= 100) {
+            Operation(window, typeDictionary, trie, favor_trie);
         }
         window.clear();
         window.draw(spr_scene);
@@ -255,6 +363,15 @@ void viewlistFavor(RenderWindow& window, string typeDictionary, Trie& trie, Trie
         if (display_def) {
             window.draw(rec_dis);
             window.draw(dis_text);
+        }
+        if (backState == 0) {
+            window.draw(back.draw);
+        }
+        else if (backState == 1) {
+            window.draw(backMove.draw);
+        }
+        else {
+            window.draw(backPressed.draw);
         }
         window.display();
     }

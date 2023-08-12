@@ -54,7 +54,9 @@ struct button {
         window.draw(shape);
     }
 };
-
+void displayinFile(TrieNode* root, string str, ofstream& fout);
 string hiden_text(float width, Text text);
+void readDisplayListFavor(string typeDictionary, vector<string>& favor_word, vector<string>& favor_def);
+
 //-----------------Draw Scene--------------------------
-void viewlistFavor(RenderWindow& window, string typeDictionary, Trie& trie, Trie favor_trie);
+void viewlistFavor(RenderWindow& window, string typeDictionary, Trie& trie, Trie &favor_trie);

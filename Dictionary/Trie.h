@@ -8,7 +8,7 @@
 #include <ctime> 
 #include <sstream>
 #include "random.h"
-
+#include "HashTable.h"
 using namespace std;
 using namespace sf;
 
@@ -18,6 +18,8 @@ class TrieNode {
 public:
     vector<TrieNode*> children;
     vector<string> meaning;
+    vector<HashTable> hashTable;
+
     string word;
     bool isEndOfWord;
     bool isFavorite;
@@ -67,6 +69,18 @@ public:
         cur->isFavorite = false;
         if (def_is_exist(cur->meaning, meaning)) {
             cur->meaning.push_back(meaning);
+            //Hash definition
+            /*istringstream iss(meaning);
+            string s;
+            if (cur->hashTable.size() <= 5) {
+                HashTable tmp;
+                while (iss >> s) {
+                    int t = (int)(s.size() - 1);
+                    if ('a' > s[t] || s[t] > 'z') s.pop_back();
+                    tmp.insert(s);
+                }
+                cur->hashTable.push_back(tmp);
+            }*/
         }
     }
 
@@ -145,21 +159,11 @@ public:
             cout << "Failed to open the file: " << filename << endl;
             return;
         }
-        string line;
-        while (getline(file, line, '\n')) {
-
-            int i = 0;
-            string word = "", meaning = "";
-            while (line[i] != '\0') {
-                if (line[i] != '\t') word += line[i];
-                else break;
-                i++;
-            }
-            i++;
-            while (line[i] != '\0') {
-                meaning += line[i];
-                i++;
-            }
+        while (!file.eof()) {
+            string word = "";
+            string meaning = "";
+            getline(file, word, '\t');
+            getline(file, meaning, '\n');
             insertWord(word, meaning);
         }
         file.close();
