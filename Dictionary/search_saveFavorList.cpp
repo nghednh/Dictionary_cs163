@@ -41,7 +41,7 @@ void display(TrieNode* root, string str, ofstream &fout)
         }
     }
 }
-void search_addfavorite(RenderWindow& window, Trie& trie, string typeDictionary, Trie& favor_trie) {
+void search_addfavorite(RenderWindow& window, Trie &trie, string typeDictionary, Trie &favor_trie) {
     Clock clickClock;
     //Scene
     sf::Texture scene;

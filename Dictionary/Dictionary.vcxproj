@@ -144,6 +144,7 @@
     <ClCompile Include="random.cpp" />
     <ClCompile Include="removeWordScreen.cpp" />
     <ClCompile Include="restoreDictionaryScreen.cpp" />
+    <ClCompile Include="searchByDef.cpp" />
     <ClCompile Include="search_saveFavorList.cpp" />
     <ClCompile Include="viewListFavor.cpp" />
   </ItemGroup>
