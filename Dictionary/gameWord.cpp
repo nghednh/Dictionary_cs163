@@ -1,32 +1,107 @@
 #include "Operation.h"
-#include "game.h"
 #include "gameWord.h"
-#include "gameDef.h"
+#include "game.h"
 
-//-------------------Scene-----------------
-void gameMenu(RenderWindow& window, string typeDictionary, Trie& trie, Trie& favor_trie)
+//-------------------Function-----------------
+void createGameWord(int& ans, Font& font, Trie& trie, Object ob[], Object obMove[], Object obPressed[], Object obTrue[], Object obFalse[], Text opText[], Text& question, RectangleShape& box)
+{
+	srand(time(0));
+	ans = rand() % 4 + 1;
+	TrieNode* tmp = trie.getRandomWordTrue();
+	TrieNode* op1 = trie.getRandomWordWrong(tmp, nullptr, nullptr);
+	TrieNode* op2 = trie.getRandomWordWrong(tmp, op1, nullptr);
+	TrieNode* op3 = trie.getRandomWordWrong(tmp, op1, op2);
+
+	question.setString(tmp->word);
+	question.setPosition(300, 300);
+	question.setFont(font);
+	question.setFillColor(Color(136, 136, 136));
+	question.setCharacterSize(40);
+
+	int cnt = 1;
+	for (int i = 1; i <= 4; ++i) {
+		if (i == ans) {
+			opText[i].setString(tmp->meaning[0]);
+		}
+		else if (cnt == 1) {
+			opText[i].setString(op1->meaning[0]);
+			++cnt;
+		}
+		else if (cnt == 2) {
+			opText[i].setString(op2->meaning[0]);
+			++cnt;
+		}
+		else {
+			opText[i].setString(op3->meaning[0]);
+		}
+		opText[i].setCharacterSize(30);
+		opText[i].setFont(font);
+		opText[i].setFillColor(Color(52, 142, 254));
+
+		ob[i].txt.loadFromFile("content/option.png");
+		ob[i].draw.setTexture(ob[i].txt);
+		obMove[i].txt.loadFromFile("content/optionMove.png");
+		obMove[i].draw.setTexture(obMove[i].txt);
+		obPressed[i].txt.loadFromFile("content/optionPressed.png");
+		obPressed[i].draw.setTexture(obPressed[i].txt);
+		obTrue[i].txt.loadFromFile("content/optionTrue.png");
+		obTrue[i].draw.setTexture(obTrue[i].txt);
+		obFalse[i].txt.loadFromFile("content/optionFalse.png");
+		obFalse[i].draw.setTexture(obFalse[i].txt);
+
+		if (i == 1) {
+			opText[i].setPosition(210, 510);
+			ob[i].draw.setPosition(200, 500);
+			obMove[i].draw.setPosition(200, 500);
+			obPressed[i].draw.setPosition(200, 500);
+			obTrue[i].draw.setPosition(200, 500);
+			obFalse[i].draw.setPosition(200, 500);
+		}
+		else if (i == 2) {
+			opText[i].setPosition(860, 510);
+			ob[i].draw.setPosition(850, 500);
+			obMove[i].draw.setPosition(850, 500);
+			obPressed[i].draw.setPosition(850, 500);
+			obTrue[i].draw.setPosition(850, 500);
+			obFalse[i].draw.setPosition(850, 500);
+		}
+		else if (i == 3) {
+			opText[i].setPosition(210, 735);
+			ob[i].draw.setPosition(200, 725);
+			obMove[i].draw.setPosition(200, 725);
+			obPressed[i].draw.setPosition(200, 725);
+			obTrue[i].draw.setPosition(200, 725);
+			obFalse[i].draw.setPosition(200, 725);
+		}
+		else if (i == 4) {
+			opText[i].setPosition(860, 735);
+			ob[i].draw.setPosition(850, 725);
+			obMove[i].draw.setPosition(850, 725);
+			obPressed[i].draw.setPosition(850, 725);
+			obTrue[i].draw.setPosition(850, 725);
+			obFalse[i].draw.setPosition(850, 725);
+		}
+		wrapped_text(box, opText[i]);
+	}
+}
+
+//-----------------Draw Scene--------------------------
+void gameWord(RenderWindow& window, string typeDictionary, Trie& trie, Trie& favor_trie)
 {
 	Clock clickClock;
 
+	Font font;
+	font.loadFromFile("arial.ttf");
+
 	Object screen = createObject("content/scene.png");
 
-	Object title = createObject("content/searchBar.png", 200, 360);
-	Info titleText = createInfo("arial.ttf", "Choose your mode!", 220, 360, 40);
+	Object title = createObject("content/searchBar.png", 200, 225);
+	Info titleText = createInfo("arial.ttf", "Choose the correct definition of the given word!", 220, 225, 40);
 
-	Object back = createObject("content/back.png", 200, 820);
-	Object backMove = createObject("content/backMove.png", 200, 820);
-	Object backPressed = createObject("content/backPressed.png", 200, 820);
+	Object back = createObject("content/back.png", 200, 950);
+	Object backMove = createObject("content/backMove.png", 200, 950);
+	Object backPressed = createObject("content/backPressed.png", 200, 950);
 	int backState = 0;
-
-	Object word = createObject("content/word.png", 200, 660);
-	Object wordMove = createObject("content/wordMove.png", 200, 660);
-	Object wordPressed = createObject("content/wordPressed.png", 200, 660);
-	int wordState = 0;
-
-	Object def = createObject("content/definition.png", 200, 740);
-	Object defMove = createObject("content/definitionMove.png", 200, 740);
-	Object defPressed = createObject("content/definitionPressed.png", 200, 740);
-	int defState = 0;
 
 	Object engeng = createObject("content/engengMenu.png", 120, 30);
 	Object engengMove = createObject("content/engengMenuMove.png", 120, 30);
@@ -64,6 +139,20 @@ void gameMenu(RenderWindow& window, string typeDictionary, Trie& trie, Trie& fav
 	rect.setOrigin(700, 0);
 	float xVelocity = 0;
 
+	RectangleShape box(Vector2f(600, 200));
+	Object ob[5];
+	Object obMove[5];
+	Object obPressed[5];
+	Object obTrue[5];
+	Object obFalse[5];
+	Text opText[5];
+	Text question;
+	int ans;
+	int state[5] = { 0, 0, 0, 0, 0 };
+	bool isAns = false;
+
+	createGameWord(ans, font, trie, ob, obMove, obPressed, obTrue, obFalse, opText, question, box);
+
 	Event e;
 
 	while (window.isOpen())
@@ -79,17 +168,31 @@ void gameMenu(RenderWindow& window, string typeDictionary, Trie& trie, Trie& fav
 				clickClock.restart();
 			}
 			else if (e.type == Event::MouseMoved) {
-				if (isHere(word.bound, mouse)) {
-					wordState = 1;
-				}
-				else {
-					wordState = 0;
-				}
-				if (isHere(def.bound, mouse)) {
-					defState = 1;
-				}
-				else {
-					defState = 0;
+				if (!isAns) {
+					if (ob[1].draw.getGlobalBounds().contains(mouse)) {
+						state[1] = 1;
+					}
+					else {
+						state[1] = 0;
+					}
+					if (ob[2].draw.getGlobalBounds().contains(mouse)) {
+						state[2] = 1;
+					}
+					else {
+						state[2] = 0;
+					}
+					if (ob[3].draw.getGlobalBounds().contains(mouse)) {
+						state[3] = 1;
+					}
+					else {
+						state[3] = 0;
+					}
+					if (ob[4].draw.getGlobalBounds().contains(mouse)) {
+						state[4] = 1;
+					}
+					else {
+						state[4] = 0;
+					}
 				}
 				if (isHere(back.bound, mouse)) {
 					backState = 1;
@@ -145,13 +248,21 @@ void gameMenu(RenderWindow& window, string typeDictionary, Trie& trie, Trie& fav
 						xVelocity = -5;
 					}
 				}
-				else if (isHere(word.bound, mouse)) {
-					wordState = 2;
-					clickClock.restart();
+				else if (ob[1].draw.getGlobalBounds().contains(mouse) && !isAns) {
+					isAns = true;
+					state[1] = 2;
 				}
-				else if (isHere(def.bound, mouse)) {
-					defState = 2;
-					clickClock.restart();
+				else if (ob[2].draw.getGlobalBounds().contains(mouse) && !isAns) {
+					isAns = true;
+					state[2] = 2;
+				}
+				else if (ob[3].draw.getGlobalBounds().contains(mouse) && !isAns) {
+					isAns = true;
+					state[3] = 2;
+				}
+				else if (ob[4].draw.getGlobalBounds().contains(mouse) && !isAns) {
+					isAns = true;
+					state[4] = 2;
 				}
 				else if (isHere(back.bound, mouse)) {
 					backState = 2;
@@ -179,14 +290,8 @@ void gameMenu(RenderWindow& window, string typeDictionary, Trie& trie, Trie& fav
 				}
 			}
 		}
-		if (wordState == 2 && clickClock.getElapsedTime().asMilliseconds() >= 100) {
-			gameWord(window, typeDictionary, trie, favor_trie);
-		}
-		if (defState == 2 && clickClock.getElapsedTime().asMilliseconds() >= 100) {
-			gameDef(window, typeDictionary, trie, favor_trie);
-		}
 		if (backState == 2 && clickClock.getElapsedTime().asMilliseconds() >= 100) {
-			Operation(window, typeDictionary, trie, favor_trie);
+			gameMenu(window, typeDictionary, trie, favor_trie);
 		}
 		if (engengState == 2 && clickClock.getElapsedTime().asMilliseconds() >= 100) {
 			trie.clearAll();
@@ -227,6 +332,7 @@ void gameMenu(RenderWindow& window, string typeDictionary, Trie& trie, Trie& fav
 		window.draw(screen.draw);
 		window.draw(title.draw);
 		window.draw(titleText.text);
+		window.draw(question);
 
 		rect.move(xVelocity, 0);
 		menu.draw.move(xVelocity, 0);
@@ -322,26 +428,6 @@ void gameMenu(RenderWindow& window, string typeDictionary, Trie& trie, Trie& fav
 			window.draw(menuPressed.draw);
 		}
 
-		if (wordState == 0) {
-			window.draw(word.draw);
-		}
-		else if (wordState == 1) {
-			window.draw(wordMove.draw);
-		}
-		else {
-			window.draw(wordPressed.draw);
-		}
-
-		if (defState == 0) {
-			window.draw(def.draw);
-		}
-		else if (defState == 1) {
-			window.draw(defMove.draw);
-		}
-		else {
-			window.draw(defPressed.draw);
-		}
-
 		if (backState == 0) {
 			window.draw(back.draw);
 		}
@@ -350,6 +436,29 @@ void gameMenu(RenderWindow& window, string typeDictionary, Trie& trie, Trie& fav
 		}
 		else {
 			window.draw(backPressed.draw);
+		}
+
+		for (int i = 1; i <= 4; ++i) {
+			if (isAns) {
+				if (state[i] != 2 && i != ans) {
+					window.draw(obPressed[i].draw);
+				}
+				else if (state[i] == 2 && i != ans) {
+					window.draw(obFalse[i].draw);
+				}
+				else {
+					window.draw(obTrue[i].draw);
+				}
+			}
+			else {
+				if (state[i] == 0) {
+					window.draw(ob[i].draw);
+				}
+				else if (state[i] == 1) {
+					window.draw(obMove[i].draw);
+				}
+			}
+			window.draw(opText[i]);
 		}
 
 		window.display();
