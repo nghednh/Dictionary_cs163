@@ -1,4 +1,5 @@
 #include "search_saveFavorList.h"
+#include "search_editDefinition.h"
 #include "Operation.h"
 void wrapped_text(RectangleShape shape, Text& text) {
     float hei, wid;
@@ -22,13 +23,13 @@ void wrapped_text(RectangleShape shape, Text& text) {
     }
     text.setString(s + "\n");
 }
-void display(TrieNode* root, string str, ofstream &fout)
+void display(TrieNode* root, string str, ofstream& fout)
 {
     if (root->isEndOfWord)
-    {   
+    {
         for (int j = 0; j < root->meaning.size(); j++) {
             fout << str << '\t' << root->meaning[j] << '\n';
-        }  
+        }
     }
     int i;
     for (i = 0; i < sizee; i++)
@@ -41,7 +42,7 @@ void display(TrieNode* root, string str, ofstream &fout)
         }
     }
 }
-void search_addfavorite(RenderWindow& window, Trie &trie, string typeDictionary, Trie &favor_trie) {
+void search_addfavorite(RenderWindow& window, Trie& trie, string typeDictionary, Trie& favor_trie, Trie& history_trie) {
     Clock clickClock;
     //Scene
     sf::Texture scene;
@@ -66,6 +67,12 @@ void search_addfavorite(RenderWindow& window, Trie &trie, string typeDictionary,
     Object backMove = createObject("content/backMove.png", 200, 970);
     Object backPressed = createObject("content/backPressed.png", 200, 970);
     int backState = 0;
+
+    //Edit Def
+    Object editDef = createObject("content/editDef.png", 900, 970);
+    Object editDefMove = createObject("content/editDefMove.png", 900, 970);
+    Object editDefPressed = createObject("content/editDefPressed.png", 900, 970);
+    int editState = 0;
     //Sprite
     sf::Sprite spr_scene;
     spr_scene.setTexture(scene);
@@ -148,6 +155,12 @@ void search_addfavorite(RenderWindow& window, Trie &trie, string typeDictionary,
                 else {
                     backState = 0;
                 }
+                if (isHere(editDef.bound, mousePos)) {
+                    backState = 1;
+                }
+                else {
+                    backState = 0;
+                }
             }
             //Check Touch Search_bar
             if (rec_enter.getGlobalBounds().contains(mousePos)) spr_bar.setTexture(bar_move);
@@ -156,6 +169,10 @@ void search_addfavorite(RenderWindow& window, Trie &trie, string typeDictionary,
             if (event.type == sf::Event::MouseButtonPressed) {
                 if (isHere(back.bound, mousePos)) {
                     backState = 2;
+                    clickClock.restart();
+                }
+                if (isHere(editDef.bound, mousePos)) {
+                    editState = 2;
                     clickClock.restart();
                 }
                 if (rec_enter.getGlobalBounds().contains(mousePos)) enter = true;
@@ -284,7 +301,20 @@ void search_addfavorite(RenderWindow& window, Trie &trie, string typeDictionary,
             fout.open("Data/" + typeDictionary + "/favorite.txt");
             if (fout.is_open()) display(favor_trie.getRoot(), str, fout);
             fout.close();
-            Operation(window, typeDictionary, trie, favor_trie);
+            Operation(window, typeDictionary, trie, favor_trie, history_trie);
+        }
+        if (editState == 2 && clickClock.getElapsedTime().asMilliseconds() >= 100) {
+            string str = "";
+            ofstream fout;
+            fout.open("Data/" + typeDictionary + "/favorite.txt");
+            if (fout.is_open()) display(favor_trie.getRoot(), str, fout);
+            fout.close();
+            if (trie.searchWord(user_text)) {
+                int state = 0;
+                    while (state == 0) {
+                        search_editDefinition(window, trie, typeDictionary, favor_trie, history_trie, user_text, state);
+                    }
+            }
         }
         window.clear();
         window.draw(spr_scene);
@@ -301,7 +331,7 @@ void search_addfavorite(RenderWindow& window, Trie &trie, string typeDictionary,
         float sum = y_text + 10;
         for (int i = 0; i < found.size(); i++)
         {
-            found[i].setPosition(viewBounds.left*100, sum);
+            found[i].setPosition(viewBounds.left * 100, sum);
             sum += found[i].getLocalBounds().height;
             window.draw(found[i]);
         }
@@ -314,6 +344,15 @@ void search_addfavorite(RenderWindow& window, Trie &trie, string typeDictionary,
         }
         else {
             window.draw(backPressed.draw);
+        }
+        if (editState == 0) {
+            window.draw(editDef.draw);
+        }
+        else if (editState == 1) {
+            window.draw(editDefMove.draw);
+        }
+        else {
+            window.draw(editDefPressed.draw);
         }
         window.display();
     }
