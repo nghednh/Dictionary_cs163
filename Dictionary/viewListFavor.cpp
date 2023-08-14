@@ -55,7 +55,7 @@ void readDisplayListFavor(string typeDictionary, vector<string>& favor_word, vec
     }
     fin.close();
 }
-void viewlistFavor(RenderWindow& window, string typeDictionary, Trie& trie, Trie &favor_trie) {
+void viewlistFavor(RenderWindow& window, string typeDictionary, Trie& trie, Trie& favor_trie, Trie& history_trie) {
     //Save favorite word to two vectors.
     vector<string> favor_word;
     vector<string> favor_def;
@@ -97,7 +97,7 @@ void viewlistFavor(RenderWindow& window, string typeDictionary, Trie& trie, Trie
     //Bin 
     sf::Texture bin;
     bin.loadFromFile("../Dictionary/content/bin.png");
-    
+
     Sprite* bins = new Sprite[11];
     for (int i = 0; i < 11; i++) {
         bins[i].setTexture(bin);
@@ -188,8 +188,8 @@ void viewlistFavor(RenderWindow& window, string typeDictionary, Trie& trie, Trie
             }
             if (prev.getGlobalBounds().contains(mousePos)) {
                 if (cursor.loadFromSystem(sf::Cursor::Hand)) {
-                       window.setMouseCursor(cursor);
-                   }
+                    window.setMouseCursor(cursor);
+                }
                 if (event.type == sf::Event::MouseButtonPressed) {
                     if (page > 1) {
                         --page;
@@ -270,7 +270,7 @@ void viewlistFavor(RenderWindow& window, string typeDictionary, Trie& trie, Trie
                         rec_dis.setPosition(mousePos.x, mousePos.y - 150 - delta);
                     }
                 }
-                else item_def[i].color[0] = color[(i)%2];
+                else item_def[i].color[0] = color[(i) % 2];
             }
             for (int i = 0; i < 11; i++) {
                 if (bins[i].getGlobalBounds().contains(mousePos)) {
@@ -330,11 +330,11 @@ void viewlistFavor(RenderWindow& window, string typeDictionary, Trie& trie, Trie
             }
         }
         if (backState == 2 && clickClock.getElapsedTime().asMilliseconds() >= 100) {
-            Operation(window, typeDictionary, trie, favor_trie);
+            Operation(window, typeDictionary, trie, favor_trie, history_trie);
         }
         window.clear();
         window.draw(spr_scene);
- 
+
         word.drawButton(window, event);
         word.text.setFont(font1);
         window.draw(word.text);
@@ -350,7 +350,7 @@ void viewlistFavor(RenderWindow& window, string typeDictionary, Trie& trie, Trie
             item_def[i].drawButton(window, event);
             item_def[i].text.setFont(font);
             window.draw(item_def[i].text);
-            
+
             window.draw(bins[i]);
         }
         window.draw(prev);
