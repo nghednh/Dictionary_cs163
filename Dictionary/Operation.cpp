@@ -7,36 +7,41 @@
 #include "game.h"
 
 //-------------------Scene-----------------
-void Operation(RenderWindow& window, string typeDictionary, Trie& trie, Trie& favor_trie)
+void Operation(RenderWindow& window, string typeDictionary, Trie& trie, Trie& favor_trie, Trie& history_trie)
 {
 	Clock clickClock;
 
 	Object screen = createObject("content/scene.png");
 
-	Object searchWord = createObject("content/searchWord.png", 200, 420);
-	Object searchWordMove = createObject("content/searchWordMove.png", 200, 420);
-	Object searchWordPressed = createObject("content/searchWordPressed.png", 200, 420);
+	Object searchWord = createObject("content/searchWord.png", 200, 340);
+	Object searchWordMove = createObject("content/searchWordMove.png", 200, 340);
+	Object searchWordPressed = createObject("content/searchWordPressed.png", 200, 340);
 	int searchWordState = 0;
 
-	Object addWord = createObject("content/addWord.png", 200, 500);
-	Object addWordMove = createObject("content/addWordMove.png", 200, 500);
-	Object addWordPressed = createObject("content/addWordPressed.png", 200, 500);
+	Object addWord = createObject("content/addWord.png", 200, 420);
+	Object addWordMove = createObject("content/addWordMove.png", 200, 420);
+	Object addWordPressed = createObject("content/addWordPressed.png", 200, 420);
 	int addState = 0;
 
-	Object remove = createObject("content/removeWord.png", 200, 580);
-	Object removeMove = createObject("content/removeWordMove.png", 200, 580);
-	Object removePressed = createObject("content/removeWordPressed.png", 200, 580);
+	Object remove = createObject("content/removeWord.png", 200, 500);
+	Object removeMove = createObject("content/removeWordMove.png", 200, 500);
+	Object removePressed = createObject("content/removeWordPressed.png", 200, 500);
 	int removeState = 0;
 
-	Object resetDicitonary = createObject("content/reset.png", 200, 660);
-	Object resetDicitonaryMove = createObject("content/resetMove.png", 200, 660);
-	Object resetDicitonaryPressed = createObject("content/resetPressed.png", 200, 660);
+	Object resetDicitonary = createObject("content/reset.png", 200, 580);
+	Object resetDicitonaryMove = createObject("content/resetMove.png", 200, 580);
+	Object resetDicitonaryPressed = createObject("content/resetPressed.png", 200, 580);
 	int resetState = 0;
 
-	Object favor = createObject("content/favor.png", 200, 740);
-	Object favorMove = createObject("content/favorMove.png", 200, 740);
-	Object favorPressed = createObject("content/favorPressed.png", 200, 740);
+	Object favor = createObject("content/favor.png", 200, 660);
+	Object favorMove = createObject("content/favorMove.png", 200, 660);
+	Object favorPressed = createObject("content/favorPressed.png", 200, 660);
 	int favorState = 0;
+
+	Object history = createObject("content/history.png", 200, 740);
+	Object historyMove = createObject("content/historyMove.png", 200, 740);
+	Object historyPressed = createObject("content/historyPressed.png", 200, 740);
+	int historyState = 0;
 
 	Object game = createObject("content/game.png", 200, 820);
 	Object gameMove = createObject("content/gameMove.png", 200, 820);
@@ -118,6 +123,10 @@ void Operation(RenderWindow& window, string typeDictionary, Trie& trie, Trie& fa
 				else {
 					favorState = 0;
 				}
+				if (isHere(history.bound, mouse)) {
+					historyState = 1;
+				}
+				else { historyState = 0; }
 				if (isHere(addWord.bound, mouse)) {
 					addState = 1;
 				}
@@ -208,6 +217,10 @@ void Operation(RenderWindow& window, string typeDictionary, Trie& trie, Trie& fa
 					favorState = 2;
 					clickClock.restart();
 				}
+				else if (isHere(history.bound, mouse)) {
+					historyState = 2;
+					clickClock.restart();
+				}
 				else if (isHere(resetDicitonary.bound, mouse)) {
 					resetState = 2;
 					clickClock.restart();
@@ -247,52 +260,52 @@ void Operation(RenderWindow& window, string typeDictionary, Trie& trie, Trie& fa
 			}
 		}
 		if (addState == 2 && clickClock.getElapsedTime().asMilliseconds() >= 100) {
-			addNewWordScreen(window, typeDictionary, trie, favor_trie);
+			addNewWordScreen(window, typeDictionary, trie, favor_trie, history_trie);
 		}
 		if (removeState == 2 && clickClock.getElapsedTime().asMilliseconds() >= 100) {
-			removeWordScreen(window, typeDictionary, trie, favor_trie);
+			removeWordScreen(window, typeDictionary, trie, favor_trie, history_trie);
 		}
 		if (favorState == 2 && clickClock.getElapsedTime().asMilliseconds() >= 100) {
-			viewlistFavor(window, typeDictionary, trie, favor_trie);
+			viewlistFavor(window, typeDictionary, trie, favor_trie, history_trie);
 		}
 		if (resetState == 2 && clickClock.getElapsedTime().asMilliseconds() >= 100) {
-			restoreDictionaryScreen(window, typeDictionary, trie, favor_trie);
+			restoreDictionaryScreen(window, typeDictionary, trie, favor_trie, history_trie);
 		}
 		if (searchWordState == 2 && clickClock.getElapsedTime().asMilliseconds() >= 100) {
-			search_addfavorite(window, trie, typeDictionary, favor_trie);
+			search_addfavorite(window, trie, typeDictionary, favor_trie, history_trie);
 			//searchByDef(window, trie, typeDictionary, favor_trie);
 		}
 		if (gameState == 2 && clickClock.getElapsedTime().asMilliseconds() >= 100) {
-			gameMenu(window, typeDictionary, trie, favor_trie);
+			gameMenu(window, typeDictionary, trie, favor_trie, history_trie);
 		}
 		if (backState == 2 && clickClock.getElapsedTime().asMilliseconds() >= 100) {
 			trie.clearAll();
-			mainScreen(window, trie, favor_trie);
+			mainScreen(window, trie, favor_trie, history_trie);
 		}
 		if (engengState == 2 && clickClock.getElapsedTime().asMilliseconds() >= 100) {
 			trie.clearAll();
 			trie.readDatasetToTrie("Data/EngEng/document.txt");
-			Operation(window, "EngEng", trie, favor_trie);
+			Operation(window, "EngEng", trie, favor_trie, history_trie);
 		}
 		if (engvieState == 2 && clickClock.getElapsedTime().asMilliseconds() >= 100) {
 			trie.clearAll();
 			trie.readDatasetToTrie("Data/EngVie/document.txt");
-			Operation(window, "EngVie", trie, favor_trie);
+			Operation(window, "EngVie", trie, favor_trie, history_trie);
 		}
 		if (vieengState == 2 && clickClock.getElapsedTime().asMilliseconds() >= 100) {
 			trie.clearAll();
 			trie.readDatasetToTrie("Data/VieEng/document.txt");
-			Operation(window, "VieEng", trie, favor_trie);
+			Operation(window, "VieEng", trie, favor_trie, history_trie);
 		}
 		if (slangState == 2 && clickClock.getElapsedTime().asMilliseconds() >= 100) {
 			trie.clearAll();
 			trie.readDatasetToTrie("Data/Slang/document.txt");
-			Operation(window, "Slang", trie, favor_trie);
+			Operation(window, "Slang", trie, favor_trie, history_trie);
 		}
 		if (emoState == 2 && clickClock.getElapsedTime().asMilliseconds() >= 100) {
 			trie.clearAll();
 			trie.readDatasetToTrie("Data/Emoji/document.txt");
-			Operation(window, "Emoji", trie, favor_trie);
+			Operation(window, "Emoji", trie, favor_trie, history_trie);
 		}
 		if (menuState == 2 && clickClock.getElapsedTime().asMilliseconds() >= 100) {
 			if (menu.draw.getGlobalBounds().contains(mouse)) {
@@ -410,7 +423,15 @@ void Operation(RenderWindow& window, string typeDictionary, Trie& trie, Trie& fa
 		else {
 			window.draw(favorPressed.draw);
 		}
-
+		if (historyState == 0) {
+			window.draw(history.draw);
+		}
+		else if (addState == 1) {
+			window.draw(historyMove.draw);
+		}
+		else {
+			window.draw(historyPressed.draw);
+		}
 		if (addState == 0) {
 			window.draw(addWord.draw);
 		}
