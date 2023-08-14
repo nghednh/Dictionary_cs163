@@ -5,6 +5,7 @@
 #include "search_saveFavorList.h"
 #include "viewListFavor.h"
 #include "game.h"
+#include "History.h"
 
 //-------------------Scene-----------------
 void Operation(RenderWindow& window, string typeDictionary, Trie& trie, Trie& favor_trie, Trie& history_trie)
@@ -268,6 +269,9 @@ void Operation(RenderWindow& window, string typeDictionary, Trie& trie, Trie& fa
 		if (favorState == 2 && clickClock.getElapsedTime().asMilliseconds() >= 100) {
 			viewlistFavor(window, typeDictionary, trie, favor_trie, history_trie);
 		}
+		if (historyState == 2 && clickClock.getElapsedTime().asMilliseconds() >= 100) {
+			historyScene(window, typeDictionary, trie, favor_trie, history_trie);
+		}
 		if (resetState == 2 && clickClock.getElapsedTime().asMilliseconds() >= 100) {
 			restoreDictionaryScreen(window, typeDictionary, trie, favor_trie, history_trie);
 		}
@@ -426,7 +430,7 @@ void Operation(RenderWindow& window, string typeDictionary, Trie& trie, Trie& fa
 		if (historyState == 0) {
 			window.draw(history.draw);
 		}
-		else if (addState == 1) {
+		else if (historyState == 1) {
 			window.draw(historyMove.draw);
 		}
 		else {
