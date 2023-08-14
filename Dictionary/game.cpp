@@ -4,7 +4,7 @@
 #include "gameDef.h"
 
 //-------------------Scene-----------------
-void gameMenu(RenderWindow& window, string typeDictionary, Trie& trie, Trie& favor_trie)
+void gameMenu(RenderWindow& window, string typeDictionary, Trie& trie, Trie& favor_trie, Trie& history_trie)
 {
 	Clock clickClock;
 
@@ -180,38 +180,38 @@ void gameMenu(RenderWindow& window, string typeDictionary, Trie& trie, Trie& fav
 			}
 		}
 		if (wordState == 2 && clickClock.getElapsedTime().asMilliseconds() >= 100) {
-			gameWord(window, typeDictionary, trie, favor_trie);
+			gameWord(window, typeDictionary, trie, favor_trie, history_trie);
 		}
 		if (defState == 2 && clickClock.getElapsedTime().asMilliseconds() >= 100) {
-			gameDef(window, typeDictionary, trie, favor_trie);
+			gameDef(window, typeDictionary, trie, favor_trie, history_trie);
 		}
 		if (backState == 2 && clickClock.getElapsedTime().asMilliseconds() >= 100) {
-			Operation(window, typeDictionary, trie, favor_trie);
+			Operation(window, typeDictionary, trie, favor_trie, history_trie);
 		}
 		if (engengState == 2 && clickClock.getElapsedTime().asMilliseconds() >= 100) {
 			trie.clearAll();
 			trie.readDatasetToTrie("Data/EngEng/document.txt");
-			Operation(window, "EngEng", trie, favor_trie);
+			Operation(window, "EngEng", trie, favor_trie, history_trie);
 		}
 		if (engvieState == 2 && clickClock.getElapsedTime().asMilliseconds() >= 100) {
 			trie.clearAll();
 			trie.readDatasetToTrie("Data/EngVie/document.txt");
-			Operation(window, "EngVie", trie, favor_trie);
+			Operation(window, "EngVie", trie, favor_trie, history_trie);
 		}
 		if (vieengState == 2 && clickClock.getElapsedTime().asMilliseconds() >= 100) {
 			trie.clearAll();
 			trie.readDatasetToTrie("Data/VieEng/document.txt");
-			Operation(window, "VieEng", trie, favor_trie);
+			Operation(window, "VieEng", trie, favor_trie, history_trie);
 		}
 		if (slangState == 2 && clickClock.getElapsedTime().asMilliseconds() >= 100) {
 			trie.clearAll();
 			trie.readDatasetToTrie("Data/Slang/document.txt");
-			Operation(window, "Slang", trie, favor_trie);
+			Operation(window, "Slang", trie, favor_trie, history_trie);
 		}
 		if (emoState == 2 && clickClock.getElapsedTime().asMilliseconds() >= 100) {
 			trie.clearAll();
 			trie.readDatasetToTrie("Data/Emoji/document.txt");
-			Operation(window, "Emoji", trie, favor_trie);
+			Operation(window, "Emoji", trie, favor_trie, history_trie);
 		}
 		if (menuState == 2 && clickClock.getElapsedTime().asMilliseconds() >= 100) {
 			if (menu.draw.getGlobalBounds().contains(mouse)) {
