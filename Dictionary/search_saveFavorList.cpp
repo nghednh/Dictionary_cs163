@@ -69,9 +69,9 @@ void search_addfavorite(RenderWindow& window, Trie& trie, string typeDictionary,
     int backState = 0;
 
     //Edit Def
-    Object editDef = createObject("content/editDef.png", 900, 970);
-    Object editDefMove = createObject("content/editDefMove.png", 900, 970);
-    Object editDefPressed = createObject("content/editDefPressed.png", 900, 970);
+    Object editDef = createObject("content/editDef.png", 800, 970);
+    Object editDefMove = createObject("content/editDefMove.png", 800, 970);
+    Object editDefPressed = createObject("content/editDefPressed.png", 800, 970);
     int editState = 0;
     //Sprite
     sf::Sprite spr_scene;
@@ -156,10 +156,10 @@ void search_addfavorite(RenderWindow& window, Trie& trie, string typeDictionary,
                     backState = 0;
                 }
                 if (isHere(editDef.bound, mousePos)) {
-                    backState = 1;
+                    editState = 1;
                 }
                 else {
-                    backState = 0;
+                    editState = 0;
                 }
             }
             //Check Touch Search_bar
