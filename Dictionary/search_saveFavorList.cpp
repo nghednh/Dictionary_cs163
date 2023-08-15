@@ -178,46 +178,49 @@ void search_addfavorite(RenderWindow& window, Trie &trie, string typeDictionary,
                     }
                     else if (event.text.unicode == '\b' && !dis_text.getString().isEmpty()) {
                         if (user_text.size() > 0) {
+                            found.clear();
                             user_text.pop_back();
                         }
                     }
-                    //Check whether word is exist in trie/favor_trie or not, 
-                    if (trie.searchWord(user_text)) {
-                        found.clear();
-                        cnt_move = 0;
-                        totalHeight = 0.0f;
-                        meaning = trie.searchWordNode(user_text)->meaning;
-                        for (const auto& data : meaning)
-                        {
-                            sf::Text text(data, font, 30);
-                            text.setFillColor(sf::Color::Black);
-                            wrapped_text(rec_result, text);
-                            totalHeight += text.getLocalBounds().height;
-                            found.push_back(text);
-                        }
-                        sf::Text line("\n", font, 30);
-                        totalHeight -= line.getLocalBounds().height;
+                    else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Enter) == true) {
+                        //Check whether word is exist in trie/favor_trie or not,
+                        if (trie.searchWord(user_text)) {
+                            found.clear();
+                            cnt_move = 0;
+                            totalHeight = 0.0f;
+                            meaning = trie.searchWordNode(user_text)->meaning;
+                            for (const auto& data : meaning)
+                            {
+                                sf::Text text(data, font, 30);
+                                text.setFillColor(sf::Color::Black);
+                                wrapped_text(rec_result, text);
+                                totalHeight += text.getLocalBounds().height;
+                                found.push_back(text);
+                            }
+                            sf::Text line("\n", font, 30);
+                            totalHeight -= line.getLocalBounds().height;
 
-                        view.setCenter(rec_result.getSize().x / 2, (totalHeight) / 2);
-                        y_text = view.getCenter().y - view.getSize().y / 2;
+                            view.setCenter(rec_result.getSize().x / 2, (totalHeight) / 2);
+                            y_text = view.getCenter().y - view.getSize().y / 2;
 
-                        if (!favor_trie.searchWord(user_text)) {
-                            spr_favor.setTexture(star);
-                            display_star = true;
+                            if (!favor_trie.searchWord(user_text)) {
+                                spr_favor.setTexture(star);
+                                display_star = true;
+                            }
+                            else {
+                                spr_favor.setTexture(starSaved);
+                                display_star = true;
+                            }
+
                         }
                         else {
-                            spr_favor.setTexture(starSaved);
-                            display_star = true;
+                            found.clear();
+                            totalHeight = 0.0f;
+                            sf::Text text("This word is not exist!", font, 30);
+                            text.setFillColor(sf::Color::Black);
+                            found.push_back(text);
+                            display_star = false;
                         }
-
-                    }
-                    else {
-                        found.clear();
-                        totalHeight = 0.0f;
-                        sf::Text text("This word is not exist!", font, 30);
-                        text.setFillColor(sf::Color::Black);
-                        found.push_back(text);
-                        display_star = false;
                     }
                 }
                 dis_text.setString(user_text + "_");

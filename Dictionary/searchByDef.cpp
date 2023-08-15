@@ -1,4 +1,5 @@
 #include "search_saveFavorList.h"
+#include "viewListFavor.h"
 #include "Operation.h"
 void findDef(TrieNode* root, string input, vector<pair<string, string>>& ans) {
     if (root->isEndOfWord) {
@@ -159,6 +160,7 @@ void searchByDef(RenderWindow& window, Trie &trie, string typeDictionary, Trie &
                     }
                     else if (event.text.unicode == '\b' && !dis_text.getString().isEmpty()) {
                         if (user_text.size() > 0) {
+                            found.clear();
                             user_text.pop_back();
                         }
                     }
@@ -166,24 +168,34 @@ void searchByDef(RenderWindow& window, Trie &trie, string typeDictionary, Trie &
                         cnt_move = 0;
                         totalHeight = 0.0f;
                         meaning.clear();
-                        findDef(trie.getRoot(),user_text, meaning);
+                        findDef(trie.getRoot(), user_text, meaning);
                         found.clear();
+                        if (meaning.size() != 0) {
+                            for (const auto& data : meaning)
+                            {
+                                string s;
+                                s = data.first + " " + data.second;
+                                sf::Text text(s, font, 30);
+                                text.setFillColor(sf::Color::Black);
+                                wrapped_text(rec_result, text);
+                                totalHeight += text.getLocalBounds().height;
+                                found.push_back(text);
+                            }
+                            sf::Text line("\n", font, 30);
+                            totalHeight -= line.getLocalBounds().height;
 
-                        for (const auto& data : meaning)
-                        {
+                            view.setCenter(rec_result.getSize().x / 2, (totalHeight) / 2);
+                            y_text = view.getCenter().y - view.getSize().y / 2;
+                        }
+                        else {
                             string s;
-                            s = data.first + " " + data.second;
+                            s = "There are no words related to this definition!";
                             sf::Text text(s, font, 30);
                             text.setFillColor(sf::Color::Black);
                             wrapped_text(rec_result, text);
                             totalHeight += text.getLocalBounds().height;
                             found.push_back(text);
                         }
-                        sf::Text line("\n", font, 30);
-                        totalHeight -= line.getLocalBounds().height;
-
-                        view.setCenter(1000 / 2, (totalHeight) / 2);
-                        y_text = view.getCenter().y - view.getSize().y / 2;
                     }
                 }
                 dis_text.setString(user_text + "_");
