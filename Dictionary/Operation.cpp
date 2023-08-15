@@ -94,11 +94,6 @@ void Operation(RenderWindow& window, string typeDictionary, Trie& trie, Trie& fa
 
 	favor_trie.readDatasetToTrie("Data/" + typeDictionary + "/favorite.txt");
 
-	TrieNode* tmp1 = trie.getRandomWordTrue();
-	TrieNode* tmp2 = trie.getRandomWordWrong(nullptr, nullptr, nullptr);
-	cout << tmp1->word << " " << tmp1->meaning[0] << endl;
-	cout << tmp2->word << " " << tmp2->meaning[0] << endl;
-
 	while (window.isOpen())
 	{
 		Vector2f mouse = window.mapPixelToCoords(Mouse::getPosition(window));
@@ -277,7 +272,7 @@ void Operation(RenderWindow& window, string typeDictionary, Trie& trie, Trie& fa
 		}
 		if (searchWordState == 2 && clickClock.getElapsedTime().asMilliseconds() >= 100) {
 			//search_addfavorite(window, trie, typeDictionary, favor_trie);
-			searchByDef(window, trie, typeDictionary, favor_trie);
+			searchByDef(window, trie, typeDictionary, favor_trie, history_trie);
 		}
 		if (gameState == 2 && clickClock.getElapsedTime().asMilliseconds() >= 100) {
 			gameMenu(window, typeDictionary, trie, favor_trie, history_trie);

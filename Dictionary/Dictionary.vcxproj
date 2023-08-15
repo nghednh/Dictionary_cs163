@@ -147,6 +147,7 @@
     <ClCompile Include="removeWordScreen.cpp" />
     <ClCompile Include="restoreDictionaryScreen.cpp" />
     <ClCompile Include="searchByDef.cpp" />
+    <ClCompile Include="search_editDefinition.cpp" />
     <ClCompile Include="search_saveFavorList.cpp" />
     <ClCompile Include="viewListFavor.cpp" />
   </ItemGroup>
@@ -163,6 +164,7 @@
     <ClInclude Include="random.h" />
     <ClInclude Include="removeWordScreen.h" />
     <ClInclude Include="restoreDictionaryScreen.h" />
+    <ClInclude Include="search_editDefinition.h" />
     <ClInclude Include="search_saveFavorList.h" />
     <ClInclude Include="Trie.h" />
     <ClInclude Include="viewListFavor.h" />

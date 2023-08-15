@@ -103,6 +103,11 @@ void gameDef(RenderWindow& window, string typeDictionary, Trie& trie, Trie& favo
 	Object backPressed = createObject("content/backPressed.png", 200, 950);
 	int backState = 0;
 
+	Object retry = createObject("content/retry.png", 600, 950);
+	Object retryMove = createObject("content/retryMove.png", 600, 950);
+	Object retryPressed = createObject("content/retryPressed.png", 600, 950);
+	int retryState = 0;
+
 	Object engeng = createObject("content/engengMenu.png", 120, 30);
 	Object engengMove = createObject("content/engengMenuMove.png", 120, 30);
 	Object engengPressed = createObject("content/engengMenuPressed.png", 120, 30);
@@ -200,6 +205,12 @@ void gameDef(RenderWindow& window, string typeDictionary, Trie& trie, Trie& favo
 				else {
 					backState = 0;
 				}
+				if (isHere(retry.bound, mouse)) {
+					retryState = 1;
+				}
+				else {
+					retryState = 0;
+				}
 				if (isHere(engeng.bound, mouse) && rect.getPosition().x >= 700) {
 					engengState = 1;
 				}
@@ -268,6 +279,10 @@ void gameDef(RenderWindow& window, string typeDictionary, Trie& trie, Trie& favo
 					backState = 2;
 					clickClock.restart();
 				}
+				else if (isHere(retry.bound, mouse)) {
+					retryState = 2;
+					clickClock.restart();
+				}
 				else if (isHere(engeng.bound, mouse) && rect.getPosition().x >= 700) {
 					engengState = 2;
 					clickClock.restart();
@@ -292,6 +307,9 @@ void gameDef(RenderWindow& window, string typeDictionary, Trie& trie, Trie& favo
 		}
 		if (backState == 2 && clickClock.getElapsedTime().asMilliseconds() >= 100) {
 			gameMenu(window, typeDictionary, trie, favor_trie, history_trie);
+		}
+		if (retryState == 2 && clickClock.getElapsedTime().asMilliseconds() >= 100) {
+			gameDef(window, typeDictionary, trie, favor_trie, history_trie);
 		}
 		if (engengState == 2 && clickClock.getElapsedTime().asMilliseconds() >= 100) {
 			trie.clearAll();
@@ -436,6 +454,16 @@ void gameDef(RenderWindow& window, string typeDictionary, Trie& trie, Trie& favo
 		}
 		else {
 			window.draw(backPressed.draw);
+		}
+
+		if (retryState == 0) {
+			window.draw(retry.draw);
+		}
+		else if (backState == 1) {
+			window.draw(retryMove.draw);
+		}
+		else {
+			window.draw(retryPressed.draw);
 		}
 
 		for (int i = 1; i <= 4; ++i) {
