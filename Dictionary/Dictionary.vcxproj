@@ -134,6 +134,9 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="addNewWordScreen.cpp" />
+    <ClCompile Include="game.cpp" />
+    <ClCompile Include="gameDef.cpp" />
+    <ClCompile Include="gameWord.cpp" />
     <ClCompile Include="gui.cpp" />
     <ClCompile Include="History.cpp" />
     <ClCompile Include="main.cpp" />
@@ -149,6 +152,9 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="addNewWordScreen.h" />
+    <ClInclude Include="game.h" />
+    <ClInclude Include="gameDef.h" />
+    <ClInclude Include="gameWord.h" />
     <ClInclude Include="gui.h" />
     <ClInclude Include="HashTable.h" />
     <ClInclude Include="History.h" />

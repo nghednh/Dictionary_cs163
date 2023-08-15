@@ -1,58 +1,32 @@
 #include "Operation.h"
-#include "addNewWordScreen.h"
-#include "removeWordScreen.h"
-#include "restoreDictionaryScreen.h"
-#include "search_saveFavorList.h"
-#include "viewListFavor.h"
 #include "game.h"
-#include "History.h"
+#include "gameWord.h"
+#include "gameDef.h"
 
 //-------------------Scene-----------------
-void Operation(RenderWindow& window, string typeDictionary, Trie& trie, Trie& favor_trie, Trie& history_trie)
+void gameMenu(RenderWindow& window, string typeDictionary, Trie& trie, Trie& favor_trie, Trie& history_trie)
 {
 	Clock clickClock;
 
 	Object screen = createObject("content/scene.png");
 
-	Object searchWord = createObject("content/searchWord.png", 200, 340);
-	Object searchWordMove = createObject("content/searchWordMove.png", 200, 340);
-	Object searchWordPressed = createObject("content/searchWordPressed.png", 200, 340);
-	int searchWordState = 0;
+	Object title = createObject("content/searchBar.png", 200, 360);
+	Info titleText = createInfo("arial.ttf", "Choose your mode!", 220, 360, 40);
 
-	Object addWord = createObject("content/addWord.png", 200, 420);
-	Object addWordMove = createObject("content/addWordMove.png", 200, 420);
-	Object addWordPressed = createObject("content/addWordPressed.png", 200, 420);
-	int addState = 0;
-
-	Object remove = createObject("content/removeWord.png", 200, 500);
-	Object removeMove = createObject("content/removeWordMove.png", 200, 500);
-	Object removePressed = createObject("content/removeWordPressed.png", 200, 500);
-	int removeState = 0;
-
-	Object resetDicitonary = createObject("content/reset.png", 200, 580);
-	Object resetDicitonaryMove = createObject("content/resetMove.png", 200, 580);
-	Object resetDicitonaryPressed = createObject("content/resetPressed.png", 200, 580);
-	int resetState = 0;
-
-	Object favor = createObject("content/favor.png", 200, 660);
-	Object favorMove = createObject("content/favorMove.png", 200, 660);
-	Object favorPressed = createObject("content/favorPressed.png", 200, 660);
-	int favorState = 0;
-
-	Object history = createObject("content/history.png", 200, 740);
-	Object historyMove = createObject("content/historyMove.png", 200, 740);
-	Object historyPressed = createObject("content/historyPressed.png", 200, 740);
-	int historyState = 0;
-
-	Object game = createObject("content/game.png", 200, 820);
-	Object gameMove = createObject("content/gameMove.png", 200, 820);
-	Object gamePressed = createObject("content/gamePressed.png", 200, 820);
-	int gameState = 0;
-
-	Object back = createObject("content/back.png", 200, 900);
-	Object backMove = createObject("content/backMove.png", 200, 900);
-	Object backPressed = createObject("content/backPressed.png", 200, 900);
+	Object back = createObject("content/back.png", 200, 820);
+	Object backMove = createObject("content/backMove.png", 200, 820);
+	Object backPressed = createObject("content/backPressed.png", 200, 820);
 	int backState = 0;
+
+	Object word = createObject("content/word.png", 200, 660);
+	Object wordMove = createObject("content/wordMove.png", 200, 660);
+	Object wordPressed = createObject("content/wordPressed.png", 200, 660);
+	int wordState = 0;
+
+	Object def = createObject("content/definition.png", 200, 740);
+	Object defMove = createObject("content/definitionMove.png", 200, 740);
+	Object defPressed = createObject("content/definitionPressed.png", 200, 740);
+	int defState = 0;
 
 	Object engeng = createObject("content/engengMenu.png", 120, 30);
 	Object engengMove = createObject("content/engengMenuMove.png", 120, 30);
@@ -92,13 +66,6 @@ void Operation(RenderWindow& window, string typeDictionary, Trie& trie, Trie& fa
 
 	Event e;
 
-	favor_trie.readDatasetToTrie("Data/" + typeDictionary + "/favorite.txt");
-
-	TrieNode* tmp1 = trie.getRandomWordTrue();
-	TrieNode* tmp2 = trie.getRandomWordWrong(nullptr, nullptr, nullptr);
-	cout << tmp1->word << " " << tmp1->meaning[0] << endl;
-	cout << tmp2->word << " " << tmp2->meaning[0] << endl;
-
 	while (window.isOpen())
 	{
 		Vector2f mouse = window.mapPixelToCoords(Mouse::getPosition(window));
@@ -112,45 +79,17 @@ void Operation(RenderWindow& window, string typeDictionary, Trie& trie, Trie& fa
 				clickClock.restart();
 			}
 			else if (e.type == Event::MouseMoved) {
-				if (isHere(searchWord.bound, mouse)) {
-					searchWordState = 1;
+				if (isHere(word.bound, mouse)) {
+					wordState = 1;
 				}
 				else {
-					searchWordState = 0;
+					wordState = 0;
 				}
-				if (isHere(favor.bound, mouse)) {
-					favorState = 1;
-				}
-				else {
-					favorState = 0;
-				}
-				if (isHere(history.bound, mouse)) {
-					historyState = 1;
-				}
-				else { historyState = 0; }
-				if (isHere(addWord.bound, mouse)) {
-					addState = 1;
+				if (isHere(def.bound, mouse)) {
+					defState = 1;
 				}
 				else {
-					addState = 0;
-				}
-				if (isHere(remove.bound, mouse)) {
-					removeState = 1;
-				}
-				else {
-					removeState = 0;
-				}
-				if (isHere(resetDicitonary.bound, mouse)) {
-					resetState = 1;
-				}
-				else {
-					resetState = 0;
-				}
-				if (isHere(game.bound, mouse)) {
-					gameState = 1;
-				}
-				else {
-					gameState = 0;
+					defState = 0;
 				}
 				if (isHere(back.bound, mouse)) {
 					backState = 1;
@@ -206,32 +145,12 @@ void Operation(RenderWindow& window, string typeDictionary, Trie& trie, Trie& fa
 						xVelocity = -5;
 					}
 				}
-				else if (isHere(addWord.bound, mouse)) {
-					addState = 2;
+				else if (isHere(word.bound, mouse)) {
+					wordState = 2;
 					clickClock.restart();
 				}
-				else if (isHere(remove.bound, mouse)) {
-					removeState = 2;
-					clickClock.restart();
-				}
-				else if (isHere(favor.bound, mouse)) {
-					favorState = 2;
-					clickClock.restart();
-				}
-				else if (isHere(history.bound, mouse)) {
-					historyState = 2;
-					clickClock.restart();
-				}
-				else if (isHere(resetDicitonary.bound, mouse)) {
-					resetState = 2;
-					clickClock.restart();
-				}
-				else if (isHere(searchWord.bound, mouse)) {
-					searchWordState = 2;
-					clickClock.restart();
-				}
-				else if (isHere(game.bound, mouse)) {
-					gameState = 2;
+				else if (isHere(def.bound, mouse)) {
+					defState = 2;
 					clickClock.restart();
 				}
 				else if (isHere(back.bound, mouse)) {
@@ -260,31 +179,14 @@ void Operation(RenderWindow& window, string typeDictionary, Trie& trie, Trie& fa
 				}
 			}
 		}
-		if (addState == 2 && clickClock.getElapsedTime().asMilliseconds() >= 100) {
-			addNewWordScreen(window, typeDictionary, trie, favor_trie, history_trie);
+		if (wordState == 2 && clickClock.getElapsedTime().asMilliseconds() >= 100) {
+			gameWord(window, typeDictionary, trie, favor_trie, history_trie);
 		}
-		if (removeState == 2 && clickClock.getElapsedTime().asMilliseconds() >= 100) {
-			removeWordScreen(window, typeDictionary, trie, favor_trie, history_trie);
-		}
-		if (favorState == 2 && clickClock.getElapsedTime().asMilliseconds() >= 100) {
-			viewlistFavor(window, typeDictionary, trie, favor_trie, history_trie);
-		}
-		if (historyState == 2 && clickClock.getElapsedTime().asMilliseconds() >= 100) {
-			historyScene(window, typeDictionary, trie, favor_trie, history_trie);
-		}
-		if (resetState == 2 && clickClock.getElapsedTime().asMilliseconds() >= 100) {
-			restoreDictionaryScreen(window, typeDictionary, trie, favor_trie, history_trie);
-		}
-		if (searchWordState == 2 && clickClock.getElapsedTime().asMilliseconds() >= 100) {
-			//search_addfavorite(window, trie, typeDictionary, favor_trie);
-			searchByDef(window, trie, typeDictionary, favor_trie);
-		}
-		if (gameState == 2 && clickClock.getElapsedTime().asMilliseconds() >= 100) {
-			gameMenu(window, typeDictionary, trie, favor_trie, history_trie);
+		if (defState == 2 && clickClock.getElapsedTime().asMilliseconds() >= 100) {
+			gameDef(window, typeDictionary, trie, favor_trie, history_trie);
 		}
 		if (backState == 2 && clickClock.getElapsedTime().asMilliseconds() >= 100) {
-			trie.clearAll();
-			mainScreen(window, trie, favor_trie, history_trie);
+			Operation(window, typeDictionary, trie, favor_trie, history_trie);
 		}
 		if (engengState == 2 && clickClock.getElapsedTime().asMilliseconds() >= 100) {
 			trie.clearAll();
@@ -323,6 +225,8 @@ void Operation(RenderWindow& window, string typeDictionary, Trie& trie, Trie& fa
 		window.clear();
 
 		window.draw(screen.draw);
+		window.draw(title.draw);
+		window.draw(titleText.text);
 
 		rect.move(xVelocity, 0);
 		menu.draw.move(xVelocity, 0);
@@ -418,72 +322,24 @@ void Operation(RenderWindow& window, string typeDictionary, Trie& trie, Trie& fa
 			window.draw(menuPressed.draw);
 		}
 
-		if (favorState == 0) {
-			window.draw(favor.draw);
+		if (wordState == 0) {
+			window.draw(word.draw);
 		}
-		else if (favorState == 1) {
-			window.draw(favorMove.draw);
-		}
-		else {
-			window.draw(favorPressed.draw);
-		}
-		if (historyState == 0) {
-			window.draw(history.draw);
-		}
-		else if (historyState == 1) {
-			window.draw(historyMove.draw);
+		else if (wordState == 1) {
+			window.draw(wordMove.draw);
 		}
 		else {
-			window.draw(historyPressed.draw);
-		}
-		if (addState == 0) {
-			window.draw(addWord.draw);
-		}
-		else if (addState == 1) {
-			window.draw(addWordMove.draw);
-		}
-		else {
-			window.draw(addWordPressed.draw);
+			window.draw(wordPressed.draw);
 		}
 
-		if (removeState == 0) {
-			window.draw(remove.draw);
+		if (defState == 0) {
+			window.draw(def.draw);
 		}
-		else if (removeState == 1) {
-			window.draw(removeMove.draw);
-		}
-		else {
-			window.draw(removePressed.draw);
-		}
-
-		if (resetState == 0) {
-			window.draw(resetDicitonary.draw);
-		}
-		else if (resetState == 1) {
-			window.draw(resetDicitonaryMove.draw);
+		else if (defState == 1) {
+			window.draw(defMove.draw);
 		}
 		else {
-			window.draw(resetDicitonaryPressed.draw);
-		}
-
-		if (searchWordState == 0) {
-			window.draw(searchWord.draw);
-		}
-		else if (searchWordState == 1) {
-			window.draw(searchWordMove.draw);
-		}
-		else {
-			window.draw(searchWordPressed.draw);
-		}
-
-		if (gameState == 0) {
-			window.draw(game.draw);
-		}
-		else if (gameState == 1) {
-			window.draw(gameMove.draw);
-		}
-		else {
-			window.draw(gamePressed.draw);
+			window.draw(defPressed.draw);
 		}
 
 		if (backState == 0) {

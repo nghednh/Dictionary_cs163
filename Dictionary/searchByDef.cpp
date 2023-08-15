@@ -24,7 +24,7 @@ void findDef(TrieNode* root, string input, vector<pair<string, string>>& ans) {
         }
     }
 }
-void searchByDef(RenderWindow& window, Trie &trie, string typeDictionary, Trie &favor_trie) {
+void searchByDef(RenderWindow& window, Trie& trie, string typeDictionary, Trie& favor_trie, Trie& history_trie) {
     Clock clickClock;
     //Scene
     sf::Texture scene;
@@ -262,7 +262,7 @@ void searchByDef(RenderWindow& window, Trie &trie, string typeDictionary, Trie &
             fout.open("Data/" + typeDictionary + "/favorite.txt");
             if (fout.is_open()) display(favor_trie.getRoot(), str, fout);
             fout.close();*/
-            Operation(window, typeDictionary, trie, favor_trie);
+            Operation(window, typeDictionary, trie, favor_trie, history_trie);
         }
         window.clear();
         window.draw(spr_scene);
@@ -271,9 +271,9 @@ void searchByDef(RenderWindow& window, Trie &trie, string typeDictionary, Trie &
         window.draw(rec_enter);
         window.draw(dis_text);
         window.draw(rec_result);
-       /* if (display_star) {
-            window.draw(spr_favor);
-        }*/
+        /* if (display_star) {
+             window.draw(spr_favor);
+         }*/
         window.setView(view);
         sf::FloatRect viewBounds = view.getViewport();
         float sum = y_text + 10;

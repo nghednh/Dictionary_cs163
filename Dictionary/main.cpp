@@ -19,8 +19,9 @@ int main()
 
 	Trie trie;
 	Trie favor_trie;
+	Trie history_trie;
 	RenderWindow window(VideoMode(1740, 1080), "CS163-Dictionary", Style::Default);
-	mainScreen(window, trie, favor_trie);
+	mainScreen(window, trie, favor_trie, history_trie);
 
 
 
@@ -36,6 +37,6 @@ int main()
 	//}
 	trie.clearAll();
 	favor_trie.clearAll();
-	
+	history_trie.clearAll();
 	return 0;
 }
