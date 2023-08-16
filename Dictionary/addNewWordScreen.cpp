@@ -1,5 +1,6 @@
 #include "addNewWordScreen.h"
 #include "Operation.h"
+#include "changeDictionary.h"
 
 void submitAdding(string word, string def, string typeDictionary, Trie& trie)
 {
@@ -295,7 +296,7 @@ void addNewWordScreen(RenderWindow& window, string typeDictionary, Trie& trie, T
             warning.text.setString("");
         }
         if (backState == 2 && clickClock.getElapsedTime().asMilliseconds() >= 100) {
-            Operation(window, typeDictionary, trie, favor_trie, history_trie);
+            changeMenu(window, typeDictionary, trie, favor_trie, history_trie);
         }
         if (engengState == 2 && clickClock.getElapsedTime().asMilliseconds() >= 100) {
             trie.clearAll();

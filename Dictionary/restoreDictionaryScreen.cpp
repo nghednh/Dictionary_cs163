@@ -1,5 +1,6 @@
 #include "restoreDictionaryScreen.h"
 #include "Operation.h"
+#include "changeDictionary.h"
 
 void restoreDictionary(string& typeDictionary, Trie& trie)
 {
@@ -205,7 +206,7 @@ void restoreDictionaryScreen(RenderWindow& window, string& typeDictionary, Trie&
             warning.text.setString("");
         }
         if (backState == 2 && clickClock.getElapsedTime().asMilliseconds() >= 100) {
-            Operation(window, typeDictionary, trie, favor_trie, history_trie);
+            changeMenu(window, typeDictionary, trie, favor_trie, history_trie);
         }
         if (engengState == 2 && clickClock.getElapsedTime().asMilliseconds() >= 100) {
             trie.clearAll();
