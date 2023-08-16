@@ -31,8 +31,6 @@ public:
     }
     bool get(const string& key) {
         unsigned long long hashValue = hashString(key);
-        /*int index = hashValue % TABLE_SIZE;*/
-
         for (auto entry : table[hashValue]){
             if (entry == key) return true;
         }

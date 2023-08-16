@@ -281,7 +281,8 @@ void viewlistFavor(RenderWindow& window, string typeDictionary, Trie& trie, Trie
                         string s = item[i].text.getString();
                         if (favor_trie.searchWord(s) == true) {
                             favor_trie.removeWord(s);
-                            trie.searchWordNode(s)->isFavorite = false;
+                            TrieNode* tmp = trie.searchWordNode(s);
+                            if (tmp) tmp->isFavorite = false;
                             ofstream fout;
                             fout.open("Data/" + typeDictionary + "/favorite.txt");
                             displayinFile(favor_trie.getRoot(), "", fout);
@@ -301,7 +302,6 @@ void viewlistFavor(RenderWindow& window, string typeDictionary, Trie& trie, Trie
                             nxt.setTexture(b_next3);
                             for (int i = 11 * (page - 1); i < 11 * page; i++) {
                                 if (i < favor_word.size()) {
-                                    cout << favor_word[i] << '\n';
                                     item[cnt].set_up(favor_word[i], font, 30, color, 200, x, 220, x + 5, Vector2f(500, 50));
                                     sf::Text text(favor_def[i], font, 30);
                                     item_def[cnt].set_up(hiden_text(950, text), font, 30, color, 500, x, 520, x + 5, Vector2f(950, 50));

@@ -1,29 +1,8 @@
 	
-a	() The first letter of the English and of many other alphabets. The capital A of the alphabets of Middle and Western Europe, as also the small letter (a), besides the forms in Italic, black letter, etc., are all descended from the old Latin A, which was borrowed from the Greek Alpha, of the same form; and this was made from the first letter (/) of the Phoenician alphabet, the equivalent of the Hebrew Aleph, and itself from the Egyptian origin. The Aleph was a consonant letter, with a guttural breath sound that was not an element of Greek articulation; and the Greeks took it to represent their vowel Alpha with the a sound, the Phoenician alphabet having no vowel symbols.
-a	() The name of the sixth tone in the model major scale (that in C), or the first tone of the minor scale, which is named after it the scale in A minor. The second string of the violin is tuned to the A in the treble staff. -- A sharp (A/) is the name of a musical tone intermediate between A and B. -- A flat (A/) is the name of a tone intermediate between A and G.
-a	() An adjective, commonly called the indefinite article, and signifying one or any, but less emphatically.
-a	() In each; to or for each; as, "twenty leagues a day", "a hundred pounds a year", "a dollar a yard", etc.
-a	(prep.) In; on; at; by.
-a	(prep.) In process of; in the act of; into; to; -- used with verbal substantives in -ing which begin with a consonant. This is a shortened form of the preposition an (which was used before the vowel sound); as in a hunting, a building, a begging.
-a	() Of.
-a	() A barbarous corruption of have, of he, and sometimes of it and of they.
-a	() An expletive, void of sense, to fill up the meter
-a 1	() A registry mark given by underwriters (as at Lloyd's) to ships in first-class condition. Inferior grades are indicated by A 2 and A 3.
-a b c	() The first three letters of the alphabet, used for the whole alphabet.
-a b c	() A primer for teaching the alphabet and first elements of reading.
-a b c	() The simplest rudiments of any subject; as, the A B C of finance.
-a cappella	() A time indication, equivalent to alla breve.
-a cappella	() In church or chapel style; -- said of compositions sung in the old church style, without instrumental accompaniment; as, a mass a capella, i. e., a mass purely vocal.
-a fortiori	() With stronger reason.
-a mensa et thoro	() A kind of divorce which does not dissolve the marriage bond, but merely authorizes a separate life of the husband and wife.
-a posteriori	() Characterizing that kind of reasoning which derives propositions from the observation of facts, or by generalizations from facts arrives at principles and definitions, or infers causes from effects. This is the reverse of a priori reasoning.
-a posteriori	() Applied to knowledge which is based upon or derived from facts through induction or experiment; inductive or empirical.
 a priori	() Characterizing that kind of reasoning which deduces consequences from definitions formed, or principles assumed, or which infers effects from causes previously known; deductive or deductively. The reverse of a posteriori.
 a priori	() Applied to knowledge and conceptions assumed, or presupposed, as prior to experience, in order to make experience rational or possible.
 a-	() A, as a prefix to English words, is derived from various sources. (1) It frequently signifies on or in (from an, a forms of AS. on), denoting a state, as in afoot, on foot, abed, amiss, asleep, aground, aloft, away (AS. onweg), and analogically, ablaze, atremble, etc. (2) AS. of off, from, as in adown (AS. ofd/ne off the dun or hill). (3) AS. a- (Goth. us-, ur-, Ger. er-), usually giving an intensive force, and sometimes the sense of away, on, back, as in arise, abide, ago. (4) Old English y- or i- (corrupted from the AS. inseparable particle ge-, cognate with OHG. ga-, gi-, Goth. ga-), which, as a prefix, made no essential addition to the meaning, as in aware. (5) French a (L. ad to), as in abase, achieve. (6) L. a, ab, abs, from, as in avert. (7) Greek insep. prefix / without, or privative, not, as in abyss, atheist; akin to E. un-.
-a-mornings	(adv.) In the morning; every morning.
 a-sea	(adv.) On the sea; at sea; toward the sea.
-a-tiptoe	(adv.) On tiptoe; eagerly expecting.
 aam	(n.) A Dutch and German measure of liquids, varying in different cities, being at Amsterdam about 41 wine gallons, at Antwerp 36 1/2, at Hamburg 38 1/4.
 aard-vark	(n.) An edentate mammal, of the genus Orycteropus, somewhat resembling a pig, common in some parts of Southern Africa. It burrows in the ground, and feeds entirely on ants, which it catches with its long, slimy tongue.
 aard-wolf	(n.) A carnivorous quadruped (Proteles Lalandii), of South Africa, resembling the fox and hyena. See Proteles.
@@ -33,7 +12,6 @@ aaronic	(a.) Alt. of Aaronical
 aaronical	(a.) Pertaining to Aaron, the first high priest of the Jews.
 ab	(n.) The fifth month of the Jewish year according to the ecclesiastical reckoning, the eleventh by the civil computation, coinciding nearly with August.
 ab-	() A prefix in many words of Latin origin. It signifies from, away , separating, or departure, as in abduct, abstract, abscond. See A-(6).
-abaca	(n.) The Manila-hemp plant (Musa textilis); also, its fiber. See Manila hemp under Manila.
 abaci	(pl. ) of Abacus
 abacinate	(v. t.) To blind by a red-hot metal plate held before the eyes.
 abacination	(n.) The act of abacinating.
@@ -54,30 +32,14 @@ abacus	(n.) The uppermost member or division of the capital of a column, immedia
 abacus	(n.) A tablet, panel, or compartment in ornamented or mosaic work.
 abacus	(n.) A board, tray, or table, divided into perforated compartments, for holding cups, bottles, or the like; a kind of cupboard, buffet, or sideboard.
 abacuses	(pl. ) of Abacus
-abada	(n.) The rhinoceros.
-abaddon	(n.) The destroyer, or angel of the bottomless pit; -- the same as Apollyon and Asmodeus.
-abaddon	(n.) Hell; the bottomless pit.
 abaft	(prep.) Behind; toward the stern from; as, abaft the wheelhouse.
 abaft	(adv.) Toward the stern; aft; as, to go abaft.
-abaisance	(n.) Obeisance.
 abaiser	(n.) Ivory black or animal charcoal.
-abaist	(p. p.) Abashed; confounded; discomfited.
 abalienate	(v. t.) To transfer the title of from one to another; to alienate.
 abalienate	(v. t.) To estrange; to withdraw.
 abalienate	(v. t.) To cause alienation of (mind).
 abalienation	(n.) The act of abalienating; alienation; estrangement.
 abalone	(n.) A univalve mollusk of the genus Haliotis. The shell is lined with mother-of-pearl, and used for ornamental purposes; the sea-ear. Several large species are found on the coast of California, clinging closely to the rocks.
-aband	(v. t.) To abandon.
-aband	(v. t.) To banish; to expel.
-abandon	(v. t.) To cast or drive out; to banish; to expel; to reject.
-abandon	(v. t.) To give up absolutely; to forsake entirely ; to renounce utterly; to relinquish all connection with or concern on; to desert, as a person to whom one owes allegiance or fidelity; to quit; to surrender.
-abandon	(v. t.) Reflexively: To give (one's self) up without attempt at self-control; to yield (one's self) unrestrainedly; -- often in a bad sense.
-abandon	(v. t.) To relinquish all claim to; -- used when an insured person gives up to underwriters all claim to the property covered by a policy, which may remain after loss or damage by a peril insured against.
-abandon	(v.) Abandonment; relinquishment.
-abandon	(n.) A complete giving up to natural impulses; freedom from artificial constraint; careless freedom or ease.
-abandoned	(imp. & p. p.) of Abandon
-abandoned	(a.) Forsaken, deserted.
-abandoned	(a.) Self-abandoned, or given up to vice; extremely wicked, or sinning without restraint; irreclaimably wicked ; as, an abandoned villain.
 abandonedly	(adv.) Unrestrainedly.
 abandonee	(n.) One to whom anything is legally abandoned.
 abandoner	(n.) One who abandons.
@@ -207,7 +169,6 @@ aberr	(v. i.) To wander; to stray.
 aberrance	(n.) Alt. of Aberrancy
 aberrant	(a.) Wandering; straying from the right way.
 aberrant	(a.) Deviating from the ordinary or natural type; exceptional; abnormal.
-aberrate	(v. i.) To go astray; to diverge.
 aberration	(n.) A partial alienation of reason.
 aberration	(n.) The passage of blood or other fluid into parts not appropriate for it.
 aberrational	(a.) Characterized by aberration.
@@ -239,30 +200,6 @@ abhorrent	(a.) Detestable.
 abhorrently	(adv.) With abhorrence.
 abhorrer	(n.) One who abhors.
 abhorrible	(a.) Detestable.
-abhorring	(p. pr. & vb. n.) of Abhor
-abhorring	(n.) Detestation.
-abhorring	(n.) Object of abhorrence.
 abid	() of Abide
 abidance	(n.) The state of abiding; abode; continuance; compliance (with).
-abide	(v. i.) To wait; to pause; to delay.
-abide	(v. t.) To endure; to sustain; to submit to.
-abide	(v. t.) To bear patiently; to tolerate; to put up with.
-abide	(v. t.) To stand the consequences of; to answer for; to suffer for.
-abider	(n.) One who abides, or continues.
-abider	(n.) One who dwells; a resident.
-abiding	(p. pr. & vb. n.) of Abide
-abiding	(a.) Continuing; lasting.
 abidingly	(adv.) Permanently.
-abietin	(n.) Alt. of Abietine
-abietinic	(a.) Of or pertaining to abietin; as, abietinic acid.
-abiliment	(n.) Habiliment.
-abilities	(pl. ) of Ability
-abime	(n.) Alt. of Abyme
-abiogenetic	(a.) Of or pertaining to abiogenesis.
-abiogenist	(n.) One who believes that life can be produced independently of antecedent.
-love	(n.) Due gratitude and reverence to God.
-love	(n.) The object of affection; -- often employed in endearing address.
-love	(n.) Cupid, the god of love; sometimes, Venus.
-love	(n.) A thin silk stuff.
-love	(n.) A climbing species of Clematis (C. Vitalba).
-love	(v. i.) To have the feeling of love; to be in love.
