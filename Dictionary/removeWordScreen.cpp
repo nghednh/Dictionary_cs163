@@ -1,5 +1,6 @@
 #include "removeWordScreen.h"
 #include "Operation.h"
+#include "changeDictionary.h"
 
 //-------------------Scene-----------------
 void removeWordScreen(RenderWindow& window, string typeDictionary, Trie& trie, Trie& favor_trie, Trie& history_trie)
@@ -242,7 +243,7 @@ void removeWordScreen(RenderWindow& window, string typeDictionary, Trie& trie, T
             warning.text.setString("");
         }
         if (backState == 2 && clickClock.getElapsedTime().asMilliseconds() >= 100) {
-            Operation(window, typeDictionary, trie, favor_trie, history_trie);
+            changeMenu(window, typeDictionary, trie, favor_trie, history_trie);
         }
         if (engengState == 2 && clickClock.getElapsedTime().asMilliseconds() >= 100) {
             trie.clearAll();
