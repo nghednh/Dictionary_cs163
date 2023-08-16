@@ -1,5 +1,6 @@
 #pragma once
 #include "Trie.h"
+
 void wrapped_text(RectangleShape shape, Text& text);
 
 //-----------------Draw Scene--------------------------

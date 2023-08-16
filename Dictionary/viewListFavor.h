@@ -53,6 +53,9 @@ struct button {
         else shape.setFillColor(color[0]);
         window.draw(shape);
     }
+    void onlyDraw(RenderWindow& window) {
+        window.draw(shape);
+    }
 };
 void displayinFile(TrieNode* root, string str, ofstream& fout);
 string hiden_text(float width, Text text);

@@ -276,8 +276,8 @@ void Operation(RenderWindow& window, string typeDictionary, Trie& trie, Trie& fa
 			restoreDictionaryScreen(window, typeDictionary, trie, favor_trie, history_trie);
 		}
 		if (searchWordState == 2 && clickClock.getElapsedTime().asMilliseconds() >= 100) {
-			//search_addfavorite(window, trie, typeDictionary, favor_trie);
-			searchByDef(window, trie, typeDictionary, favor_trie);
+			search_addfavorite(window, trie, typeDictionary, favor_trie, history_trie);
+			/*searchByDef(window, trie, typeDictionary, favor_trie, history_trie);*/
 		}
 		if (gameState == 2 && clickClock.getElapsedTime().asMilliseconds() >= 100) {
 			gameMenu(window, typeDictionary, trie, favor_trie, history_trie);

@@ -1,5 +1,6 @@
 #include "search_saveFavorList.h"
 #include "search_editDefinition.h"
+#include "viewListFavor.h"
 #include "Operation.h"
 void wrapped_text(RectangleShape shape, Text& text) {
     float hei, wid;
@@ -42,9 +43,45 @@ void display(TrieNode* root, string str, ofstream& fout)
         }
     }
 }
+void searchWordsWithPrefix(TrieNode* node, string& prefix, vector<pair<string, string>> &result) {
+    if (result.size() <= 5) {
+        if (!node) return;
+        if (node->isEndOfWord) {
+            //cout << prefix << '\n';
+            pair<string, string> tmp;
+            tmp.first = prefix;
+            tmp.second = node->meaning[0];
+            result.push_back(tmp);
+        }
+        for (int i = 0; i < sizee; i++)
+        {
+            if (node->children[i])
+            {
+                prefix.push_back(i + ' ');
+                searchWordsWithPrefix(node->children[i], prefix, result);
+                prefix.pop_back();
+            }
+        }
+    }
+}
+vector<pair<string, string>> searchPrefix(Trie trie, string input) {
+    vector<pair<string, string>> recom;
+    TrieNode* cur = trie.getRoot();
+    for (auto c : input) {
+        int index = c - ' ';
+        if (!cur->children[index]) {
+            return recom;
+        }
+        else cur = cur->children[index];
+    }
+    string prefix;
+    prefix = input;
+    searchWordsWithPrefix(cur, prefix, recom);
+    return recom;
+}
 void search_addfavorite(RenderWindow& window, Trie& trie, string typeDictionary, Trie& favor_trie, Trie& history_trie) {
     Clock clickClock;
-    //Scene
+    //Scence
     sf::Texture scene;
     scene.loadFromFile("../Dictionary/content/scene.png");
     //Search_bar
@@ -120,23 +157,31 @@ void search_addfavorite(RenderWindow& window, Trie& trie, string typeDictionary,
 
     vector<sf::Text> found;
     vector<string> meaning;
-    Color* color = new Color[1];
-    color[0] = sf::Color::Black;
+    vector<pair<string, string>> recom;
 
     bool alter = false;
     sf::Color color1(246, 241, 241);
     sf::Color color2(175, 211, 226);
+    //Color of button
+    Color* color = new Color[4];
+    color[1] = Color(236, 248, 249);
+    color[0] = Color(165, 215, 232);
+    color[2] = Color(45, 67, 86);
+    color[3] = Color(79, 112, 156);
+    //Button
+    vector<button> guest;
+
     float totalHeight = 0.0f;
     float y_text = 0;
     float cnt_move = 0;
     //
     bool enter = false;
     bool display_star = false;
+    bool choose = false;
     sf::Cursor cursor;
     while (window.isOpen())
     {
         sf::Event event;
-
         if (!enter && user_text == "") {
             dis_text.setString("Search");
         }
@@ -196,13 +241,17 @@ void search_addfavorite(RenderWindow& window, Trie& trie, string typeDictionary,
                     else if (event.text.unicode == '\b' && !dis_text.getString().isEmpty()) {
                         if (user_text.size() > 0) {
                             found.clear();
+                            recom.clear();
+                            guest.clear();
                             user_text.pop_back();
                         }
                     }
                     else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Enter) == true) {
                         //Check whether word is exist in trie/favor_trie or not,
                         if (trie.searchWord(user_text)) {
+                            
                             found.clear();
+                            guest.clear();
                             cnt_move = 0;
                             totalHeight = 0.0f;
                             meaning = trie.searchWordNode(user_text)->meaning;
@@ -232,6 +281,8 @@ void search_addfavorite(RenderWindow& window, Trie& trie, string typeDictionary,
                         }
                         else {
                             found.clear();
+                            recom.clear();
+                            guest.clear();
                             totalHeight = 0.0f;
                             sf::Text text("This word is not exist!", font, 30);
                             text.setFillColor(sf::Color::Black);
@@ -239,8 +290,37 @@ void search_addfavorite(RenderWindow& window, Trie& trie, string typeDictionary,
                             display_star = false;
                         }
                     }
+                    if (user_text != "" && sf::Keyboard::isKeyPressed(sf::Keyboard::Enter) == false) {
+                        recom.clear();
+                        guest.clear();
+                        recom = searchPrefix(trie, user_text);
+                        if (recom.size() > 0) {
+                            float x = 425;
+                            for (int i = 0; i < recom.size(); i++) {
+                                button cur;
+                                cur.set_up(recom[i].first, font, 30, color, 200, x, 245, x + 5, Vector2f(500, 50));
+                                guest.push_back(cur);
+                                x += 50;
+                            }
+                        }
+                    }
                 }
                 dis_text.setString(user_text + "_");
+            }
+            for (int i = 0; i < guest.size(); i++) {
+                if (guest[i].shape.getGlobalBounds().contains(mousePos)) {
+                    guest[i].shape.setFillColor(color[0]);
+                    if (event.type == sf::Event::MouseButtonPressed) {
+                        guest[i].shape.setFillColor(color[3]);
+                        user_text = guest[i].text.getString();
+                        dis_text.setString(user_text + "_");
+                        guest.clear();
+                        break;
+                    }
+                }
+                else {
+                    guest[i].shape.setFillColor(color[1]);
+                }
             }
             //Move the list data
             if (rec_result.getGlobalBounds().contains(mousePos)) {
@@ -356,6 +436,11 @@ void search_addfavorite(RenderWindow& window, Trie& trie, string typeDictionary,
         }
         else {
             window.draw(editDefPressed.draw);
+        }
+        for (int i = 0; i < guest.size(); i++) {
+            guest[i].onlyDraw(window);
+            guest[i].text.setFont(font);
+            window.draw(guest[i].text);
         }
         window.display();
     }
