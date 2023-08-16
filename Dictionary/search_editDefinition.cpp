@@ -76,8 +76,6 @@ void search_editDefinition(RenderWindow& window, Trie& trie, string typeDictiona
 							delete full[i];
 						}
 						def.clear();
-						state = 1;
-						return;
 						Operation(window, typeDictionary, trie, favor_trie, history_trie);
 					}
 					if (isHere(enterEdit.bound, mouse))

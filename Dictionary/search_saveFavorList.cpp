@@ -266,17 +266,17 @@ void search_addfavorite(RenderWindow& window, Trie& trie, string typeDictionary,
                             sf::Text line("\n", font, 30);
                             totalHeight -= line.getLocalBounds().height;
 
-                            view.setCenter(rec_result.getSize().x / 2, (totalHeight) / 2);
-                            y_text = view.getCenter().y - view.getSize().y / 2;
+                        view.setCenter(rec_result.getSize().x / 2, (totalHeight) / 2);
+                        y_text = view.getCenter().y - view.getSize().y / 2;
 
-                            if (!favor_trie.searchWord(user_text)) {
-                                spr_favor.setTexture(star);
-                                display_star = true;
-                            }
-                            else {
-                                spr_favor.setTexture(starSaved);
-                                display_star = true;
-                            }
+                        if (!favor_trie.searchWord(user_text)) {
+                            spr_favor.setTexture(star);
+                            display_star = true;
+                        }
+                        else {
+                            spr_favor.setTexture(starSaved);
+                            display_star = true;
+                        }
 
                         }
                         else {
@@ -392,11 +392,11 @@ void search_addfavorite(RenderWindow& window, Trie& trie, string typeDictionary,
             fout.open("Data/" + typeDictionary + "/favorite.txt");
             if (fout.is_open()) display(favor_trie.getRoot(), str, fout);
             fout.close();
-            if (trie.searchWord(user_text)) {
+            if (trie.searchWord(user_text)&&user_text!="") {
                 int state = 0;
-                    while (state == 0) {
-                        search_editDefinition(window, trie, typeDictionary, favor_trie, history_trie, user_text, state);
-                    }
+                while (state == 0) {
+                    search_editDefinition(window, trie, typeDictionary, favor_trie, history_trie, user_text, state);
+                }
             }
         }
         window.clear();

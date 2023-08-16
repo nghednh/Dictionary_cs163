@@ -94,11 +94,6 @@ void Operation(RenderWindow& window, string typeDictionary, Trie& trie, Trie& fa
 
 	favor_trie.readDatasetToTrie("Data/" + typeDictionary + "/favorite.txt");
 
-	TrieNode* tmp1 = trie.getRandomWordTrue();
-	TrieNode* tmp2 = trie.getRandomWordWrong(nullptr, nullptr, nullptr);
-	cout << tmp1->word << " " << tmp1->meaning[0] << endl;
-	cout << tmp2->word << " " << tmp2->meaning[0] << endl;
-
 	while (window.isOpen())
 	{
 		Vector2f mouse = window.mapPixelToCoords(Mouse::getPosition(window));

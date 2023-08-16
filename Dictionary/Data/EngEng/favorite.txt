@@ -1,52 +1,3 @@
-	
-a b c	() The first three letters of the alphabet, used for the whole alphabet.
-a b c	() A primer for teaching the alphabet and first elements of reading.
-a b c	() The simplest rudiments of any subject; as, the A B C of finance.
-a cappella	() A time indication, equivalent to alla breve.
-a fortiori	() With stronger reason.
-a-mornings	(adv.) In the morning; every morning.
-a-sea	(adv.) On the sea; at sea; toward the sea.
-a-tiptoe	(adv.) On tiptoe; eagerly expecting.
-aaronic	(a.) Alt. of Aaronical
-aaronical	(a.) Pertaining to Aaron, the first high priest of the Jews.
-abaci	(pl. ) of Abacus
-abacinate	(v. t.) To blind by a red-hot metal plate held before the eyes.
-abacination	(n.) The act of abacinating.
-abaciscus	(n.) One of the tiles or squares of a tessellated pavement; an abaculus.
-abaction	(n.) Stealing cattle on a large scale.
-abacuses	(pl. ) of Abacus
-abada	(n.) The rhinoceros.
-abaft	(prep.) Behind; toward the stern from; as, abaft the wheelhouse.
-abaft	(adv.) Toward the stern; aft; as, to go abaft.
-abaisance	(n.) Obeisance.
-abaiser	(n.) Ivory black or animal charcoal.
-abalienation	(n.) The act of abalienating; alienation; estrangement.
-abandonee	(n.) One to whom anything is legally abandoned.
-abandonment	(n.) Careless freedom or ease; abandon.
-abanet	(n.) See Abnet.
-abaser	(n.) He who, or that which, abases.
-abashedly	(adv.) In an abashed manner.
-abashment	(n.) The state of being abashed; confusion from shame.
-abatable	(a.) Capable of being abated; as, an abatable writ or nuisance.
-abated	(imp. & p. p.) of Abate
-abater	(n.) One who, or that which, abates.
-abator	(n.) One who abates a nuisance.
-abattoir	(n.) A public slaughterhouse for cattle, sheep, etc.
-abattoirs	(pl. ) of Abattoir
-abature	(n.) Grass and sprigs beaten or trampled down by a stag passing through them.
-abatvoix	(n.) The sounding-board over a pulpit or rostrum.
-abawed	(p. p.) Astonished; abashed.
-abaxial	(a.) Alt. of Abaxile
-abaxile	(a.) Away from the axis or central line; eccentric.
-abay	(n.) Barking; baying of dogs upon their prey. See Bay.
-abb	(n.) Among weavers, yarn for the warp. Hence, abb wool is wool for the abb.
-abb wool	() See Abb.
-abbacies	(pl. ) of Abbacy
-abbacy	(n.) The dignity, estate, or jurisdiction of an abbot.
-abbatial	(a.) Belonging to an abbey; as, abbatial rights.
-abbatical	(a.) Abbatial.
-abbey	(n.) The church of a monastery.
-abbeys	(pl. ) of Abbey
 abbot	(n.) The superior or head of an abbey.
 abbot	(n.) One of a class of bishops whose sees were formerly abbeys.
 abbotship	(n.) The state or office of an abbot.
@@ -73,16 +24,7 @@ abdicate	(v. t.) To reject; to cast off.
 abdicate	(v. i.) To relinquish or renounce a throne, or other high office or dignity.
 abdicated	(imp. & p. p.) of Abdicate
 abdicating	(p. pr. & vb. n.) of Abdicate
-abdicative	(a.) Causing, or implying, abdication.
-abdicator	(n.) One who abdicates.
-abditive	(a.) Having the quality of hiding.
-abditory	(n.) A place for hiding or preserving articles of value.
-abdominal	(a.) Having abdominal fins; belonging to the Abdominales; as, abdominal fishes.
-abdominal	(n.) A fish of the group Abdominales.
 abdominales	(pl. ) of Abdominal
-abdominalia	(n. pl.) A group of cirripeds having abdominal appendages.
-abdominals	(pl. ) of Abdominal
-abdominoscopy	(n.) Examination of the abdomen to detect abdominal disease.
 abdominothoracic	(a.) Relating to the abdomen and the thorax, or chest.
 abdominous	(a.) Having a protuberant belly; pot-bellied.
 abduce	(v. t.) To draw or conduct away; to withdraw; to draw to a different part.
@@ -91,76 +33,3 @@ abducing	(p. pr. & vb. n.) of Abduce
 abduct	(v. t.) To draw away, as a limb or other part, from its ordinary position.
 abducted	(imp. & p. p.) of Abduct
 abducting	(p. pr. & vb. n.) of Abduct
-abduction	(n.) The act of abducing or abducting; a drawing apart; a carrying away.
-abductor	(n.) One who abducts.
-abear	(v. t.) To bear; to behave.
-abear	(v. t.) To put up with; to endure.
-abearance	(n.) Behavior.
-abearing	(n.) Behavior.
-abecedarian	(n.) One who is learning the alphabet; hence, a tyro.
-abecedarian	(n.) One engaged in teaching the alphabet.
-abecedarian	(a.) Alt. of Abecedary
-abecedary	(n.) A primer; the first principle or rudiment of anything.
-abed	(adv.) In bed, or on the bed.
-abed	(adv.) To childbed (in the phrase "brought abed," that is, delivered of a child).
-abegge	() Same as Aby.
-abele	(n.) The white poplar (Populus alba).
-abelian	(n.) Alt. of Abelonian
-abelite	(n.) Alt. of Abelonian
-aberr	(v. i.) To wander; to stray.
-aberrance	(n.) Alt. of Aberrancy
-aberrant	(a.) Wandering; straying from the right way.
-aberrant	(a.) Deviating from the ordinary or natural type; exceptional; abnormal.
-aberrate	(v. i.) To go astray; to diverge.
-aberration	(n.) A partial alienation of reason.
-aberration	(n.) The passage of blood or other fluid into parts not appropriate for it.
-aberrational	(a.) Characterized by aberration.
-aberuncate	(v. t.) To weed out.
-aberuncator	(n.) A weeding machine.
-abet	(v. t.) To support, uphold, or aid; to maintain; -- in a good sense.
-abet	(n.) Act of abetting; aid.
-abetment	(n.) The act of abetting; as, an abetment of treason, crime, etc.
-abettal	(n.) Abetment.
-abetted	(imp. & p. p.) of Abet
-abetter	(n.) Alt. of Abettor
-abetting	(p. pr. & vb. n.) of Abet
-abettor	(n.) One who abets; an instigator of an offense or an offender.
-abevacuation	(n.) A partial evacuation.
-abeyance	(n.) Expectancy; condition of being undetermined.
-abeyance	(n.) Suspension; temporary suppression.
-abeyancy	(n.) Abeyance.
-abeyant	(a.) Being in a state of abeyance.
-abhal	(n.) The berries of a species of cypress in the East Indies.
-abhominable	(a.) Abominable.
-abhominal	(a.) Inhuman.
-abhor	(v. t.) To fill with horror or disgust.
-abhor	(v. t.) To protest against; to reject solemnly.
-abhorred	(imp. & p. p.) of Abhor
-abhorrence	(n.) Extreme hatred or detestation; the feeling of utter dislike.
-abhorrency	(n.) Abhorrence.
-abhorrent	(a.) Contrary or repugnant; discordant; inconsistent; -- followed by to.
-abhorrent	(a.) Detestable.
-abhorrently	(adv.) With abhorrence.
-abhorrer	(n.) One who abhors.
-abhorrible	(a.) Detestable.
-abhorring	(p. pr. & vb. n.) of Abhor
-abhorring	(n.) Detestation.
-abhorring	(n.) Object of abhorrence.
-abid	() of Abide
-abidance	(n.) The state of abiding; abode; continuance; compliance (with).
-abide	(v. i.) To wait; to pause; to delay.
-abide	(v. t.) To endure; to sustain; to submit to.
-abide	(v. t.) To bear patiently; to tolerate; to put up with.
-abide	(v. t.) To stand the consequences of; to answer for; to suffer for.
-abider	(n.) One who abides, or continues.
-abider	(n.) One who dwells; a resident.
-abiding	(p. pr. & vb. n.) of Abide
-abiding	(a.) Continuing; lasting.
-abidingly	(adv.) Permanently.
-abietin	(n.) Alt. of Abietine
-abietinic	(a.) Of or pertaining to abietin; as, abietinic acid.
-abiliment	(n.) Habiliment.
-abilities	(pl. ) of Ability
-abime	(n.) Alt. of Abyme
-abiogenetic	(a.) Of or pertaining to abiogenesis.
-abiogenist	(n.) One who believes that life can be produced independently of antecedent.
