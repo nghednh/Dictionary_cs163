@@ -151,6 +151,7 @@
     <ClCompile Include="searchByDef.cpp" />
     <ClCompile Include="search_editDefinition.cpp" />
     <ClCompile Include="search_saveFavorList.cpp" />
+    <ClCompile Include="randomview.cpp" />
     <ClCompile Include="viewListFavor.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -161,6 +162,7 @@
     <ClInclude Include="gameWord.h" />
     <ClInclude Include="gui.h" />
     <ClInclude Include="HashTable.h" />
+    <ClInclude Include="randomview.h" />
     <ClInclude Include="History.h" />
     <ClInclude Include="MainScreen.h" />
     <ClInclude Include="Operation.h" />
