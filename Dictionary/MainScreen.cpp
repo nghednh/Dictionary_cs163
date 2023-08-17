@@ -9,7 +9,7 @@ void mainScreen(RenderWindow& window, Trie* trie, Trie& favor_trie, Trie& histor
 
 	Object screen = createObject("content/scene.png");
 
-	Object engEng = createObject("content/engeng.png", 200, 400);
+	Object engEng = createObject("content/engeng.png", 200, 400);	
 	Object engEngMove = createObject("content/engengMove.png", 200, 400);
 	Object engEngPressed = createObject("content/engengPressed.png", 200, 400);
 	int engengState = 0;
