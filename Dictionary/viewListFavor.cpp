@@ -55,7 +55,7 @@ void readDisplayListFavor(string typeDictionary, vector<string>& favor_word, vec
     }
     fin.close();
 }
-void viewlistFavor(RenderWindow& window, string typeDictionary, Trie& trie, Trie& favor_trie, Trie& history_trie) {
+void viewlistFavor(RenderWindow& window, string typeDictionary, Trie* trie, Trie& favor_trie, Trie& history_trie) {
     //Save favorite word to two vectors.
     vector<string> favor_word;
     vector<string> favor_def;
@@ -281,7 +281,7 @@ void viewlistFavor(RenderWindow& window, string typeDictionary, Trie& trie, Trie
                         string s = item[i].text.getString();
                         if (favor_trie.searchWord(s) == true) {
                             favor_trie.removeWord(s);
-                            TrieNode* tmp = trie.searchWordNode(s);
+                            TrieNode* tmp = trie->searchWordNode(s);
                             if (tmp) tmp->isFavorite = false;
                             ofstream fout;
                             fout.open("Data/" + typeDictionary + "/favorite.txt");

@@ -25,23 +25,29 @@ int main()
 	dictrie[3].readDatasetToTrie("Data/Slang/document.txt");
 	dictrie[4].readDatasetToTrie("Data/Emoji/document.txt");
 	// 0:engeng 1:engvvie 2:vieeng 3:slang 4:emoji
-	Trie trie;
+	Trie *trie= new Trie();
 	Trie favor_trie;
 	Trie history_trie;
 	RenderWindow window(VideoMode(1740, 1080), "CS163-Dictionary", Style::Default);
 	mainScreen(window, trie, favor_trie, history_trie);
-
+	int i = 0;
 	for (auto tr : dictrie) {
-		if (trie.checkisChanged()) {
-			cout << endl << endl << 1;
+		if (tr.checkisChanged()) {
+			cout << endl << endl << i;
 			string str = "";
 			ofstream fout;
-			fout.open("Data/nghe.txt"); // luu tam thoi
-			if (fout.is_open()) display(trie.getRoot(), str, fout);
+			if (i == 0) fout.open("Data/EngEng/document.txt");
+			else if (i == 1) fout.open("Data/EngVie/Document.txt");
+			else if (i == 2) fout.open("Data/VieEng/Document.txt");
+			else if (i == 3) fout.open("Data/Slang/Document.txt");
+			else if (i == 4) fout.open("Data/Emoji/Document.txt");
+			if (fout.is_open()) display(tr.getRoot(), str, fout);
 			fout.close();
 		}
+		dictrie[i].clearAll();
+		i++;
 	}
-	trie.clearAll();
+	trie->clearAll();
 	favor_trie.clearAll();
 	history_trie.clearAll();
 	return 0;

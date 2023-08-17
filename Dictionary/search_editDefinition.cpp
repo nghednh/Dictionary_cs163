@@ -2,10 +2,10 @@
 #include "viewListFavor.h"
 #include "search_saveFavorList.h"
 #include "Operation.h"
-void search_editDefinition(RenderWindow& window, Trie& trie, string typeDictionary, Trie& favor_trie, Trie& history_trie, string word, int& state) {
+void search_editDefinition(RenderWindow& window, Trie* trie, string typeDictionary, Trie& favor_trie, Trie& history_trie, string word, int& state) {
 	string editWord;
 	vector<string> def;
-	def = trie.searchWordNode(word)->meaning;
+	def = trie->searchWordNode(word)->meaning;
 	def.push_back("");
 	float scale = 1.5f;
 	bool entered1 = 0;
@@ -148,7 +148,7 @@ void search_editDefinition(RenderWindow& window, Trie& trie, string typeDictiona
 							}
 							def.at(count) = enterEdit.text.getString();
 							def.pop_back();
-							trie.searchWordNode(word)->meaning.swap(def);
+							trie->searchWordNode(word)->meaning.swap(def);
 							if (favor_trie.searchWord(word))
 								favor_trie.searchWordNode(word)->meaning.swap(def);
 							if (history_trie.searchWord(word))
@@ -168,7 +168,7 @@ void search_editDefinition(RenderWindow& window, Trie& trie, string typeDictiona
 						if (isHere(ok1.bound, mouse)) {
 							def.pop_back();
 							def.push_back(enterEdit.text.getString());
-							trie.searchWordNode(word)->meaning.swap(def);
+							trie->searchWordNode(word)->meaning.swap(def);
 							if (favor_trie.searchWord(word))
 								favor_trie.searchWordNode(word)->meaning.swap(def);
 							if (history_trie.searchWord(word))
@@ -196,7 +196,7 @@ void search_editDefinition(RenderWindow& window, Trie& trie, string typeDictiona
 							}
 							def.pop_back();
 							def.erase(def.begin() + count);
-							trie.searchWordNode(word)->meaning.swap(def);
+							trie->searchWordNode(word)->meaning.swap(def);
 							if (favor_trie.searchWord(word))
 								favor_trie.searchWordNode(word)->meaning.swap(def);
 							if (history_trie.searchWord(word))

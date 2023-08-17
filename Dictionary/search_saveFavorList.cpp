@@ -64,9 +64,9 @@ void searchWordsWithPrefix(TrieNode* node, string& prefix, vector<pair<string, s
         }
     }
 }
-vector<pair<string, string>> searchPrefix(Trie trie, string input) {
+vector<pair<string, string>> searchPrefix(Trie * trie, string input) {
     vector<pair<string, string>> recom;
-    TrieNode* cur = trie.getRoot();
+    TrieNode* cur = trie->getRoot();
     for (auto c : input) {
         int index = c - ' ';
         if (!cur->children[index]) {
@@ -79,7 +79,7 @@ vector<pair<string, string>> searchPrefix(Trie trie, string input) {
     searchWordsWithPrefix(cur, prefix, recom);
     return recom;
 }
-void search_addfavorite(RenderWindow& window, Trie& trie, string typeDictionary, Trie& favor_trie, Trie& history_trie) {
+void search_addfavorite(RenderWindow& window, Trie* trie, string typeDictionary, Trie& favor_trie, Trie& history_trie) {
     Clock clickClock;
     //Scence
     sf::Texture scene;
@@ -248,13 +248,13 @@ void search_addfavorite(RenderWindow& window, Trie& trie, string typeDictionary,
                     }
                     else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Enter) == true) {
                         //Check whether word is exist in trie/favor_trie or not,
-                        if (trie.searchWord(user_text)) {
+                        if (trie->searchWord(user_text)) {
                             
                             found.clear();
                             guest.clear();
                             cnt_move = 0;
                             totalHeight = 0.0f;
-                            meaning = trie.searchWordNode(user_text)->meaning;
+                            meaning = trie->searchWordNode(user_text)->meaning;
                             for (const auto& data : meaning)
                             {
                                 sf::Text text(data, font, 30);
@@ -356,8 +356,8 @@ void search_addfavorite(RenderWindow& window, Trie& trie, string typeDictionary,
                     window.setMouseCursor(cursor);
                 }
                 if (event.type == sf::Event::MouseButtonPressed && sf::Mouse::isButtonPressed(sf::Mouse::Left)) {
-                    if (trie.searchWordNode(user_text)->isFavorite == false) {
-                        trie.searchWordNode(user_text)->isFavorite = true;
+                    if (trie->searchWordNode(user_text)->isFavorite == false) {
+                        trie->searchWordNode(user_text)->isFavorite = true;
                         for (int i = 0; i < meaning.size(); i++) {
                             favor_trie.insertWord(user_text, meaning[i]);
                         }
@@ -365,7 +365,7 @@ void search_addfavorite(RenderWindow& window, Trie& trie, string typeDictionary,
                         display_star = true;
                     }
                     else {
-                        trie.searchWordNode(user_text)->isFavorite = false;
+                        trie->searchWordNode(user_text)->isFavorite = false;
                         favor_trie.removeWord(user_text);
                         spr_favor.setTexture(star);
                         display_star = true;
@@ -392,7 +392,7 @@ void search_addfavorite(RenderWindow& window, Trie& trie, string typeDictionary,
             fout.open("Data/" + typeDictionary + "/favorite.txt");
             if (fout.is_open()) display(favor_trie.getRoot(), str, fout);
             fout.close();
-            if (trie.searchWord(user_text)&&user_text!="") {
+            if (trie->searchWord(user_text)&&user_text!="") {
                 int state = 0;
                 while (state == 0) {
                     search_editDefinition(window, trie, typeDictionary, favor_trie, history_trie, user_text, state);

@@ -3,7 +3,7 @@
 #include "changeDictionary.h"
 
 //-------------------Scene-----------------
-void randomView(RenderWindow& window, string typeDictionary, Trie& trie, Trie& favor_trie, Trie& history_trie)
+void randomView(RenderWindow& window, string typeDictionary, Trie* trie, Trie& favor_trie, Trie& history_trie)
 {
     Clock clickClock;
     Object screen = createObject("content/scene.png");
@@ -16,7 +16,7 @@ void randomView(RenderWindow& window, string typeDictionary, Trie& trie, Trie& f
     Object retryMove = createObject("content/retryMove.png", 450, 780);
     Object retryPressed = createObject("content/retryPressed.png", 450, 780);
     int retryState = 0;
-    TrieNode* tr = trie.getRandomWordTrue();
+    TrieNode* tr = trie->getRandomWordTrue();
     string word = tr->word;
     string meaning = tr->meaning[0];
     Info wordText = createInfo("arial.ttf", word, 220, 360, 40);
@@ -90,7 +90,7 @@ void randomView(RenderWindow& window, string typeDictionary, Trie& trie, Trie& f
             Operation(window, typeDictionary, trie, favor_trie, history_trie);
         }
         if (retryState == 2 && clickClock.getElapsedTime().asMilliseconds() >= 100) {
-            tr = trie.getRandomWordWrong(tr,nullptr,nullptr);
+            tr = trie->getRandomWordWrong(tr,nullptr,nullptr);
             word = tr->word;
             meaning = tr->meaning[0];
             wordText.text.setString(word);
