@@ -6,11 +6,9 @@
 #include <cstdlib> 
 #include <ctime> 
 #include <sstream>
-#include "Trie.h"
-#include "History.h"
 #include "MainScreen.h";
 #include "search_saveFavorList.h"
-#include "randomview.h"
+
 using namespace std;
 using namespace sf;
 
@@ -32,9 +30,7 @@ int main()
 	mainScreen(window, trie, favor_trie, history_trie);
 	int i = 0;
 	for (auto tr : dictrie) {
-		cout << i;
 		if (tr.checkisChanged()) {
-			cout << endl << endl << i<<endl;
 			string str = "";
 			ofstream fout;
 			if (i == 0) fout.open("Data/EngEng/document.txt");
@@ -51,5 +47,4 @@ int main()
 	favor_trie.clearAll();
 	history_trie.clearAll();
 	return 0;
-	
 }
