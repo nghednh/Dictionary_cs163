@@ -99,7 +99,7 @@ bool drawWhich(RenderWindow& window, Object* a, Object* b, Vector2f& mouse)
 		window.draw(a->draw);
 		return true;
 	}
-	window.draw(b->draw);
+	window.draw(b->draw);	
 	return false;
 }
 
