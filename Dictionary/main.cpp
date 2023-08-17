@@ -24,7 +24,7 @@ int main()
 	dictrie[2].readDatasetToTrie("Data/VieEng/document.txt");
 	dictrie[3].readDatasetToTrie("Data/Slang/document.txt");
 	dictrie[4].readDatasetToTrie("Data/Emoji/document.txt");
-
+	// 0:engeng 1:engvvie 2:vieeng 3:slang 4:emoji
 	Trie trie;
 	Trie favor_trie;
 	Trie history_trie;
