@@ -70,7 +70,7 @@ public:
         if (def_is_exist(cur->meaning, meaning)) {
             cur->meaning.push_back(meaning);
             //Hash definition
-            /*istringstream iss(meaning);
+            istringstream iss(meaning);
             string s;
             if (cur->hashTable.size() <= 5) {
                 HashTable tmp;
@@ -80,7 +80,7 @@ public:
                     tmp.insert(s);
                 }
                 cur->hashTable.push_back(tmp);
-            }*/
+            }
         }
     }
 

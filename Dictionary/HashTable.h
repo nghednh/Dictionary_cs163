@@ -20,17 +20,17 @@ public:
     vector<vector<string>> getTable() {
         return table;
     }
-    unsigned long long hashString(const string& s) {
+    int hashString(const string& s) {
         if (s[0] < 101) return s[0];
         return s[0] % TABLE_SIZE;
     }
     void insert(const string& key) {
-        unsigned long long hashValue = hashString(key);
+        int hashValue = hashString(key);
 
         table[hashValue].push_back(key);
     }
     bool get(const string& key) {
-        unsigned long long hashValue = hashString(key);
+        int hashValue = hashString(key);
         for (auto entry : table[hashValue]){
             if (entry == key) return true;
         }
