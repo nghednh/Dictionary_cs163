@@ -32,8 +32,9 @@ int main()
 	mainScreen(window, trie, favor_trie, history_trie);
 	int i = 0;
 	for (auto tr : dictrie) {
+		cout << i;
 		if (tr.checkisChanged()) {
-			cout << endl << endl << i;
+			cout << endl << endl << i<<endl;
 			string str = "";
 			ofstream fout;
 			if (i == 0) fout.open("Data/EngEng/document.txt");
@@ -47,8 +48,8 @@ int main()
 		dictrie[i].clearAll();
 		i++;
 	}
-	trie->clearAll();
 	favor_trie.clearAll();
 	history_trie.clearAll();
 	return 0;
+	
 }
