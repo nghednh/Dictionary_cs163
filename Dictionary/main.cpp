@@ -10,6 +10,7 @@
 #include "History.h"
 #include "MainScreen.h";
 #include "search_saveFavorList.h"
+#include "randomview.h"
 using namespace std;
 using namespace sf;
 
@@ -22,7 +23,6 @@ int main()
 	Trie history_trie;
 	RenderWindow window(VideoMode(1740, 1080), "CS163-Dictionary", Style::Default);
 	mainScreen(window, trie, favor_trie, history_trie);
-
 
 
 	//luu lai trie sau khi tat chuong trinh
