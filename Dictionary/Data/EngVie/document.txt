@@ -2754,7 +2754,7 @@ archbishopric	tong giam muc
 archchamberlain	Archchamberlain
 archchancellor	tong thu tuong
 archchemic	thieu mau nao
-archdeaconship	chuc vu kien ​​truc su
+archdeaconship	chuc vu kien truc su
 archdiocese	tong giao phan
 archducal	tong tai
 archduke	Archduke
@@ -2782,8 +2782,8 @@ archimandrite	archimandrite
 archimedean	archimedean
 archimedes	Archimedes
 archipelago	quan dao
-architectress	nu kien ​​truc su
-architecture	nganh kien ​​​​truc
+architectress	nu kien truc su
+architecture	nganh kien truc
 archivolt	archivolt
 archlute	vom hau
 archly	vom
@@ -12786,7 +12786,7 @@ dieting	an kieng
 dietitian	chuyen gia dinh duong
 differentia	Su khac biet
 difficultate	voi kho khan
-diffidence	thiéu tụ tin
+diffidence	thiéu tụ̣tin
 difflation	giam phat
 diffluent	chung chay
 diffractive	nhieu xa
@@ -16843,7 +16843,7 @@ feuar	feuar
 feud	moi thu han
 feudal	phong kien
 feudalist	che do phong kien
-feudalizing	phong kien ​​hoa
+feudalizing	phong kien hoa
 feudist	lanh chua phong kien
 feudtory	moi thu
 feuillemort	la chet
@@ -19391,7 +19391,7 @@ gougeshell	vo gougeshell
 gouging	khoet lo
 goujere	goujere
 gouland	gouland
-goulards extract	chiet xuat tu ​​goulards
+goulards extract	chiet xuat tu goulards
 goura	hoan ho
 gourami	nguoi sanh soi
 gourd	qua bau
@@ -25408,7 +25408,7 @@ klipspringer	nguoi nhay da
 klopemania	clopemania
 knackish	gion
 knacky	so truong
-knagged	co kien ​​thuc
+knagged	co kien thuc
 knaggy	knaggy
 knap	cai nut
 knapbottle	knapbottle
@@ -27216,7 +27216,7 @@ lothario	lothario
 lotion	nuoc thom
 lotos-eater	nguoi an nhieu
 lotted	danh lo to
-lotteries	xo so kien ​​thiet
+lotteries	xo so kien thiet
 lotto	lo to
 lotus	hoa sen
 lotus-eater	nguoi an hoa sen
@@ -35571,7 +35571,6 @@ samphire	samphire
 sample	vat mau
 sampler	nguoi lay mau
 samshoo	luan hoi
-samshu	Sam 丨
 samson	con sam
 sanable	sanable
 sanation	sanation
@@ -36524,7 +36523,7 @@ sea flewer	tau bien
 sea fowl	ga bien
 sea fox	cao bien
 sea gauge	may do bien
-sea gherkin	sea ​​gherkin
+sea gherkin	sea gherkin
 sea ginger	gung bien
 sea girkin	nau an bien
 sea god	than bien
@@ -36981,7 +36980,7 @@ self-moving	tu di chuyen
 self-murderer	ke tu sat
 self-neglecting	tu bo qua
 self-one	tu mot minh
-self-opinion	y kien ​​cua ban than
+self-opinion	y kien cua ban than
 self-partiality	tinh tu cao tu dai
 self-perplexed	tu boi roi
 self-posited	tu cho minh
@@ -46899,7 +46898,7 @@ unfinished	chua xong
 unfirm	khong xac nhan
 unfit	khong thich hop
 unfix	bo sua loi
-unfledged	khong co kien ​​thuc
+unfledged	khong co kien thuc
 unflexible	khong linh hoat
 unflinching	khong nao nung
 unflower	mo hoa
