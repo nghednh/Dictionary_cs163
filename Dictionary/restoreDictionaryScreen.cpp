@@ -165,8 +165,24 @@ void restoreDictionaryScreen(RenderWindow& window, string& typeDictionary, Trie&
                 }
                 else if (isHere(submit.bound, mouse)) {
                     restoreDictionary(typeDictionary, trie);
-                    trie.clearAll();
-                    trie.readDatasetToTrie("Data/" + typeDictionary + "/document.txt");
+                    int i = -1;
+                    if (typeDictionary == "EngEng") {
+                        i = 0;
+                    }
+                    else if (typeDictionary == "EngVie") {
+                        i = 1;
+                    }
+                    else if (typeDictionary == "VieEng") {
+                        i = 2;
+                    }
+                    else if (typeDictionary == "Slang") {
+                        i = 3;
+                    }
+                    else if (typeDictionary == "Emoji") {
+                        i = 4;
+                    }
+                    dictrie[i].readDatasetToTrie("Data/" + typeDictionary + "/document.txt");
+                    trie = dictrie[i];
                     warning.text.setString("Reset successfully!");
                     warningState = 1;
                     submitState = 2;

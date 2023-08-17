@@ -329,6 +329,7 @@ void viewlistFavor(RenderWindow& window, string typeDictionary, Trie& trie, Trie
                 }
             }
         }
+        
         if (backState == 2 && clickClock.getElapsedTime().asMilliseconds() >= 100) {
             Operation(window, typeDictionary, trie, favor_trie, history_trie);
         }

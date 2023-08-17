@@ -242,7 +242,6 @@ void Operation(RenderWindow& window, string typeDictionary, Trie& trie, Trie& fa
 			gameMenu(window, typeDictionary, trie, favor_trie, history_trie);
 		}
 		if (backState == 2 && clickClock.getElapsedTime().asMilliseconds() >= 100) {
-			trie.clearAll();
 			mainScreen(window, trie, favor_trie, history_trie);
 		}
 		if (engengState == 2 && clickClock.getElapsedTime().asMilliseconds() >= 100) {
