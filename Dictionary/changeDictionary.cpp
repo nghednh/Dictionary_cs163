@@ -4,9 +4,9 @@
 #include "removeWordScreen.h"
 #include "restoreDictionaryScreen.h"
 #include "randomview.h"
-
+extern Trie dictrie[5];
 //-------------------Scene-----------------
-void changeMenu(RenderWindow& window, string typeDictionary, Trie& trie, Trie& favor_trie, Trie& history_trie)
+void changeMenu(RenderWindow& window, string typeDictionary, Trie* trie, Trie& favor_trie, Trie& history_trie)
 {
 	Clock clickClock;
 
@@ -192,6 +192,7 @@ void changeMenu(RenderWindow& window, string typeDictionary, Trie& trie, Trie& f
 				}
 				else if (isHere(emo.bound, mouse) && rect.getPosition().x >= 700) {
 					emoState = 2;
+
 					clickClock.restart();
 				}
 			}
@@ -209,28 +210,23 @@ void changeMenu(RenderWindow& window, string typeDictionary, Trie& trie, Trie& f
 			Operation(window, typeDictionary, trie, favor_trie, history_trie);
 		}
 		if (engengState == 2 && clickClock.getElapsedTime().asMilliseconds() >= 100) {
-			trie.clearAll();
-			trie.readDatasetToTrie("Data/EngEng/document.txt");
+			trie = &dictrie[0];
 			Operation(window, "EngEng", trie, favor_trie, history_trie);
 		}
 		if (engvieState == 2 && clickClock.getElapsedTime().asMilliseconds() >= 100) {
-			trie.clearAll();
-			trie.readDatasetToTrie("Data/EngVie/document.txt");
+			trie = &dictrie[1];
 			Operation(window, "EngVie", trie, favor_trie, history_trie);
 		}
 		if (vieengState == 2 && clickClock.getElapsedTime().asMilliseconds() >= 100) {
-			trie.clearAll();
-			trie.readDatasetToTrie("Data/VieEng/document.txt");
+			trie = &dictrie[2];
 			Operation(window, "VieEng", trie, favor_trie, history_trie);
 		}
 		if (slangState == 2 && clickClock.getElapsedTime().asMilliseconds() >= 100) {
-			trie.clearAll();
-			trie.readDatasetToTrie("Data/Slang/document.txt");
+			trie = &dictrie[3];
 			Operation(window, "Slang", trie, favor_trie, history_trie);
 		}
 		if (emoState == 2 && clickClock.getElapsedTime().asMilliseconds() >= 100) {
-			trie.clearAll();
-			trie.readDatasetToTrie("Data/Emoji/document.txt");
+			trie = &dictrie[4];
 			Operation(window, "Emoji", trie, favor_trie, history_trie);
 		}
 		if (menuState == 2 && clickClock.getElapsedTime().asMilliseconds() >= 100) {

@@ -4,7 +4,7 @@
 #include "gui.h"
 #include "Operation.h"
 //-------------------Scene-----------------
-void historyScene(RenderWindow& window, string typedictionary, Trie trie, Trie favor_trie, Trie history_trie) {
+void historyScene(RenderWindow& window, string typedictionary, Trie * trie, Trie favor_trie, Trie history_trie) {
 	vector<string> his_word;
 	vector<string> his_def;
 	ifstream fin;

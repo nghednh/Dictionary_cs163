@@ -1,8 +1,9 @@
 #include "restoreDictionaryScreen.h"
 #include "Operation.h"
 #include "changeDictionary.h"
+extern Trie dictrie[5];
 
-void restoreDictionary(string& typeDictionary, Trie& trie)
+void restoreDictionary(string& typeDictionary, Trie* trie)
 {
     ifstream fin("Data/" + typeDictionary + "/backup.txt");
     ofstream fout("Data/" + typeDictionary + "/document.txt");
@@ -21,7 +22,7 @@ void restoreDictionary(string& typeDictionary, Trie& trie)
     fout.close();
 }
 
-void restoreDictionaryScreen(RenderWindow& window, string& typeDictionary, Trie& trie, Trie& favor_trie, Trie& history_trie)
+void restoreDictionaryScreen(RenderWindow& window, string& typeDictionary, Trie* trie, Trie& favor_trie, Trie& history_trie)
 {
     Clock clickClock;
 
@@ -164,8 +165,24 @@ void restoreDictionaryScreen(RenderWindow& window, string& typeDictionary, Trie&
                 }
                 else if (isHere(submit.bound, mouse)) {
                     restoreDictionary(typeDictionary, trie);
-                    trie.clearAll();
-                    trie.readDatasetToTrie("Data/" + typeDictionary + "/document.txt");
+                    int i = -1;
+                    if (typeDictionary == "EngEng") {
+                        i = 0;
+                    }
+                    else if (typeDictionary == "EngVie") {
+                        i = 1;
+                    }
+                    else if (typeDictionary == "VieEng") {
+                        i = 2;
+                    }
+                    else if (typeDictionary == "Slang") {
+                        i = 3;
+                    }
+                    else if (typeDictionary == "Emoji") {
+                        i = 4;
+                    }
+                    dictrie[i].readDatasetToTrie("Data/" + typeDictionary + "/document.txt");
+                    *trie = dictrie[i];
                     warning.text.setString("Reset successfully!");
                     warningState = 1;
                     submitState = 2;
@@ -209,28 +226,23 @@ void restoreDictionaryScreen(RenderWindow& window, string& typeDictionary, Trie&
             changeMenu(window, typeDictionary, trie, favor_trie, history_trie);
         }
         if (engengState == 2 && clickClock.getElapsedTime().asMilliseconds() >= 100) {
-            trie.clearAll();
-            trie.readDatasetToTrie("Data/EngEng/document.txt");
+            trie = &dictrie[0];
             Operation(window, "EngEng", trie, favor_trie, history_trie);
         }
         if (engvieState == 2 && clickClock.getElapsedTime().asMilliseconds() >= 100) {
-            trie.clearAll();
-            trie.readDatasetToTrie("Data/EngVie/document.txt");
+            trie = &dictrie[1];
             Operation(window, "EngVie", trie, favor_trie, history_trie);
         }
         if (vieengState == 2 && clickClock.getElapsedTime().asMilliseconds() >= 100) {
-            trie.clearAll();
-            trie.readDatasetToTrie("Data/VieEng/document.txt");
+            trie = &dictrie[2];
             Operation(window, "VieEng", trie, favor_trie, history_trie);
         }
         if (slangState == 2 && clickClock.getElapsedTime().asMilliseconds() >= 100) {
-            trie.clearAll();
-            trie.readDatasetToTrie("Data/Slang/document.txt");
+            trie = &dictrie[3];
             Operation(window, "Slang", trie, favor_trie, history_trie);
         }
         if (emoState == 2 && clickClock.getElapsedTime().asMilliseconds() >= 100) {
-            trie.clearAll();
-            trie.readDatasetToTrie("Data/Emoji/document.txt");
+            trie = &dictrie[4];
             Operation(window, "Emoji", trie, favor_trie, history_trie);
         }
         if (menuState == 2 && clickClock.getElapsedTime().asMilliseconds() >= 100) {

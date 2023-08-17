@@ -1,16 +1,16 @@
 #include "Operation.h"
 #include "gameWord.h"
 #include "game.h"
-
+extern Trie dictrie[5];
 //-------------------Function-----------------
-void createGameWord(int& ans, Font& font, Trie& trie, Object ob[], Object obMove[], Object obPressed[], Object obTrue[], Object obFalse[], Text opText[], Text& question, RectangleShape& box)
+void createGameWord(int& ans, Font& font, Trie* trie, Object ob[], Object obMove[], Object obPressed[], Object obTrue[], Object obFalse[], Text opText[], Text& question, RectangleShape& box)
 {
 	srand(time(0));
 	ans = rand() % 4 + 1;
-	TrieNode* tmp = trie.getRandomWordTrue();
-	TrieNode* op1 = trie.getRandomWordWrong(tmp, nullptr, nullptr);
-	TrieNode* op2 = trie.getRandomWordWrong(tmp, op1, nullptr);
-	TrieNode* op3 = trie.getRandomWordWrong(tmp, op1, op2);
+	TrieNode* tmp = trie->getRandomWordTrue();
+	TrieNode* op1 = trie->getRandomWordWrong(tmp, nullptr, nullptr);
+	TrieNode* op2 = trie->getRandomWordWrong(tmp, op1, nullptr);
+	TrieNode* op3 = trie->getRandomWordWrong(tmp, op1, op2);
 
 	question.setString(tmp->word);
 	question.setPosition(300, 300);
@@ -86,7 +86,7 @@ void createGameWord(int& ans, Font& font, Trie& trie, Object ob[], Object obMove
 }
 
 //-----------------Draw Scene--------------------------
-void gameWord(RenderWindow& window, string typeDictionary, Trie& trie, Trie& favor_trie, Trie& history_trie)
+void gameWord(RenderWindow& window, string typeDictionary, Trie* trie, Trie& favor_trie, Trie& history_trie)
 {
 	Clock clickClock;
 
@@ -312,28 +312,23 @@ void gameWord(RenderWindow& window, string typeDictionary, Trie& trie, Trie& fav
 			gameWord(window, typeDictionary, trie, favor_trie, history_trie);
 		}
 		if (engengState == 2 && clickClock.getElapsedTime().asMilliseconds() >= 100) {
-			trie.clearAll();
-			trie.readDatasetToTrie("Data/EngEng/document.txt");
+			trie = &dictrie[0];
 			Operation(window, "EngEng", trie, favor_trie, history_trie);
 		}
 		if (engvieState == 2 && clickClock.getElapsedTime().asMilliseconds() >= 100) {
-			trie.clearAll();
-			trie.readDatasetToTrie("Data/EngVie/document.txt");
+			trie = &dictrie[1];
 			Operation(window, "EngVie", trie, favor_trie, history_trie);
 		}
 		if (vieengState == 2 && clickClock.getElapsedTime().asMilliseconds() >= 100) {
-			trie.clearAll();
-			trie.readDatasetToTrie("Data/VieEng/document.txt");
+			trie = &dictrie[2];
 			Operation(window, "VieEng", trie, favor_trie, history_trie);
 		}
 		if (slangState == 2 && clickClock.getElapsedTime().asMilliseconds() >= 100) {
-			trie.clearAll();
-			trie.readDatasetToTrie("Data/Slang/document.txt");
+			trie = &dictrie[3];
 			Operation(window, "Slang", trie, favor_trie, history_trie);
 		}
 		if (emoState == 2 && clickClock.getElapsedTime().asMilliseconds() >= 100) {
-			trie.clearAll();
-			trie.readDatasetToTrie("Data/Emoji/document.txt");
+			trie = &dictrie[4];
 			Operation(window, "Emoji", trie, favor_trie, history_trie);
 		}
 		if (menuState == 2 && clickClock.getElapsedTime().asMilliseconds() >= 100) {

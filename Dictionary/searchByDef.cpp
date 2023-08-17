@@ -24,7 +24,7 @@ void findDef(TrieNode* root, string input, vector<pair<string, string>>& ans) {
         }
     }
 }
-void searchByDef(RenderWindow& window, Trie& trie, string typeDictionary, Trie& favor_trie, Trie& history_trie) {
+void searchByDef(RenderWindow& window, Trie* trie, string typeDictionary, Trie& favor_trie, Trie& history_trie) {
     Clock clickClock;
     //Scene
     sf::Texture scene;
@@ -168,7 +168,7 @@ void searchByDef(RenderWindow& window, Trie& trie, string typeDictionary, Trie& 
                         cnt_move = 0;
                         totalHeight = 0.0f;
                         meaning.clear();
-                        findDef(trie.getRoot(), user_text, meaning);
+                        findDef(trie->getRoot(), user_text, meaning);
                         found.clear();
                         if (meaning.size() != 0) {
                             for (const auto& data : meaning)

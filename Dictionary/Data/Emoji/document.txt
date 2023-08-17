@@ -1,3 +1,4 @@
+	
 %-)	User has been staring at a green screen for 15 hours straight.
 (-:	User is left handed.
 (:I	User is an egghead.
@@ -478,7 +479,6 @@ M	Male
 M8	Mate
 MB	Maybe
 MYOB	Mind your own business
-N	In
 N/C	Not cool
 N/M	Never mind / nothing much
 N/S	No shit
