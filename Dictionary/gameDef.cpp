@@ -2,7 +2,16 @@
 #include "gameWord.h"
 #include "game.h"
 extern Trie dictrie[5];
+
 //-------------------Function-----------------
+void chooseDef(Trie*& trie, TrieNode*& tmp)
+{
+	tmp = trie->getRandomWordTrue();
+	while (buffer(tmp).size() == 0) {
+		tmp = trie->getRandomWordTrue();
+	}
+}
+
 void createGameDef(int& ans, Font& font, Trie* trie, Object ob[], Object obMove[], Object obPressed[], Object obTrue[], Object obFalse[], Text opText[], Text& question, RectangleShape& box)
 {
 	srand(time(0));
@@ -12,7 +21,7 @@ void createGameDef(int& ans, Font& font, Trie* trie, Object ob[], Object obMove[
 	TrieNode* op2 = trie->getRandomWordWrong(tmp, op1, nullptr);
 	TrieNode* op3 = trie->getRandomWordWrong(tmp, op1, op2);
 
-	question.setString(tmp->meaning[0]);
+	question.setString(buffer(tmp));
 	question.setPosition(300, 300);
 	question.setFont(font);
 	question.setFillColor(Color(136, 136, 136));

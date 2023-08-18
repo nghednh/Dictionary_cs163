@@ -1,7 +1,9 @@
 #include "Operation.h"
 #include "search.h"
 #include "search_saveFavorList.h"
+#include "randomview.h"
 extern Trie dictrie[5];
+
 //-------------------Scene-----------------
 void searchMenu(RenderWindow& window, string typeDictionary, Trie* trie, Trie& favor_trie, Trie& history_trie)
 {
@@ -17,15 +19,20 @@ void searchMenu(RenderWindow& window, string typeDictionary, Trie* trie, Trie& f
 	Object backPressed = createObject("content/backPressed.png", 200, 820);
 	int backState = 0;
 
-	Object word = createObject("content/searchWord.png", 200, 660);
-	Object wordMove = createObject("content/searchWordMove.png", 200, 660);
-	Object wordPressed = createObject("content/searchWordPressed.png", 200, 660);
+	Object word = createObject("content/searchWord.png", 200, 580);
+	Object wordMove = createObject("content/searchWordMove.png", 200, 580);
+	Object wordPressed = createObject("content/searchWordPressed.png", 200, 580);
 	int wordState = 0;
 
-	Object def = createObject("content/searchDef.png", 200, 740);
-	Object defMove = createObject("content/searchDefMove.png", 200, 740);
-	Object defPressed = createObject("content/searchDefPressed.png", 200, 740);
+	Object def = createObject("content/searchDef.png", 200, 660);
+	Object defMove = createObject("content/searchDefMove.png", 200, 660);
+	Object defPressed = createObject("content/searchDefPressed.png", 200, 660);
 	int defState = 0;
+
+	Object ran = createObject("content/random.png", 200, 740);
+	Object ranMove = createObject("content/randomMove.png", 200, 740);
+	Object ranPressed = createObject("content/randomPressed.png", 200, 740);
+	int ranState = 0;
 
 	Object engeng = createObject("content/engengMenu.png", 120, 30);
 	Object engengMove = createObject("content/engengMenuMove.png", 120, 30);
@@ -90,6 +97,12 @@ void searchMenu(RenderWindow& window, string typeDictionary, Trie* trie, Trie& f
 				else {
 					defState = 0;
 				}
+				if (isHere(ran.bound, mouse)) {
+					ranState = 1;
+				}
+				else {
+					ranState = 0;
+				}
 				if (isHere(back.bound, mouse)) {
 					backState = 1;
 				}
@@ -152,6 +165,10 @@ void searchMenu(RenderWindow& window, string typeDictionary, Trie* trie, Trie& f
 					defState = 2;
 					clickClock.restart();
 				}
+				else if (isHere(ran.bound, mouse)) {
+					ranState = 2;
+					clickClock.restart();
+				}
 				else if (isHere(back.bound, mouse)) {
 					backState = 2;
 					clickClock.restart();
@@ -177,6 +194,9 @@ void searchMenu(RenderWindow& window, string typeDictionary, Trie* trie, Trie& f
 					clickClock.restart();
 				}
 			}
+		}
+		if (ranState == 2 && clickClock.getElapsedTime().asMilliseconds() >= 100) {
+			randomView(window, typeDictionary, trie, favor_trie, history_trie);
 		}
 		if (wordState == 2 && clickClock.getElapsedTime().asMilliseconds() >= 100) {
 			search_addfavorite(window, trie, typeDictionary, favor_trie, history_trie);
@@ -334,6 +354,16 @@ void searchMenu(RenderWindow& window, string typeDictionary, Trie* trie, Trie& f
 		}
 		else {
 			window.draw(defPressed.draw);
+		}
+
+		if (ranState == 0) {
+			window.draw(ran.draw);
+		}
+		else if (ranState == 1) {
+			window.draw(ranMove.draw);
+		}
+		else {
+			window.draw(ranPressed.draw);
 		}
 
 		if (backState == 0) {

@@ -1,6 +1,7 @@
 #include "randomview.h"
 #include "Operation.h"
 #include "changeDictionary.h"
+#include "game.h"
 
 //-------------------Scene-----------------
 void randomView(RenderWindow& window, string typeDictionary, Trie* trie, Trie& favor_trie, Trie& history_trie)
@@ -15,12 +16,15 @@ void randomView(RenderWindow& window, string typeDictionary, Trie* trie, Trie& f
     Object retry = createObject("content/retry.png", 450, 780);
     Object retryMove = createObject("content/retryMove.png", 450, 780);
     Object retryPressed = createObject("content/retryPressed.png", 450, 780);
+    RectangleShape box(Vector2f(1000, 200));
     int retryState = 0;
-    TrieNode* tr = trie->getRandomWordTrue();
+    TrieNode* tr;
+    chooseDef(trie, tr);
     string word = tr->word;
-    string meaning = tr->meaning[0];
+    string meaning = buffer(tr);
     Info wordText = createInfo("arial.ttf", word, 220, 360, 40);
     Info wordText2 = createInfo("arial.ttf", meaning, 220, 450, 40);
+    wrapped_text(box, wordText2.text);
     int backState = 0;
     Event e;
     while (window.isOpen()) {
@@ -90,11 +94,15 @@ void randomView(RenderWindow& window, string typeDictionary, Trie* trie, Trie& f
             Operation(window, typeDictionary, trie, favor_trie, history_trie);
         }
         if (retryState == 2 && clickClock.getElapsedTime().asMilliseconds() >= 100) {
-            tr = trie->getRandomWordWrong(tr,nullptr,nullptr);
+            string tmp = tr->word;
+            while (tmp == tr->word) {
+                chooseDef(trie, tr);
+            }
             word = tr->word;
-            meaning = tr->meaning[0];
+            meaning = buffer(tr);
             wordText.text.setString(word);
             wordText2.text.setString(meaning);
+            wrapped_text(box, wordText2.text);
             retryState = 0;
         }
     }

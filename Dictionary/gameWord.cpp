@@ -2,15 +2,40 @@
 #include "gameWord.h"
 #include "game.h"
 extern Trie dictrie[5];
+
 //-------------------Function-----------------
+void chooseWord(Trie*& trie, TrieNode*& tmp, TrieNode*& op1, TrieNode*& op2, TrieNode*& op3)
+{
+	tmp = trie->getRandomWordTrue();
+	while (buffer(tmp).size() == 0) {
+		tmp = trie->getRandomWordTrue();
+	}
+
+	op1 = trie->getRandomWordWrong(tmp, nullptr, nullptr);
+	while (buffer(op1).size() == 0) {
+		op1 = trie->getRandomWordWrong(tmp, nullptr, nullptr);
+	}
+
+	op2 = trie->getRandomWordWrong(tmp, op1, nullptr);
+	while (buffer(op2).size() == 0) {
+		op2 = trie->getRandomWordWrong(tmp, op1, nullptr);
+	}
+
+	op3 = trie->getRandomWordWrong(tmp, op1, op2);
+	while (buffer(op3).size() == 0) {
+		op3 = trie->getRandomWordWrong(tmp, op1, op2);
+	}
+}
+
 void createGameWord(int& ans, Font& font, Trie* trie, Object ob[], Object obMove[], Object obPressed[], Object obTrue[], Object obFalse[], Text opText[], Text& question, RectangleShape& box)
 {
 	srand(time(0));
 	ans = rand() % 4 + 1;
-	TrieNode* tmp = trie->getRandomWordTrue();
-	TrieNode* op1 = trie->getRandomWordWrong(tmp, nullptr, nullptr);
-	TrieNode* op2 = trie->getRandomWordWrong(tmp, op1, nullptr);
-	TrieNode* op3 = trie->getRandomWordWrong(tmp, op1, op2);
+	TrieNode* tmp;
+	TrieNode* op1;
+	TrieNode* op2;
+	TrieNode* op3;
+	chooseWord(trie, tmp, op1, op2, op3);
 
 	question.setString(tmp->word);
 	question.setPosition(300, 300);
@@ -21,18 +46,18 @@ void createGameWord(int& ans, Font& font, Trie* trie, Object ob[], Object obMove
 	int cnt = 1;
 	for (int i = 1; i <= 4; ++i) {
 		if (i == ans) {
-			opText[i].setString(tmp->meaning[0]);
+			opText[i].setString(buffer(tmp));
 		}
 		else if (cnt == 1) {
-			opText[i].setString(op1->meaning[0]);
+			opText[i].setString(buffer(op1));
 			++cnt;
 		}
 		else if (cnt == 2) {
-			opText[i].setString(op2->meaning[0]);
+			opText[i].setString(buffer(op2));
 			++cnt;
 		}
 		else {
-			opText[i].setString(op3->meaning[0]);
+			opText[i].setString(buffer(op3));
 		}
 		opText[i].setCharacterSize(30);
 		opText[i].setFont(font);

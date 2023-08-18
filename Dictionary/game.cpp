@@ -3,6 +3,22 @@
 #include "gameWord.h"
 #include "gameDef.h"
 extern Trie dictrie[5];
+
+//-------------------Function-----------------
+string buffer(TrieNode*& tmp)
+{
+	int i = 0;
+	while (tmp->meaning[i].size() > 90 && i < tmp->meaning.size()) {
+		++i;
+	}
+	if (i < tmp->meaning.size()) {
+		return tmp->meaning[i];
+	}
+	else {
+		return "";
+	}
+}
+
 //-------------------Scene-----------------
 void gameMenu(RenderWindow& window, string typeDictionary, Trie* trie, Trie& favor_trie, Trie& history_trie)
 {
