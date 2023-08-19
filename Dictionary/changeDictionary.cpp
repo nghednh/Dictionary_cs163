@@ -5,6 +5,7 @@
 #include "restoreDictionaryScreen.h"
 #include "randomview.h"
 extern Trie dictrie[5];
+
 //-------------------Scene-----------------
 void changeMenu(RenderWindow& window, string typeDictionary, Trie* trie, Trie& favor_trie, Trie& history_trie)
 {
