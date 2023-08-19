@@ -28,7 +28,7 @@ void searchByDef(RenderWindow& window, Trie* trie, string typeDictionary, Trie& 
     Clock clickClock;
     //Scene
     sf::Texture scene;
-    scene.loadFromFile("../Dictionary/content/scene.png");
+    scene.loadFromFile("../Dictionary/content/background/searchDef_scene.png");
     //Search_bar
     sf::Texture search_bar;
     search_bar.loadFromFile("../Dictionary/content/search_barBig.png");
