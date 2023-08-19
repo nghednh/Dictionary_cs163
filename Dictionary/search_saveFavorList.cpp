@@ -2,6 +2,7 @@
 #include "search_editDefinition.h"
 #include "viewListFavor.h"
 #include "Operation.h"
+#include "search.h"
 void wrapped_text(RectangleShape shape, Text& text) {
     float hei, wid;
     string s = "";
@@ -80,6 +81,7 @@ vector<pair<string, string>> searchPrefix(Trie * trie, string input) {
     return recom;
 }
 void search_addfavorite(RenderWindow& window, Trie* trie, string typeDictionary, Trie& favor_trie, Trie& history_trie) {
+    history_trie.readDatasetToTrie("Data/" + typeDictionary + "/history.txt");
     Clock clickClock;
     //Scence
     sf::Texture scene;
@@ -263,6 +265,9 @@ void search_addfavorite(RenderWindow& window, Trie* trie, string typeDictionary,
                                 totalHeight += text.getLocalBounds().height;
                                 found.push_back(text);
                             }
+                            for (int i = 0; i < meaning.size(); i++) {
+                                history_trie.insertWord(user_text, meaning[i]);
+                            }
                             sf::Text line("\n", font, 30);
                             totalHeight -= line.getLocalBounds().height;
 
@@ -384,14 +389,22 @@ void search_addfavorite(RenderWindow& window, Trie* trie, string typeDictionary,
             fout.open("Data/" + typeDictionary + "/favorite.txt");
             if (fout.is_open()) display(favor_trie.getRoot(), str, fout);
             fout.close();
-            Operation(window, typeDictionary, trie, favor_trie, history_trie);
+            str = "";
+            fout.open("Data/" + typeDictionary + "/history.txt");
+            if (fout.is_open()) display(history_trie.getRoot(), str, fout);
+            fout.close();
+            history_trie.clearAll();
+            searchMenu(window, typeDictionary, trie, favor_trie, history_trie);
         }
         if (editState == 2 && clickClock.getElapsedTime().asMilliseconds() >= 100) {
             string str = "";
             ofstream fout;
             fout.open("Data/" + typeDictionary + "/favorite.txt");
             if (fout.is_open()) display(favor_trie.getRoot(), str, fout);
+            fout.open("Data/" + typeDictionary + "/history.txt");
+            if (fout.is_open()) display(history_trie.getRoot(), str, fout);
             fout.close();
+            history_trie.clearAll();
             if (trie->searchWord(user_text)&&user_text!="") {
                 int state = 0;
                 while (state == 0) {

@@ -9,22 +9,15 @@ void historyScene(RenderWindow& window, string typedictionary, Trie * trie, Trie
 	vector<string> his_def;
 	ifstream fin;
 	fin.open("Data/" + typedictionary + "/history.txt");
-	string line;
-	while (getline(fin, line, '\n')) {
-		int i = 0;
-		string word = "", meaning = "";
-		while (line[i] != '\0') {
-			if (line[i] != '\t') word += line[i];
-			else break;
-			i++;
+	while (!fin.eof()) {
+		string word = "";
+		string meaning = "";
+		getline(fin, word, '\t');
+		getline(fin, meaning, '\n');
+		if (word != "") {
+			his_word.push_back(word);
+			his_def.push_back(meaning);
 		}
-		i++;
-		while (line[i] != '\0') {
-			meaning += line[i];
-			i++;
-		}
-		his_word.push_back(word);
-		his_def.push_back(meaning);
 	}
 	fin.close();
 	his_word.push_back("");
@@ -43,7 +36,7 @@ void historyScene(RenderWindow& window, string typedictionary, Trie * trie, Trie
 	Object right_point = createObject("content/right_point.png", 825, 966);
 	Object right_valid = createObject("content/right_valid.png", 825, 966);
 	Event event;
-	int change = 0, count = his_word.size() - 1;
+	int change = 0, count = his_word.size();
 	bool trigger_page = true;
 	Info* inf[8], * def[8];
 	Object* bar_blue[8];
