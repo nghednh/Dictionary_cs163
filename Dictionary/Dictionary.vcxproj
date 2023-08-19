@@ -152,6 +152,7 @@
     <ClCompile Include="search_editDefinition.cpp" />
     <ClCompile Include="search_saveFavorList.cpp" />
     <ClCompile Include="randomview.cpp" />
+    <ClCompile Include="Trie.cpp" />
     <ClCompile Include="viewListFavor.cpp" />
   </ItemGroup>
   <ItemGroup>

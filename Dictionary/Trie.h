@@ -9,10 +9,12 @@
 #include <sstream>
 #include "random.h"
 #include "HashTable.h"
+
 using namespace std;
 using namespace sf;
 
 const int sizee = 128;
+
 
 class TrieNode {
 public:
@@ -55,7 +57,7 @@ public:
     }
     void insertWord(const string& word, const string& meaning) {
         TrieNode* cur = root;
-
+        
         for (char c : word) {
             int index = c - ' ';
             if (cur->children[index] == nullptr) {
@@ -173,12 +175,15 @@ public:
         clearTrie(root);
         root = new TrieNode();
     }
+    bool compareRan();
     TrieNode *getRandomWordTrue() {
         TrieNode* cur = root;
         TrieNode* pre = nullptr;
-        int n = randominrange2(100,200);
+        int n = randominrange2(150,200);
         for (int i = 0; i < n; i++) {
-            int m = randominrange2(1, 90);
+            int m = 0;
+            if (compareRan()) m = randominrange2(65, 90);
+            else m = randominrange2(1, 90);
             if (cur->children[m])
             {
                 cur = cur->children[m];
@@ -195,9 +200,11 @@ public:
     TrieNode* getRandomWordWrong(TrieNode* x, TrieNode* y, TrieNode*z) {
         TrieNode* cur = root;
         TrieNode* pre = nullptr;
-        int n = randominrange2(100,200);
+        int n = randominrange2(150,200);
         for (int i = 0; i < n; i++) {
-            int m = randominrange2(1, 90);
+            int m = 0;
+            if (compareRan()) m = randominrange2(65, 90);
+            else m = randominrange2(1, 90);
             if (cur->children[m])
             {
                 cur = cur->children[m];
