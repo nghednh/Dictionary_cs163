@@ -9,8 +9,6 @@
 using namespace std;
 const int TABLE_SIZE = 101;
 const int BASE = 31;
-
-// Hash table class
 class HashTable {
 private:
     vector<vector<string>> table;
