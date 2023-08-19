@@ -36,15 +36,4 @@ public:
         }
         return false;
     }
-    // void remove(const string& key) {
-    //     unsigned long long hashValue = hashString(key);
-    //     int index = hashValue % TABLE_SIZE;
-
-    //     for (auto it : table[index]) {
-    //         if (it == key) {
-    //             table[index].erase(it);
-    //             break;
-    //         }
-    //     }
-    // }
 };
