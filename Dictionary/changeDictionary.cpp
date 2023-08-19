@@ -20,19 +20,19 @@ void changeMenu(RenderWindow& window, string typeDictionary, Trie* trie, Trie& f
 	Object backPressed = createObject("content/backPressed.png", 200, 820);
 	int backState = 0;
 
-	Object addWord = createObject("content/addWord.png", 200, 420);
-	Object addWordMove = createObject("content/addWordMove.png", 200, 420);
-	Object addWordPressed = createObject("content/addWordPressed.png", 200, 420);
+	Object addWord = createObject("content/addWord.png", 200, 580);
+	Object addWordMove = createObject("content/addWordMove.png", 200, 580);
+	Object addWordPressed = createObject("content/addWordPressed.png", 200, 580);
 	int addState = 0;
 
-	Object remove = createObject("content/removeWord.png", 200, 500);
-	Object removeMove = createObject("content/removeWordMove.png", 200, 500);
-	Object removePressed = createObject("content/removeWordPressed.png", 200, 500);
+	Object remove = createObject("content/removeWord.png", 200, 660);
+	Object removeMove = createObject("content/removeWordMove.png", 200, 660);
+	Object removePressed = createObject("content/removeWordPressed.png", 200, 660);
 	int removeState = 0;
 
-	Object resetDicitonary = createObject("content/reset.png", 200, 580);
-	Object resetDicitonaryMove = createObject("content/resetMove.png", 200, 580);
-	Object resetDicitonaryPressed = createObject("content/resetPressed.png", 200, 580);
+	Object resetDicitonary = createObject("content/reset.png", 200, 740);
+	Object resetDicitonaryMove = createObject("content/resetMove.png", 200, 740);
+	Object resetDicitonaryPressed = createObject("content/resetPressed.png", 200, 740);
 	int resetState = 0;
 
 	Object engeng = createObject("content/engengMenu.png", 120, 30);

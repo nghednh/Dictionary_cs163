@@ -16,7 +16,8 @@ void createGameDef(int& ans, Font& font, Trie* trie, Object ob[], Object obMove[
 {
 	srand(time(0));
 	ans = rand() % 4 + 1;
-	TrieNode* tmp = trie->getRandomWordTrue();
+	TrieNode* tmp;
+	chooseDef(trie, tmp);
 	TrieNode* op1 = trie->getRandomWordWrong(tmp, nullptr, nullptr);
 	TrieNode* op2 = trie->getRandomWordWrong(tmp, op1, nullptr);
 	TrieNode* op3 = trie->getRandomWordWrong(tmp, op1, op2);
@@ -46,7 +47,7 @@ void createGameDef(int& ans, Font& font, Trie* trie, Object ob[], Object obMove[
 		}
 		opText[i].setCharacterSize(30);
 		opText[i].setFont(font);
-		opText[i].setFillColor(Color(52, 142, 254));
+		opText[i].setFillColor(Color::Black);
 
 		ob[i].txt.loadFromFile("content/option.png");
 		ob[i].draw.setTexture(ob[i].txt);
@@ -103,6 +104,7 @@ void gameDef(RenderWindow& window, string typeDictionary, Trie* trie, Trie& favo
 	font.loadFromFile("arial.ttf");
 
 	Object screen = createObject("content/scene.png");
+	Object ques = createObject("content/questionBox.png", 220, 310);
 
 	Object title = createObject("content/searchBar.png", 200, 225);
 	Info titleText = createInfo("arial.ttf", "Choose the correct definition of the given word!", 220, 225, 40);
@@ -348,10 +350,11 @@ void gameDef(RenderWindow& window, string typeDictionary, Trie* trie, Trie& favo
 				menuState = 0;
 			}
 		}
-
+			
 		window.clear();
 
 		window.draw(screen.draw);
+		window.draw(ques.draw);
 		window.draw(title.draw);
 		window.draw(titleText.text);
 		window.draw(question);
