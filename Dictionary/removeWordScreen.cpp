@@ -9,7 +9,7 @@ void removeWordScreen(RenderWindow& window, string typeDictionary, Trie* trie, T
     string tmp = "";
     int check = 0;
 
-    Object screen = createObject("content/scene.png");
+    Object screen = createObject("content/background/removeWord_scne.png");
 
     Object enterWordBar = createObject("content/searchBar.png", 200, 360);
     Object enterWordBarMove = createObject("content/searchBarMove.png", 200, 360);

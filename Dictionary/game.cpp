@@ -2,6 +2,7 @@
 #include "game.h"
 #include "gameWord.h"
 #include "gameDef.h"
+#include "randomview.h"
 extern Trie dictrie[5];
 
 //-------------------Function-----------------
@@ -24,7 +25,7 @@ void gameMenu(RenderWindow& window, string typeDictionary, Trie* trie, Trie& fav
 {
 	Clock clickClock;
 
-	Object screen = createObject("content/scene.png");
+	Object screen = createObject("content/background/game_scene.png");
 
 	Object title = createObject("content/searchBar.png", 200, 360);
 	Info titleText = createInfo("arial.ttf", "Choose your mode!", 220, 360, 40);
@@ -34,15 +35,26 @@ void gameMenu(RenderWindow& window, string typeDictionary, Trie* trie, Trie& fav
 	Object backPressed = createObject("content/backPressed.png", 200, 820);
 	int backState = 0;
 
-	Object word = createObject("content/word.png", 200, 660);
-	Object wordMove = createObject("content/wordMove.png", 200, 660);
-	Object wordPressed = createObject("content/wordPressed.png", 200, 660);
+	Object word = createObject("content/word.png", 200, 500);
+	Object wordMove = createObject("content/wordMove.png", 200, 500);
+	Object wordPressed = createObject("content/wordPressed.png", 200, 500);
 	int wordState = 0;
 
-	Object def = createObject("content/definition.png", 200, 740);
-	Object defMove = createObject("content/definitionMove.png", 200, 740);
-	Object defPressed = createObject("content/definitionPressed.png", 200, 740);
+	Object def = createObject("content/definition.png", 200, 580);
+	Object defMove = createObject("content/definitionMove.png", 200, 580);
+	Object defPressed = createObject("content/definitionPressed.png", 200, 580);
 	int defState = 0;
+
+	Object fcword = createObject("content/fcword.png", 200, 660);
+	Object fcwordMove = createObject("content/fcwordMove.png", 200, 660);
+	Object fcwordPressed = createObject("content/fcwordPressed.png", 200, 660);
+	int fcwordState = 0;
+
+
+	Object fcdef = createObject("content/fcdef.png", 200, 740);
+	Object fcdefMove = createObject("content/fcdefMove.png", 200, 740);
+	Object fcdefPressed = createObject("content/fcdefPressed.png", 200, 740);
+	int fcdefState = 0;
 
 	Object engeng = createObject("content/engengMenu.png", 120, 30);
 	Object engengMove = createObject("content/engengMenuMove.png", 120, 30);
@@ -107,6 +119,18 @@ void gameMenu(RenderWindow& window, string typeDictionary, Trie* trie, Trie& fav
 				else {
 					defState = 0;
 				}
+				if (isHere(fcdef.bound, mouse)) {
+					fcdefState = 1;
+				}
+				else {
+					fcdefState = 0;
+				}
+				if (isHere(fcword.bound, mouse)) {
+					fcwordState = 1;
+				}
+				else {
+					fcwordState = 0;
+				}
 				if (isHere(back.bound, mouse)) {
 					backState = 1;
 				}
@@ -169,6 +193,14 @@ void gameMenu(RenderWindow& window, string typeDictionary, Trie* trie, Trie& fav
 					defState = 2;
 					clickClock.restart();
 				}
+				else if (isHere(fcword.bound, mouse)) {
+					fcwordState = 2;
+					clickClock.restart();
+				}
+				else if (isHere(fcdef.bound, mouse)) {
+					fcdefState = 2;
+					clickClock.restart();
+				}
 				else if (isHere(back.bound, mouse)) {
 					backState = 2;
 					clickClock.restart();
@@ -200,6 +232,12 @@ void gameMenu(RenderWindow& window, string typeDictionary, Trie* trie, Trie& fav
 		}
 		if (defState == 2 && clickClock.getElapsedTime().asMilliseconds() >= 100) {
 			gameDef(window, typeDictionary, trie, favor_trie, history_trie);
+		}
+		if (fcwordState == 2 && clickClock.getElapsedTime().asMilliseconds() >= 100) {
+			flashcardHideDef(window, typeDictionary, trie, favor_trie, history_trie);
+		}
+		if (fcdefState == 2 && clickClock.getElapsedTime().asMilliseconds() >= 100) {
+			flashcardHideWord(window, typeDictionary, trie, favor_trie, history_trie);
 		}
 		if (backState == 2 && clickClock.getElapsedTime().asMilliseconds() >= 100) {
 			Operation(window, typeDictionary, trie, favor_trie, history_trie);
@@ -351,6 +389,26 @@ void gameMenu(RenderWindow& window, string typeDictionary, Trie* trie, Trie& fav
 		}
 		else {
 			window.draw(defPressed.draw);
+		}
+
+		if (fcwordState == 0) {
+			window.draw(fcword.draw);
+		}
+		else if (fcwordState == 1) {
+			window.draw(fcwordMove.draw);
+		}
+		else {
+			window.draw(fcwordPressed.draw);
+		}
+
+		if (fcdefState == 0) {
+			window.draw(fcdef.draw);
+		}
+		else if (fcdefState == 1) {
+			window.draw(fcdefMove.draw);
+		}
+		else {
+			window.draw(fcdefPressed.draw);
 		}
 
 		if (backState == 0) {

@@ -14,7 +14,7 @@ void Operation(RenderWindow& window, string typeDictionary, Trie* trie, Trie& fa
 {
 	Clock clickClock;
 
-	Object screen = createObject("content/scene.png");
+	Object screen = createObject("content/background/dictionaryMenu_scene.png");
 
 	Object searchWord = createObject("content/searchWord.png", 200, 500);
 	Object searchWordMove = createObject("content/searchWordMove.png", 200, 500);

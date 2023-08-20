@@ -15,7 +15,7 @@ using namespace sf;
 Trie dictrie[5];
 
 int main()
-{
+{// TEST PUSH LÊN GIT
 	std::srand(static_cast<unsigned int>(std::time(nullptr)));
 	dictrie[0].readDatasetToTrie("Data/EngEng/document.txt");
 	//dictrie[1].readDatasetToTrie("Data/EngVie/document.txt");
@@ -23,6 +23,7 @@ int main()
 	dictrie[3].readDatasetToTrie("Data/Slang/document.txt");
 	dictrie[4].readDatasetToTrie("Data/Emoji/document.txt");
 	// 0:engeng 1:engvvie 2:vieeng 3:slang 4:emoji
+	Trie test;
 	Trie *trie= new Trie();
 	Trie favor_trie;
 	Trie history_trie;
