@@ -30,7 +30,7 @@ public:
         children = vector<TrieNode*>(sizee, nullptr);
         isEndOfWord = false;
         isFavorite = false;
-    }
+    }   
 };
 
 class Trie {
@@ -227,6 +227,7 @@ private:
             node->isEndOfWord = false;
             node->word.clear();
             node->meaning.clear();
+            node->hashTable.clear();
             isChanged = true;
             return isEmpty(node);
         }
