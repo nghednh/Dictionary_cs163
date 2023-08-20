@@ -18,7 +18,7 @@ int main()
 {// TEST PUSH LÊN GIT
 	std::srand(static_cast<unsigned int>(std::time(nullptr)));
 	dictrie[0].readDatasetToTrie("Data/EngEng/document.txt");
-	//dictrie[1].readDatasetToTrie("Data/EngVie/document.txt");
+	dictrie[1].readDatasetToTrie("Data/EngVie/document.txt");
 	dictrie[2].readDatasetToTrie("Data/VieEng/document.txt");
 	dictrie[3].readDatasetToTrie("Data/Slang/document.txt");
 	dictrie[4].readDatasetToTrie("Data/Emoji/document.txt");
