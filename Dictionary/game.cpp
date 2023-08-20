@@ -25,7 +25,7 @@ void gameMenu(RenderWindow& window, string typeDictionary, Trie* trie, Trie& fav
 {
 	Clock clickClock;
 
-	Object screen = createObject("content/scene.png");
+	Object screen = createObject("content/background/game_scene.png");
 
 	Object title = createObject("content/searchBar.png", 200, 360);
 	Info titleText = createInfo("arial.ttf", "Choose your mode!", 220, 360, 40);

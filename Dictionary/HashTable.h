@@ -9,8 +9,6 @@
 using namespace std;
 const int TABLE_SIZE = 101;
 const int BASE = 31;
-
-// Hash table class
 class HashTable {
 private:
     vector<vector<string>> table;
@@ -36,15 +34,4 @@ public:
         }
         return false;
     }
-    // void remove(const string& key) {
-    //     unsigned long long hashValue = hashString(key);
-    //     int index = hashValue % TABLE_SIZE;
-
-    //     for (auto it : table[index]) {
-    //         if (it == key) {
-    //             table[index].erase(it);
-    //             break;
-    //         }
-    //     }
-    // }
 };
