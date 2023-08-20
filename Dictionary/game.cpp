@@ -3,6 +3,8 @@
 #include "gameWord.h"
 #include "gameDef.h"
 #include "randomview.h"
+#include "Scramble.h"
+
 extern Trie dictrie[5];
 
 //-------------------Function-----------------
@@ -35,26 +37,31 @@ void gameMenu(RenderWindow& window, string typeDictionary, Trie* trie, Trie& fav
 	Object backPressed = createObject("content/backPressed.png", 200, 820);
 	int backState = 0;
 
-	Object word = createObject("content/word.png", 200, 500);
-	Object wordMove = createObject("content/wordMove.png", 200, 500);
-	Object wordPressed = createObject("content/wordPressed.png", 200, 500);
+	Object word = createObject("content/word.png", 200, 580);
+	Object wordMove = createObject("content/wordMove.png", 200, 580);
+	Object wordPressed = createObject("content/wordPressed.png", 200, 580);
 	int wordState = 0;
 
-	Object def = createObject("content/definition.png", 200, 580);
-	Object defMove = createObject("content/definitionMove.png", 200, 580);
-	Object defPressed = createObject("content/definitionPressed.png", 200, 580);
+	Object def = createObject("content/definition.png", 200, 660);
+	Object defMove = createObject("content/definitionMove.png", 200, 660);
+	Object defPressed = createObject("content/definitionPressed.png", 200, 660);
 	int defState = 0;
 
-	Object fcword = createObject("content/fcword.png", 200, 660);
-	Object fcwordMove = createObject("content/fcwordMove.png", 200, 660);
-	Object fcwordPressed = createObject("content/fcwordPressed.png", 200, 660);
+	Object fcword = createObject("content/fcword.png", 1000, 580);
+	Object fcwordMove = createObject("content/fcwordMove.png", 1000, 580);
+	Object fcwordPressed = createObject("content/fcwordPressed.png", 1000, 580);
 	int fcwordState = 0;
 
 
-	Object fcdef = createObject("content/fcdef.png", 200, 740);
-	Object fcdefMove = createObject("content/fcdefMove.png", 200, 740);
-	Object fcdefPressed = createObject("content/fcdefPressed.png", 200, 740);
+	Object fcdef = createObject("content/fcdef.png", 1000, 660);
+	Object fcdefMove = createObject("content/fcdefMove.png", 1000, 660);
+	Object fcdefPressed = createObject("content/fcdefPressed.png", 1000, 660);
 	int fcdefState = 0;
+
+	Object scramble = createObject("content/scramble.png", 200, 740);
+	Object scrambleMove = createObject("content/scrambleMove.png", 200, 740);
+	Object scramblePressed = createObject("content/scramblePressed.png", 200, 740);
+	int scrambleState = 0;
 
 	Object engeng = createObject("content/engengMenu.png", 120, 30);
 	Object engengMove = createObject("content/engengMenuMove.png", 120, 30);
@@ -131,6 +138,12 @@ void gameMenu(RenderWindow& window, string typeDictionary, Trie* trie, Trie& fav
 				else {
 					fcwordState = 0;
 				}
+				if (isHere(scramble.bound, mouse)) {
+					scrambleState = 1;
+				}
+				else {
+					scrambleState = 0;
+				}
 				if (isHere(back.bound, mouse)) {
 					backState = 1;
 				}
@@ -201,6 +214,10 @@ void gameMenu(RenderWindow& window, string typeDictionary, Trie* trie, Trie& fav
 					fcdefState = 2;
 					clickClock.restart();
 				}
+				else if (isHere(scramble.bound, mouse)) {
+					scrambleState = 2;
+					clickClock.restart();
+				}
 				else if (isHere(back.bound, mouse)) {
 					backState = 2;
 					clickClock.restart();
@@ -238,6 +255,10 @@ void gameMenu(RenderWindow& window, string typeDictionary, Trie* trie, Trie& fav
 		}
 		if (fcdefState == 2 && clickClock.getElapsedTime().asMilliseconds() >= 100) {
 			flashcardHideWord(window, typeDictionary, trie, favor_trie, history_trie);
+		}
+		if (scrambleState == 2 && clickClock.getElapsedTime().asMilliseconds() >= 100) {
+			TrieNode* scrambleWord = trie->getRandomWordTrue();
+			gameScrumble(window, scrambleWord->word, buffer(scrambleWord), typeDictionary, trie, favor_trie, history_trie);
 		}
 		if (backState == 2 && clickClock.getElapsedTime().asMilliseconds() >= 100) {
 			Operation(window, typeDictionary, trie, favor_trie, history_trie);
@@ -409,6 +430,16 @@ void gameMenu(RenderWindow& window, string typeDictionary, Trie* trie, Trie& fav
 		}
 		else {
 			window.draw(fcdefPressed.draw);
+		}
+
+		if (scrambleState == 0) {
+			window.draw(scramble.draw);
+		}
+		else if (scrambleState == 1) {
+			window.draw(scrambleMove.draw);
+		}
+		else {
+			window.draw(scramblePressed.draw);
 		}
 
 		if (backState == 0) {

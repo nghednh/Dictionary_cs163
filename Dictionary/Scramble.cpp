@@ -1,7 +1,8 @@
 #include "game.h"
 #include "viewListFavor.h"
 #include "Scramble.h"
-void gameScrumble(RenderWindow& window, string input, string meaning) {
+
+void gameScrumble(RenderWindow& window, string input, string meaning, string typeDictionary, Trie* trie, Trie& favor_trie, Trie& history_trie) {
 
     sf::Texture scene;
     scene.loadFromFile("../Dictionary/content/background/game_scene.png");

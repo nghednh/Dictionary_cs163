@@ -70,4 +70,4 @@ struct button1 {
         return false;
     }
 };
-void gameScrumble(RenderWindow& window, string input, string meaning);
+void gameScrumble(RenderWindow& window, string input, string meaning, string typeDictionary, Trie* trie, Trie& favor_trie, Trie& history_trie);
