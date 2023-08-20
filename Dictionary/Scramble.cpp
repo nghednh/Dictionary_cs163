@@ -179,7 +179,8 @@ void gameScrumble(RenderWindow& window, string input, string meaning, string typ
                         window.setMouseCursor(mou);
                     }
                     if (event.type == Event::MouseButtonPressed) {
-                        //Chuyen tab
+                        TrieNode* scrambleWord = trie->getRandomWordTrue();
+                        gameScrumble(window, scrambleWord->word, buffer(scrambleWord), typeDictionary, trie, favor_trie, history_trie);
                     }
                 }
                 else if (mou.loadFromSystem(Cursor::Arrow)) {
@@ -206,7 +207,8 @@ void gameScrumble(RenderWindow& window, string input, string meaning, string typ
                         window.setMouseCursor(mou);
                     }
                     if (event.type == Event::MouseButtonPressed) {
-                        //Chuyen tab
+                        TrieNode* scrambleWord = trie->getRandomWordTrue();
+                        gameScrumble(window, scrambleWord->word, buffer(scrambleWord), typeDictionary, trie, favor_trie, history_trie);
                     }
                 }
                 else if (mou.loadFromSystem(Cursor::Arrow)) {
