@@ -6,6 +6,7 @@
 #include "changeDictionary.h"
 #include "viewListFavor.h"
 #include "game.h"
+#include "Scramble.h"
 #include "History.h"
 extern Trie dictrie[5];
 //-------------------Scene-----------------
