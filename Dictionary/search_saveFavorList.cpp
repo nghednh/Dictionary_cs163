@@ -85,7 +85,7 @@ void search_addfavorite(RenderWindow& window, Trie* trie, string typeDictionary,
     Clock clickClock;
     //Scence
     sf::Texture scene;
-    scene.loadFromFile("../Dictionary/content/scene.png");
+    scene.loadFromFile("../Dictionary/content/background/searchWord_scene.png");
     //Search_bar
     sf::Texture search_bar;
     search_bar.loadFromFile("../Dictionary/content/search_barBig.png");
