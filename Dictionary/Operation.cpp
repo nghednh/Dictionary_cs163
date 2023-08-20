@@ -231,8 +231,7 @@ void Operation(RenderWindow& window, string typeDictionary, Trie* trie, Trie& fa
 			changeMenu(window, typeDictionary, trie, favor_trie, history_trie);
 		}
 		if (favorState == 2 && clickClock.getElapsedTime().asMilliseconds() >= 100) {
-			gameScrumble(window, "abandon", "to leave somebody, especially somebody you are responsible for, with no intention of returning, abandon something to stop doing something, especially before it is finished; to stop having something, to leave a thing or place, especially because it is impossible or dangerous to stay");
-			//viewlistFavor(window, typeDictionary, trie, favor_trie, history_trie);
+			viewlistFavor(window, typeDictionary, trie, favor_trie, history_trie);
 		}
 		if (historyState == 2 && clickClock.getElapsedTime().asMilliseconds() >= 100) {
 			historyScene(window, typeDictionary, trie, favor_trie, history_trie);
