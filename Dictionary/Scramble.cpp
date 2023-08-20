@@ -3,6 +3,13 @@
 #include "Scramble.h"
 
 void gameScrumble(RenderWindow& window, string input, string meaning, string typeDictionary, Trie* trie, Trie& favor_trie, Trie& history_trie) {
+    Clock clickClock;
+
+    //Back
+    Object back = createObject("content/back.png", 200, 900);
+    Object backMove = createObject("content/backMove.png", 200, 900);
+    Object backPressed = createObject("content/backPressed.png", 200, 900);
+    int backState = 0;
 
     sf::Texture scene;
     scene.loadFromFile("../Dictionary/content/background/game_scene.png");
@@ -51,6 +58,8 @@ void gameScrumble(RenderWindow& window, string input, string meaning, string typ
 
     sf::Font font;
     font.loadFromFile("content/Oswald-Light.ttf");
+    sf::Font font1;
+    font1.loadFromFile("content/Oswald-Regular.ttf");
 
     Color* color = new Color[4];
     color[0] = Color(79, 112, 156);
@@ -104,8 +113,8 @@ void gameScrumble(RenderWindow& window, string input, string meaning, string typ
         tmp.push_back(input[arrRan[i]]);
         cur.first = false;
         curAns.first = arrRan[i];
-        cur.second.set_up(tmp, font, 30, color, x, 600, x + 25, 610, Vector2f(50, 50), but[0]);
-        curAns.second.set_up("", font, 30, color, x, 350, x + 25, 360, Vector2f(50, 50), but[0]);
+        cur.second.set_up(tmp, font1, 35, color, x, 600, x + 25, 610, Vector2f(50, 50), but[0]);
+        curAns.second.set_up("", font1, 35, color, x, 350, x + 25, 360, Vector2f(50, 50), but[0]);
         list.push_back(cur);
         listAns.push_back(curAns);
         x += 80;
@@ -118,10 +127,31 @@ void gameScrumble(RenderWindow& window, string input, string meaning, string typ
 
         while (window.pollEvent(event))
         {
-            if (event.type == sf::Event::Closed) window.close();
             Vector2f mousePos = window.mapPixelToCoords(sf::Mouse::getPosition(window));
+            if (event.type == sf::Event::Closed) window.close();
+            else if (event.type == Event::KeyPressed && event.key.code == Keyboard::Escape) {
+                backState = 2;
+                clickClock.restart();
+            }
+            else if (event.type == Event::MouseMoved) {
+                if (isHere(back.bound, mousePos)) {
+                    if (mou.loadFromSystem(Cursor::Hand)) window.setMouseCursor(mou);
+                    backState = 1;
+                }
+                else if (isHere(back.bound, mousePos) == false){
+                    backState = 0;
+                    if (mou.loadFromSystem(Cursor::Arrow)) window.setMouseCursor(mou);
+                }
+            }
+            if (event.type == sf::Event::MouseButtonPressed) {
+                if (isHere(back.bound, mousePos)) {
+                    backState = 2;
+                    clickClock.restart();
+                }
+            }
             for (int i = 0; i < list.size(); i++) {
                 if (list[i].second.but.getGlobalBounds().contains(mousePos)) {
+                    //if (mou.loadFromSystem(Cursor::Hand)) window.setMouseCursor(mou);
                     list[i].second.but.setTexture(but1);
                     if (event.type == sf::Event::MouseButtonPressed) {
                         gaming = true;
@@ -140,8 +170,12 @@ void gameScrumble(RenderWindow& window, string input, string meaning, string typ
                         }
                     }
                 }
-                else list[i].second.but.setTexture(but0);
+                else if (list[i].second.but.getGlobalBounds().contains(mousePos) == false) {
+                    //if (mou.loadFromSystem(Cursor::Arrow)) window.setMouseCursor(mou);
+                    list[i].second.but.setTexture(but0);
+                }
                 if (listAns[i].second.but.getGlobalBounds().contains(mousePos)) {
+                    //if (mou.loadFromSystem(Cursor::Hand)) window.setMouseCursor(mou);
                     listAns[i].second.but.setTexture(but1);
                     string tmp = listAns[i].second.text.getString();
                     if (tmp != "" && event.type == sf::Event::MouseButtonPressed) {
@@ -158,7 +192,10 @@ void gameScrumble(RenderWindow& window, string input, string meaning, string typ
                         listAns[i].second.but.setTexture(but3);
                     }
                 }
-                else listAns[i].second.but.setTexture(but0);
+                else if (listAns[i].second.but.getGlobalBounds().contains(mousePos) == false) {
+                    //if (mou.loadFromSystem(Cursor::Arrow)) window.setMouseCursor(mou);
+                    listAns[i].second.but.setTexture(but0);
+                }
             }
             string cur;
             for (int i = 0; i < siz; i++) {
@@ -223,16 +260,20 @@ void gameScrumble(RenderWindow& window, string input, string meaning, string typ
                 hnt.setTexture(non);
             }
         }
+        if (backState == 2 && clickClock.getElapsedTime().asMilliseconds() >= 100) {
+            if (mou.loadFromSystem(Cursor::Arrow)) window.setMouseCursor(mou);
+            gameMenu(window, typeDictionary, trie, favor_trie, history_trie);
+        }
         window.clear();
         window.draw(spr_scene);
         for (int i = 0; i < list.size(); i++) {
             if (list[i].first != true) {
                 window.draw(list[i].second.but);
-                list[i].second.text.setFont(font);
+                list[i].second.text.setFont(font1);
                 window.draw(list[i].second.text);
             }
             window.draw(listAns[i].second.but);
-            listAns[i].second.text.setFont(font);
+            listAns[i].second.text.setFont(font1);
             window.draw(listAns[i].second.text);
         }
         window.draw(state);
@@ -241,6 +282,15 @@ void gameScrumble(RenderWindow& window, string input, string meaning, string typ
         window.draw(ansWord);
         window.draw(ht);
         window.draw(hnt);
+        if (backState == 0) {
+            window.draw(back.draw);
+        }
+        else if (backState == 1) {
+            window.draw(backMove.draw);
+        }
+        else {
+            window.draw(backPressed.draw);
+        }
         window.display();
     }
 }
