@@ -2,6 +2,7 @@
 #include "Operation.h"
 #include "changeDictionary.h"
 #include "game.h"
+#include "search.h"
 
 //-------------------Scene-----------------
 void randomView(RenderWindow& window, string typeDictionary, Trie* trie, Trie& favor_trie, Trie& history_trie)
@@ -91,7 +92,7 @@ void randomView(RenderWindow& window, string typeDictionary, Trie* trie, Trie& f
         }
         window.display();
         if (backState == 2 && clickClock.getElapsedTime().asMilliseconds() >= 100) {
-            Operation(window, typeDictionary, trie, favor_trie, history_trie);
+            searchMenu(window, typeDictionary, trie, favor_trie, history_trie);
         }
         if (retryState == 2 && clickClock.getElapsedTime().asMilliseconds() >= 100) {
             string tmp = tr->word;
@@ -212,7 +213,7 @@ void flashcardHideDef(RenderWindow& window, string typeDictionary, Trie* trie, T
         }
         window.display();
         if (backState == 2 && clickClock.getElapsedTime().asMilliseconds() >= 100) {
-            Operation(window, typeDictionary, trie, favor_trie, history_trie);
+            gameMenu(window, typeDictionary, trie, favor_trie, history_trie);
         }
         if (retryState == 2 && clickClock.getElapsedTime().asMilliseconds() >= 100) {
             string tmp = tr->word;
@@ -333,7 +334,7 @@ void flashcardHideWord(RenderWindow& window, string typeDictionary, Trie* trie, 
         }
         window.display();
         if (backState == 2 && clickClock.getElapsedTime().asMilliseconds() >= 100) {
-            Operation(window, typeDictionary, trie, favor_trie, history_trie);
+            gameMenu(window, typeDictionary, trie, favor_trie, history_trie);
         }
         if (retryState == 2 && clickClock.getElapsedTime().asMilliseconds() >= 100) {
             string tmp = tr->word;
