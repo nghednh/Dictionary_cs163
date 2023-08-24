@@ -290,11 +290,18 @@ abilities	(pl. ) of Ability
 abime	(n.) Alt. of Abyme
 abiogenetic	(a.) Of or pertaining to abiogenesis.
 abiogenist	(n.) One who believes that life can be produced independently of antecedent.
+lick	(v. t.) To draw or pass the tongue over; as, a dog licks his master's hand.
+lick	(v. t.) To lap; to take in with the tongue; as, a dog or cat licks milk.
+lick	(v.) A stroke of the tongue in licking.
+lick	(v.) A quick and careless application of anything, as if by a stroke of the tongue, or of something which acts like a tongue; as, to put on colors with a lick of the brush. Also, a small quantity of any substance so applied.
+lick	(v.) A place where salt is found on the surface of the earth, to which wild animals resort to lick it up; -- often, but not always, near salt springs.
+lick	(v. t.) To strike with repeated blows for punishment; to flog; to whip or conquer, as in a pugilistic encounter.
+lick	(n.) A slap; a quick stroke.
+lick	lime
 love	(n.) A feeling of strong attachment induced by that which delights or commands admiration; preeminent kindness or devotion to another; affection; tenderness; as, the love of brothers and sisters.
 love	(n.) Especially, devoted attachment to, or tender or passionate affection for, one of the opposite sex.
-love	(n.) Courtship; -- chiefly in the phrase to make love, i. e., to court, to woo, to solicit union in marriage.
 love	(n.) Affection; kind feeling; friendship; strong liking or desire; fondness; good will; -- opposed to hate; often with of and an object.
-love	volume
+love	a lovely
 love	(n.) The object of affection; -- often employed in endearing address.
 love	(n.) Cupid, the god of love; sometimes, Venus.
 love	(n.) A thin silk stuff.
@@ -304,3 +311,4 @@ love	(n.) To have a feeling of love for; to regard with affection or good will; 
 love	(n.) To regard with passionate and devoted affection, as that of one sex for the other.
 love	(n.) To take delight or pleasure in; to have a strong liking or desire for, or interest in; to be pleased with; to like; as, to love books; to love adventures.
 love	(v. i.) To have the feeling of love; to be in love.
+love	hello

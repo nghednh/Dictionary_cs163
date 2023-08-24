@@ -4,6 +4,8 @@
 #include "search_saveFavorList.h"
 #include "Operation.h"
 void search_editDefinition(RenderWindow& window, Trie* trie, string typeDictionary, Trie& favor_trie, Trie& history_trie, string word, int& state) {
+	favor_trie.readDatasetToTrie("Data/" + typeDictionary + "/favorite.txt");
+	history_trie.readDatasetToTrie("Data/" + typeDictionary + "/history.txt");
 	string editWord;
 	vector<string> def;
 	def = trie->searchWordNode(word)->meaning;
@@ -81,7 +83,10 @@ void search_editDefinition(RenderWindow& window, Trie* trie, string typeDictiona
 						//Operation(window, typeDictionary, trie, favor_trie, history_trie);
 					}
 					if (isHere(enterEdit.bound, mouse))
+					{
 						enterEdit.check = true;
+						enterEdit.text.setString("|");
+					}
 					if (isHere(right.bound, mouse) && change <= count - 8)
 					{
 						trigger_page = true;
