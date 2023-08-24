@@ -1,6 +1,7 @@
 #include "search_saveFavorList.h"
 #include "viewListFavor.h"
 #include "Operation.h"
+#include "search.h"
 void findDef(TrieNode* root, string input, vector<pair<string, string>>& ans) {
     if (root->isEndOfWord) {
         for (int i = 0; i < root->meaning.size(); i++) {
@@ -228,41 +229,9 @@ void searchByDef(RenderWindow& window, Trie* trie, string typeDictionary, Trie& 
                     }
                 }
             }
-            //Press favorite button
-            /*if (spr_favor.getGlobalBounds().contains(mousePos)) {
-                if (cursor.loadFromSystem(sf::Cursor::Hand)) {
-                    window.setMouseCursor(cursor);
-                }
-                if (event.type == sf::Event::MouseButtonPressed && sf::Mouse::isButtonPressed(sf::Mouse::Left)) {
-                    if (trie.searchWordNode(user_text)->isFavorite == false) {
-                        trie.searchWordNode(user_text)->isFavorite = true;
-                        for (int i = 0; i < meaning.size(); i++) {
-                            favor_trie.insertWord(user_text, meaning[i]);
-                        }
-                        spr_favor.setTexture(starSaved);
-                        display_star = true;
-                    }
-                    else {
-                        trie.searchWordNode(user_text)->isFavorite = false;
-                        favor_trie.removeWord(user_text);
-                        spr_favor.setTexture(star);
-                        display_star = true;
-                    }
-                }
-            }
-            else {
-                if (cursor.loadFromSystem(sf::Cursor::Arrow)) {
-                    window.setMouseCursor(cursor);
-                }
-            }*/
         }
         if (backState == 2 && clickClock.getElapsedTime().asMilliseconds() >= 100) {
-            /*string str = "";
-            ofstream fout;
-            fout.open("Data/" + typeDictionary + "/favorite.txt");
-            if (fout.is_open()) display(favor_trie.getRoot(), str, fout);
-            fout.close();*/
-            Operation(window, typeDictionary, trie, favor_trie, history_trie);
+            searchMenu(window, typeDictionary, trie, favor_trie, history_trie);
         }
         window.clear();
         window.draw(spr_scene);
