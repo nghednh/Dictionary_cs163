@@ -120,8 +120,8 @@ void flashcardHideDef(RenderWindow& window, string typeDictionary, Trie* trie, T
     Object retry = createObject("content/retry.png", 450, 780);
     Object retryMove = createObject("content/retryMove.png", 450, 780);
     Object retryPressed = createObject("content/retryPressed.png", 450, 780);
-    Object appe = createObject("content/return.png", 1200, 600);
-    Object appe2 = createObject("content/return1.png", 1200, 600);
+    Object appe = createObject("content/return.png", 1230, 500);
+    Object appe2 = createObject("content/return1.png", 1230, 500);
     int appestate = 0;
     RectangleShape box(Vector2f(1000, 200));
     int retryState = 0;
@@ -241,8 +241,8 @@ void flashcardHideWord(RenderWindow& window, string typeDictionary, Trie* trie, 
     Object retry = createObject("content/retry.png", 450, 780);
     Object retryMove = createObject("content/retryMove.png", 450, 780);
     Object retryPressed = createObject("content/retryPressed.png", 450, 780);
-    Object appe = createObject("content/return.png", 1200, 600);
-    Object appe2 = createObject("content/return1.png", 1200, 600);
+    Object appe = createObject("content/return.png", 1230, 351);
+    Object appe2 = createObject("content/return1.png", 1230, 351);
     int appestate = 0;
     RectangleShape box(Vector2f(1000, 200));
     int retryState = 0;
