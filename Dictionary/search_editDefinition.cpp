@@ -151,10 +151,30 @@ void search_editDefinition(RenderWindow& window, Trie* trie, string typeDictiona
 							def.at(count) = enterEdit.text.getString();
 							def.pop_back();
 							trie->searchWordNode(word)->meaning.swap(def);
-							if (favor_trie.searchWord(word))
+							string str = "";
+							ofstream fout;
+							fout.open("Data/" + typeDictionary + "/document.txt");
+							if (fout.is_open()) display(trie->getRoot(), str, fout);
+							fout.close();
+							str = "";
+							fout.open("Data/" + typeDictionary + "/history.txt");
+							if (fout.is_open()) display(history_trie.getRoot(), str, fout);
+							fout.close();
+
+							if (favor_trie.searchWord(word)) {
 								favor_trie.searchWordNode(word)->meaning.swap(def);
-							if (history_trie.searchWord(word))
+								str = "";
+								fout.open("Data/" + typeDictionary + "/favorite.txt");
+								if (fout.is_open()) display(favor_trie.getRoot(), str, fout);
+								fout.close();
+							}
+							if (history_trie.searchWord(word)) {
 								history_trie.searchWordNode(word)->meaning.swap(def);
+								str = "";
+								fout.open("Data/" + typeDictionary + "/history.txt");
+								if (fout.is_open()) display(history_trie.getRoot(), str, fout);
+								fout.close();
+							}
 							state = 0;
 							for (int i = 0; i < 8; i++) {
 								delete abs[i];
@@ -171,10 +191,30 @@ void search_editDefinition(RenderWindow& window, Trie* trie, string typeDictiona
 							def.pop_back();
 							def.push_back(enterEdit.text.getString());
 							trie->searchWordNode(word)->meaning.swap(def);
-							if (favor_trie.searchWord(word))
+							string str = "";
+							ofstream fout;
+							fout.open("Data/" + typeDictionary + "/document.txt");
+							if (fout.is_open()) display(trie->getRoot(), str, fout);
+							fout.close();
+							str = "";
+							fout.open("Data/" + typeDictionary + "/history.txt");
+							if (fout.is_open()) display(history_trie.getRoot(), str, fout);
+							fout.close();
+							
+							if (favor_trie.searchWord(word)) {
 								favor_trie.searchWordNode(word)->meaning.swap(def);
-							if (history_trie.searchWord(word))
+								str = "";
+								fout.open("Data/" + typeDictionary + "/favorite.txt");
+								if (fout.is_open()) display(favor_trie.getRoot(), str, fout);
+								fout.close();
+							}
+							if (history_trie.searchWord(word)) {
 								history_trie.searchWordNode(word)->meaning.swap(def);
+								str = "";
+								fout.open("Data/" + typeDictionary + "/history.txt");
+								if (fout.is_open()) display(history_trie.getRoot(), str, fout);
+								fout.close();
+							}
 							state = 0;
 							for (int i = 0; i < 8; i++) {
 								delete abs[i];
@@ -199,10 +239,30 @@ void search_editDefinition(RenderWindow& window, Trie* trie, string typeDictiona
 							def.pop_back();
 							def.erase(def.begin() + count);
 							trie->searchWordNode(word)->meaning.swap(def);
-							if (favor_trie.searchWord(word))
+							string str = "";
+							ofstream fout;
+							fout.open("Data/" + typeDictionary + "/document.txt");
+							if (fout.is_open()) display(trie->getRoot(), str, fout);
+							fout.close();
+							str = "";
+							fout.open("Data/" + typeDictionary + "/history.txt");
+							if (fout.is_open()) display(history_trie.getRoot(), str, fout);
+							fout.close();
+
+							if (favor_trie.searchWord(word)) {
 								favor_trie.searchWordNode(word)->meaning.swap(def);
-							if (history_trie.searchWord(word))
+								str = "";
+								fout.open("Data/" + typeDictionary + "/favorite.txt");
+								if (fout.is_open()) display(favor_trie.getRoot(), str, fout);
+								fout.close();
+							}
+							if (history_trie.searchWord(word)) {
 								history_trie.searchWordNode(word)->meaning.swap(def);
+								str = "";
+								fout.open("Data/" + typeDictionary + "/history.txt");
+								if (fout.is_open()) display(history_trie.getRoot(), str, fout);
+								fout.close();
+							}
 							state = 0;
 							for (int i = 0; i < 8; i++) {
 								delete abs[i];
