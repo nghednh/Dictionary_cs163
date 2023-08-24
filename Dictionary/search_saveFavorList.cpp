@@ -108,9 +108,9 @@ void search_addfavorite(RenderWindow& window, Trie* trie, string typeDictionary,
     int backState = 0;
 
     //Edit Def
-    Object editDef = createObject("content/editDef.png", 800, 970);
-    Object editDefMove = createObject("content/editDefMove.png", 800, 970);
-    Object editDefPressed = createObject("content/editDefPressed.png", 800, 970);
+    Object editDef = createObject("content/editDef.png", 1200, 970);
+    Object editDefMove = createObject("content/editDefMove.png", 1200, 970);
+    Object editDefPressed = createObject("content/editDefPressed.png", 1200, 970);
     int editState = 0;
     //Sprite
     sf::Sprite spr_scene;

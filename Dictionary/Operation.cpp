@@ -87,7 +87,7 @@ void Operation(RenderWindow& window, string typeDictionary, Trie* trie, Trie& fa
 	favor_trie.readDatasetToTrie("Data/" + typeDictionary + "/favorite.txt");
 
 	while (window.isOpen())
-	{
+	{	
 		Vector2f mouse = window.mapPixelToCoords(Mouse::getPosition(window));
 		while (window.pollEvent(e))
 		{

@@ -290,6 +290,12 @@ abilities	(pl. ) of Ability
 abime	(n.) Alt. of Abyme
 abiogenetic	(a.) Of or pertaining to abiogenesis.
 abiogenist	(n.) One who believes that life can be produced independently of antecedent.
+conative	(a.) Of or pertaining to conation.
+conative	() anyway
+connect	(v. t.) To join, or fasten together, as by something intervening; to associate; to combine; to unite or link together; to establish a bond or relation between.
+connect	(v. t.) To associate (a person or thing, or one's self) with another person, thing, business, or affair.
+connect	(v. i.) To join, unite, or cohere; to have a close relation; as, one line of railroad connects with another; one argument connect with another.
+connect	To do something
 love	(n.) A feeling of strong attachment induced by that which delights or commands admiration; preeminent kindness or devotion to another; affection; tenderness; as, the love of brothers and sisters.
 love	(n.) Especially, devoted attachment to, or tender or passionate affection for, one of the opposite sex.
 love	(n.) Courtship; -- chiefly in the phrase to make love, i. e., to court, to woo, to solicit union in marriage.
@@ -304,3 +310,14 @@ love	(n.) To have a feeling of love for; to regard with affection or good will; 
 love	(n.) To regard with passionate and devoted affection, as that of one sex for the other.
 love	(n.) To take delight or pleasure in; to have a strong liking or desire for, or interest in; to be pleased with; to like; as, to love books; to love adventures.
 love	(v. i.) To have the feeling of love; to be in love.
+value	(n.) The property or aggregate properties of a thing by which it is rendered useful or desirable, or the degree of such property or sum of properties; worth; excellence; utility; importance.
+value	(n.) Worth estimated by any standard of purchasing power, especially by the market price, or the amount of money agreed upon as an equivalent to the utility and cost of anything.
+value	(n.) Precise signification; import; as, the value of a word; the value of a legal instrument
+value	(n.) Esteem; regard.
+value	(n.) The relative length or duration of a tone or note, answering to quantity in prosody; thus, a quarter note [/] has the value of two eighth notes [/].
+value	(n.) In an artistical composition, the character of any one part in its relation to other parts and to the whole; -- often used in the plural; as, the values are well given, or well maintained.
+value	(n.) Valor.
+value	(v. t.) To estimate the value, or worth, of; to rate at a certain price; to appraise; to reckon with respect to number, power, importance, etc.
+value	(v. t.) To rate highly; to have in high esteem; to hold in respect and estimation; to appreciate; to prize; as, to value one for his works or his virtues.
+value	(v. t.) To raise to estimation; to cause to have value, either real or apparent; to enhance in value.
+value	(v. t.) To be worth; to be equal to in value.
