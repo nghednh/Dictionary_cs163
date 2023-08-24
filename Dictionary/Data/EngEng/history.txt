@@ -1,23 +1,8 @@
 	
-a	() The first letter of the English and of many other alphabets. The capital A of the alphabets of Middle and Western Europe, as also the small letter (a), besides the forms in Italic, black letter, etc., are all descended from the old Latin A, which was borrowed from the Greek Alpha, of the same form; and this was made from the first letter (/) of the Phoenician alphabet, the equivalent of the Hebrew Aleph, and itself from the Egyptian origin. The Aleph was a consonant letter, with a guttural breath sound that was not an element of Greek articulation; and the Greeks took it to represent their vowel Alpha with the a sound, the Phoenician alphabet having no vowel symbols.
-a	() The name of the sixth tone in the model major scale (that in C), or the first tone of the minor scale, which is named after it the scale in A minor. The second string of the violin is tuned to the A in the treble staff. -- A sharp (A/) is the name of a musical tone intermediate between A and B. -- A flat (A/) is the name of a tone intermediate between A and G.
-a	() An adjective, commonly called the indefinite article, and signifying one or any, but less emphatically.
-a	() In each; to or for each; as, "twenty leagues a day", "a hundred pounds a year", "a dollar a yard", etc.
-a	(prep.) In; on; at; by.
-a	(prep.) In process of; in the act of; into; to; -- used with verbal substantives in -ing which begin with a consonant. This is a shortened form of the preposition an (which was used before the vowel sound); as in a hunting, a building, a begging.
-abacination	(n.) The act of abacinating.
-car	(n.) A small vehicle moved on wheels; usually, one having but two wheels and drawn by one horse; a cart.
-car	(n.) A vehicle adapted to the rails of a railroad.
-car	(n.) A chariot of war or of triumph; a vehicle of splendor, dignity, or solemnity.
-car	(n.) The stars also called Charles's Wain, the Great Bear, or the Dipper.
-car	(n.) The cage of a lift or elevator.
-car	(n.) The basket, box, or cage suspended from a balloon to contain passengers, ballast, etc.
-car	(n.) A floating perforated box for living fish.
 love	(n.) A feeling of strong attachment induced by that which delights or commands admiration; preeminent kindness or devotion to another; affection; tenderness; as, the love of brothers and sisters.
 love	(n.) Especially, devoted attachment to, or tender or passionate affection for, one of the opposite sex.
-love	(n.) Courtship; -- chiefly in the phrase to make love, i. e., to court, to woo, to solicit union in marriage.
 love	(n.) Affection; kind feeling; friendship; strong liking or desire; fondness; good will; -- opposed to hate; often with of and an object.
-love	(n.) Due gratitude and reverence to God.
+love	a lovely
 love	(n.) The object of affection; -- often employed in endearing address.
 love	(n.) Cupid, the god of love; sometimes, Venus.
 love	(n.) A thin silk stuff.
@@ -27,13 +12,5 @@ love	(n.) To have a feeling of love for; to regard with affection or good will; 
 love	(n.) To regard with passionate and devoted affection, as that of one sex for the other.
 love	(n.) To take delight or pleasure in; to have a strong liking or desire for, or interest in; to be pleased with; to like; as, to love books; to love adventures.
 love	(v. i.) To have the feeling of love; to be in love.
-love	volume
-name	(n.) The title by which any person or thing is known or designated; a distinctive specific appellation, whether of an individual or a class.
-name	(n.) A descriptive or qualifying appellation given to a person or thing, on account of a character or acts.
-name	(n.) Reputed character; reputation, good or bad; estimation; fame; especially, illustrious character or fame; honorable estimation; distinction.
-name	(n.) Those of a certain name; a race; a family.
-name	(n.) A person, an individual.
-name	(n.) To give a distinctive name or appellation to; to entitle; to denominate; to style; to call.
-name	(n.) To mention by name; to utter or publish the name of; to refer to by distinctive title; to mention.
-name	(n.) To designate by name or specifically for any purpose; to nominate; to specify; to appoint; as, to name a day for the wedding.
-name	(n.) To designate (a member) by name, as the Speaker does by way of reprimand.
+love	hello
+love	not now

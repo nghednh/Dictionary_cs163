@@ -1,4 +1,10 @@
 	
+a	(excl) O; oh (exclamation of surprise, regret, ect.) 
+a	(excl) By the way 
+a	(exclnoun) Acre (100 square meters) 
+a	(excl) Oh! (exclamation of surprise) 
+a	(noun) Lass 
+a	(excl) Aah! Oof(expression of suffering)
 a	() The first letter of the English and of many other alphabets. The capital A of the alphabets of Middle and Western Europe, as also the small letter (a), besides the forms in Italic, black letter, etc., are all descended from the old Latin A, which was borrowed from the Greek Alpha, of the same form; and this was made from the first letter (/) of the Phoenician alphabet, the equivalent of the Hebrew Aleph, and itself from the Egyptian origin. The Aleph was a consonant letter, with a guttural breath sound that was not an element of Greek articulation; and the Greeks took it to represent their vowel Alpha with the a sound, the Phoenician alphabet having no vowel symbols.
 a	() The name of the sixth tone in the model major scale (that in C), or the first tone of the minor scale, which is named after it the scale in A minor. The second string of the violin is tuned to the A in the treble staff. -- A sharp (A/) is the name of a musical tone intermediate between A and B. -- A flat (A/) is the name of a tone intermediate between A and G.
 a	() An adjective, commonly called the indefinite article, and signifying one or any, but less emphatically.
@@ -16,15 +22,24 @@ a b c	() The simplest rudiments of any subject; as, the A B C of finance.
 a b c	a b c
 a cappella	() A time indication, equivalent to alla breve.
 a cappella	() In church or chapel style; -- said of compositions sung in the old church style, without instrumental accompaniment; as, a mass a capella, i. e., a mass purely vocal.
+a dao	(noun) Singsong girl, geisha 
+a dua	(verb) To ape, to chime in, to join in, to take a leaf out of sb's book 
 a fortiori	() With stronger reason.
 a fortiori	tu mot manh me hon
+a giang ho	(noun) -prostitute, 
+a giang ho	(noun) -street-walker 
+a ha	(excl) Aha, ha; hurrah, hurray 
+a hoan	(noun) Abigail ; maidservant 
 a mensa et thoro	() A kind of divorce which does not dissolve the marriage bond, but merely authorizes a separate life of the husband and wife.
 a mensa et thoro	tu cai ban va cai ban
+a phien	(noun) Opium 
 a posteriori	() Characterizing that kind of reasoning which derives propositions from the observation of facts, or by generalizations from facts arrives at principles and definitions, or infers causes from effects. This is the reverse of a priori reasoning.
 a posteriori	() Applied to knowledge which is based upon or derived from facts through induction or experiment; inductive or empirical.
 a posteriori	trong hau qua
 a priori	() Characterizing that kind of reasoning which deduces consequences from definitions formed, or principles assumed, or which infers effects from causes previously known; deductive or deductively. The reverse of a posteriori.
 a priori	() Applied to knowledge and conceptions assumed, or presupposed, as prior to experience, in order to make experience rational or possible.
+a tong	(verb) To act as (be) an accomplice to someone, to act as (be) an accessory to someone, to make common cause with someone 
+a uom	(verb) To lump together 
 a-	() A, as a prefix to English words, is derived from various sources. (1) It frequently signifies on or in (from an, a forms of AS. on), denoting a state, as in afoot, on foot, abed, amiss, asleep, aground, aloft, away (AS. onweg), and analogically, ablaze, atremble, etc. (2) AS. of off, from, as in adown (AS. ofd/ne off the dun or hill). (3) AS. a- (Goth. us-, ur-, Ger. er-), usually giving an intensive force, and sometimes the sense of away, on, back, as in arise, abide, ago. (4) Old English y- or i- (corrupted from the AS. inseparable particle ge-, cognate with OHG. ga-, gi-, Goth. ga-), which, as a prefix, made no essential addition to the meaning, as in aware. (5) French a (L. ad to), as in abase, achieve. (6) L. a, ab, abs, from, as in avert. (7) Greek insep. prefix / without, or privative, not, as in abyss, atheist; akin to E. un-.
 a-	mot-
 a-mornings	(adv.) In the morning; every morning.
@@ -275,11 +290,18 @@ abilities	(pl. ) of Ability
 abime	(n.) Alt. of Abyme
 abiogenetic	(a.) Of or pertaining to abiogenesis.
 abiogenist	(n.) One who believes that life can be produced independently of antecedent.
+lick	(v. t.) To draw or pass the tongue over; as, a dog licks his master's hand.
+lick	(v. t.) To lap; to take in with the tongue; as, a dog or cat licks milk.
+lick	(v.) A stroke of the tongue in licking.
+lick	(v.) A quick and careless application of anything, as if by a stroke of the tongue, or of something which acts like a tongue; as, to put on colors with a lick of the brush. Also, a small quantity of any substance so applied.
+lick	(v.) A place where salt is found on the surface of the earth, to which wild animals resort to lick it up; -- often, but not always, near salt springs.
+lick	(v. t.) To strike with repeated blows for punishment; to flog; to whip or conquer, as in a pugilistic encounter.
+lick	(n.) A slap; a quick stroke.
+lick	lime
 love	(n.) A feeling of strong attachment induced by that which delights or commands admiration; preeminent kindness or devotion to another; affection; tenderness; as, the love of brothers and sisters.
 love	(n.) Especially, devoted attachment to, or tender or passionate affection for, one of the opposite sex.
-love	(n.) Courtship; -- chiefly in the phrase to make love, i. e., to court, to woo, to solicit union in marriage.
 love	(n.) Affection; kind feeling; friendship; strong liking or desire; fondness; good will; -- opposed to hate; often with of and an object.
-love	volume
+love	a lovely
 love	(n.) The object of affection; -- often employed in endearing address.
 love	(n.) Cupid, the god of love; sometimes, Venus.
 love	(n.) A thin silk stuff.
@@ -289,3 +311,4 @@ love	(n.) To have a feeling of love for; to regard with affection or good will; 
 love	(n.) To regard with passionate and devoted affection, as that of one sex for the other.
 love	(n.) To take delight or pleasure in; to have a strong liking or desire for, or interest in; to be pleased with; to like; as, to love books; to love adventures.
 love	(v. i.) To have the feeling of love; to be in love.
+love	hello
