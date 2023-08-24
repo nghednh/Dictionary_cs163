@@ -277,9 +277,8 @@ abiogenetic	(a.) Of or pertaining to abiogenesis.
 abiogenist	(n.) One who believes that life can be produced independently of antecedent.
 love	(n.) A feeling of strong attachment induced by that which delights or commands admiration; preeminent kindness or devotion to another; affection; tenderness; as, the love of brothers and sisters.
 love	(n.) Especially, devoted attachment to, or tender or passionate affection for, one of the opposite sex.
-love	(n.) Courtship; -- chiefly in the phrase to make love, i. e., to court, to woo, to solicit union in marriage.
 love	(n.) Affection; kind feeling; friendship; strong liking or desire; fondness; good will; -- opposed to hate; often with of and an object.
-love	volume
+love	a lovely
 love	(n.) The object of affection; -- often employed in endearing address.
 love	(n.) Cupid, the god of love; sometimes, Venus.
 love	(n.) A thin silk stuff.
