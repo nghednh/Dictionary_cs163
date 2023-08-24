@@ -1,4 +1,5 @@
 #include "search_editDefinition.h"
+#include "search_saveFavorList.h"
 #include "viewListFavor.h"
 #include "search_saveFavorList.h"
 #include "Operation.h"
@@ -76,7 +77,8 @@ void search_editDefinition(RenderWindow& window, Trie* trie, string typeDictiona
 							delete full[i];
 						}
 						def.clear();
-						Operation(window, typeDictionary, trie, favor_trie, history_trie);
+						search_addfavorite(window, trie, typeDictionary, favor_trie, history_trie);
+						//Operation(window, typeDictionary, trie, favor_trie, history_trie);
 					}
 					if (isHere(enterEdit.bound, mouse))
 						enterEdit.check = true;

@@ -344,6 +344,7 @@ void viewlistFavor(RenderWindow& window, string typeDictionary, Trie* trie, Trie
         def.text.setFont(font1);
         window.draw(def.text);
         for (int i = 0; i < 11; i++) {
+            string word = item[i].text.getString();
             item[i].drawButton(window, event);
             item[i].text.setFont(font);
             window.draw(item[i].text);
@@ -352,7 +353,7 @@ void viewlistFavor(RenderWindow& window, string typeDictionary, Trie* trie, Trie
             item_def[i].text.setFont(font);
             window.draw(item_def[i].text);
 
-            window.draw(bins[i]);
+            if (word != "") window.draw(bins[i]);
         }
         window.draw(prev);
 

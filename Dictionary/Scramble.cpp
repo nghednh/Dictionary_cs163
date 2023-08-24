@@ -181,8 +181,6 @@ void gameScrumble(RenderWindow& window, string input, string meaning, string typ
                     if (tmp != "" && event.type == sf::Event::MouseButtonPressed) {
                         gaming = true;
                         listAns[i].second.but.setTexture(but2);
-                        cout << tmp << '\n';
-                        cout << listAns[i].first << '\n';
                         list[listAns[i].first].first = false;
                         arrAns[i] = -1;
                         listAns[i].second.text.setString("");
