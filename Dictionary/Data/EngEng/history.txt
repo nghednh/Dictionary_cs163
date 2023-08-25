@@ -1,13 +1,51 @@
 	
-a b c	() The first three letters of the alphabet, used for the whole alphabet.
-a b c	() A primer for teaching the alphabet and first elements of reading.
-a b c	() The simplest rudiments of any subject; as, the A B C of finance.
-hoker	(n.) Scorn; derision; abusive talk.
-huanaco	(n.) See Guanaco.
-khan	(n.) A king; a prince; a chief; a governor; -- so called among the Tartars, Turks, and Persians, and in countries now or formerly governed by them.
-khan	(n.) An Eastern inn or caravansary.
-tiger	(n.) A very large and powerful carnivore (Felis tigris) native of Southern Asia and the East Indies. Its back and sides are tawny or rufous yellow, transversely striped with black, the tail is ringed with black, the throat and belly are nearly white. When full grown, it equals or exceeds the lion in size and strength. Called also royal tiger, and Bengal tiger.
-tiger	(n.) Fig.: A ferocious, bloodthirsty person.
-tiger	(n.) A servant in livery, who rides with his master or mistress.
-tiger	(n.) A kind of growl or screech, after cheering; as, three cheers and a tiger.
-tiger	(n.) A pneumatic box or pan used in refining sugar.
+a	(prep.) In; on; at; by.
+a	() Of.
+a	() A barbarous corruption of have, of he, and sometimes of it and of they.
+a	() An expletive, void of sense, to fill up the meter
+a cappella	() A time indication, equivalent to alla breve.
+baaing	(n.) The bleating of a sheep.
+cab	(n.) A kind of close carriage with two or four wheels, usually a public vehicle.
+cab	(n.) The covered part of a locomotive, in which the engineer has his station.
+cab	(n.) A Hebrew dry measure, containing a little over two (2.37) pints.
+collect	(v. t.) To infer from observed facts; to conclude from premises.
+collect	(v. i.) To infer; to conclude.
+comart	(n.) A covenant.
+comate	(a.) Encompassed with a coma, or bushy appearance, like hair; hairy.
+comatous	(a.) Comatose.
+compact	(p. p. & a) Joined or held together; leagued; confederated.
+compact	(p. p. & a) Composed or made; -- with of.
+compact	(v. t.) To unite or connect firmly, as in a system.
+compact	(n.) An agreement between parties; a covenant or contract.
+d valve	() A kind of slide valve. See Slide valve, under Slide.
+dabbed	(imp. & p. p.) of Dab
+fabaceous	(a.) Having the nature of a bean; like a bean.
+hamadryades	(pl. ) of Hamadryad
+having	(p. pr. & vb. n.) of Have
+having	(n.) Possession; goods; estate.
+hele	(n.) Health; welfare.
+hele	(v. t.) To hide; to cover; to roof.
+help	(v. t.) To change for the better; to remedy.
+help	(v. t.) To prevent; to hinder; as, the evil approaches, and who can help it?
+help	(v. t.) To forbear; to avoid.
+help	(v. t.) To wait upon, as the guests at table, by carving and passing food.
+help	(v. t.) Remedy; relief; as, there is no help for it.
+help	(v. t.) Specifically, a domestic servant, man or woman.
+high	(v. i.) To hie.
+high	(superl.) Of noble birth; illustrious; as, of high family.
+high	(superl.) Very abstract; difficult to comprehend or surmount; grand; noble.
+high	(superl.) Costly; dear in price; extravagant; as, to hold goods at a high price.
+high	(superl.) Arrogant; lofty; boastful; proud; ostentatious; -- used in a bad sense.
+high	(superl.) Acute or sharp; -- opposed to grave or low; as, a high note.
+high	(n.) An elevated place; a superior region; a height; the sky; heaven.
+high	(n.) People of rank or high station; as, high and low.
+high	(n.) The highest card dealt or drawn.
+high	(v. i.) To rise; as, the sun higheth.
+kaama	(n.) The hartbeest.
+school	(n.) A shoal; a multitude; as, a school of fish.
+school	(n.) A session of an institution of instruction.
+school	(v. t.) To train in an institution of learning; to educate at a school; to teach.
+value	(n.) Esteem; regard.
+value	(n.) Valor.
+value	(v. t.) To be worth; to be equal to in value.
+view	(n.) Appearance; show; aspect.

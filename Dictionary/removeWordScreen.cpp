@@ -62,7 +62,7 @@ void removeWordScreen(RenderWindow& window, string typeDictionary, Trie* trie, T
     int menuState = 0;
 
     RectangleShape rect(Vector2f(750, 100));
-    rect.setFillColor(Color::White);
+    rect.setFillColor(Color(250, 243, 240));
     rect.setPosition(0, 20);
     rect.setOrigin(700, 0);
     float xVelocity = 0;

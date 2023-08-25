@@ -245,6 +245,7 @@ void search_addfavorite(RenderWindow& window, Trie* trie, string typeDictionary,
                     if (event.text.unicode < 128 && event.text.unicode != '\b' && sf::Keyboard::isKeyPressed(sf::Keyboard::Enter) == false && sf::Keyboard::isKeyPressed(sf::Keyboard::Escape) == false) {
                         user_text += event.text.unicode;
                         dis_text.setString(user_text + "_");
+                        display_star = false;
                     }
                     else if (event.text.unicode == '\b' && !dis_text.getString().isEmpty()) {
                         if (user_text.size() > 0) {
@@ -252,6 +253,7 @@ void search_addfavorite(RenderWindow& window, Trie* trie, string typeDictionary,
                             recom.clear();
                             guest.clear();
                             user_text.pop_back();
+                            display_star = false;
                         }
                     }
                     else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Enter) == true) {

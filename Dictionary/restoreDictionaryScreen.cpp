@@ -1,6 +1,7 @@
 #include "restoreDictionaryScreen.h"
 #include "Operation.h"
 #include "changeDictionary.h"
+#include "viewListFavor.h"
 extern Trie dictrie[5];
 
 void restoreDictionary(string& typeDictionary, Trie* trie)
@@ -74,7 +75,7 @@ void restoreDictionaryScreen(RenderWindow& window, string& typeDictionary, Trie*
     int menuState = 0;
 
     RectangleShape rect(Vector2f(750, 100));
-    rect.setFillColor(Color::White);
+    rect.setFillColor(Color(250, 243, 240));
     rect.setPosition(0, 20);
     rect.setOrigin(700, 0);
     float xVelocity = 0;
@@ -171,6 +172,16 @@ void restoreDictionaryScreen(RenderWindow& window, string& typeDictionary, Trie*
                 }
                 else if (isHere(submit.bound, mouse)) {
                     restoreDictionary(typeDictionary, trie);
+                    history_trie.clearAll();
+                    favor_trie.clearAll();
+
+                    ofstream favor("Data/" + typeDictionary + "/favorite.txt");
+                    displayinFile(favor_trie.getRoot(), "", favor);
+                    favor.close();
+                    ofstream his("Data/" + typeDictionary + "/history.txt");
+                    displayinFile(history_trie.getRoot(), "", his);
+                    his.close();
+
                     int i = -1;
                     if (typeDictionary == "EngEng") {
                         i = 0;
