@@ -166,3 +166,25 @@ void texting(Info*& text, Uint32 unicode, unsigned int limit)
 		text->text.setString(text->s);
 	}
 }
+//Set cursor
+void setCursor(RenderWindow& window, vector<Sprite> button, bool& state, Vector2f& mouse, Cursor& cursor) {
+	bool tmp = false;
+	for (auto a : button) {
+		if (a.getGlobalBounds().contains(mouse)) {
+			if (state == false && cursor.loadFromSystem(Cursor::Hand)) {
+				window.setMouseCursor(cursor);
+			}
+			state = true;
+			tmp = true;
+		}
+	}
+
+	if (tmp == false) {
+		if (state == true && cursor.loadFromSystem(Cursor::Arrow)) {
+			window.setMouseCursor(cursor);
+
+		}
+		state = false;
+	}
+
+}

@@ -49,3 +49,4 @@ void changePos(Object* a, int x, int y);
 void changePos(Info* a, int x, int y);
 void texting(Info& text, Uint32 unicode, unsigned int limit);
 void texting(Info*& text, Uint32 unicode, unsigned int limit);
+void setCursor(RenderWindow& window, vector<Sprite> button, bool& state, Vector2f& mouse, Cursor& cursor);

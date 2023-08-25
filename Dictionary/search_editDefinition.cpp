@@ -15,6 +15,7 @@ void search_editDefinition(RenderWindow& window, Trie* trie, string typeDictiona
 	int ableEdit = 0, ableAdd = 0, ableDelete = 0;
 	int change = 0, count = def.size() - 1;
 	bool trigger_page = true;
+	vector<Sprite> button;
 	Info* abs[8], * full[8];
 	Object* bar_blue[8];
 	Object* bar_red[8];
@@ -23,29 +24,38 @@ void search_editDefinition(RenderWindow& window, Trie* trie, string typeDictiona
 		bar_blue[i] = createObjectTest("content/bar1.png", 203, (315 + 75 * i));
 		bar_red[i] = createObjectTest("content/bar2.png", 203, (315 + 75 * i));
 		full[i] = createInfoTest("content/Oswald-Light.ttf", "demo_text", 616, 420, 24);
+		button.push_back(bar_blue[i]->draw);
 	}
 	Object del_blue = createObject("content/del_blue.png", 1325, 315);
+	button.push_back(del_blue.draw);
 	Object del_red = createObject("content/del_red.png", 1325, 315);
 	Object add_blue = createObject("content/add_blue.png", 1325, 390);
+	button.push_back(add_blue.draw);
 	Object add_red = createObject("content/add_red.png", 1325, 390);
 	Object edit_blue = createObject("content/edit_blue.png", 1325, 465);
+	button.push_back(edit_blue.draw);
 	Object edit_red = createObject("content/edit_red.png", 1325, 465);
 	Object check_delete = createObject("content/del_pop.png", 728, 60);
 	Object screen = createObject("content/editDefScene.png");
 	Info enterEdit = createInfo("content/Oswald-Light.ttf", "New Definition", 765,180, 39);
 	Object canEdit = createObject("content/canEdit.png" , 728, 60);
 	Object ok1 = createObject("content/ok2.png", 983, 248);
+	button.push_back(ok1.draw);
 	Object ok2 = createObject("content/ok1.png", 983, 248);
 	Object ok3 = createObject("content/ok2.png", 983, 248);
 	Object ok4 = createObject("content/ok1.png", 983, 248);
 	Object return3 = createObject("content/return2.png", 743, 248);
 	Object return4 = createObject("content/return3.png", 743, 248);
 	Object return1 = createObject("content/return.png", 146, 83);
+	button.push_back(return1.draw);
 	Object return2 = createObject("content/return1.png", 146, 83);
 	Object left = createObject("content/left.png", 798, 966);
+	button.push_back(left.draw);
 	Object left_point = createObject("content/left_point.png", 798, 966);
+
 	Object left_valid = createObject("content/left_valid.png", 798, 966);
 	Object right = createObject("content/right.png", 825, 966);
+	button.push_back(right.draw);
 	Object right_point = createObject("content/right_point.png", 825, 966);
 	Object right_valid = createObject("content/right_valid.png", 825, 966);
 	sf::RectangleShape rec_dis;
@@ -53,6 +63,13 @@ void search_editDefinition(RenderWindow& window, Trie* trie, string typeDictiona
 	rec_dis.setPosition(589, 375);
 	Object book_dis = createObject("content/book_image.png", 600, 375);
 	Event event;
+	//Cursor
+	Cursor cursor;
+	bool handstate = false;
+	if (cursor.loadFromSystem(Cursor::Arrow)) {
+		window.setMouseCursor(cursor);
+	}
+	state = false;
 	while (window.isOpen())
 	{
 		Vector2f mouse = window.mapPixelToCoords(Mouse::getPosition(window));
@@ -289,6 +306,9 @@ void search_editDefinition(RenderWindow& window, Trie* trie, string typeDictiona
 			break;
 			default: break;
 			}
+
+			//Set cursor
+			setCursor(window, button, handstate, mouse, cursor);
 			window.clear();
 			window.draw(screen.draw);
 			if (change == 0 && change >= count - 8)

@@ -83,7 +83,10 @@ void Operation(RenderWindow& window, string typeDictionary, Trie* trie, Trie& fa
 	float xVelocity = 0;
 
 	Event e;
-
+	Cursor cursor;
+	vector<Sprite> button {menu.draw, setting.draw, history.draw, searchWord.draw, emo.draw, engeng.draw, engvie.draw,
+							favor.draw, game.draw, back.draw, slang.draw, menu.draw};
+	bool handstate = false;
 	favor_trie.readDatasetToTrie("Data/" + typeDictionary + "/favorite.txt");
 
 	while (window.isOpen())
@@ -273,7 +276,86 @@ void Operation(RenderWindow& window, string typeDictionary, Trie* trie, Trie& fa
 				menuState = 0;
 			}
 		}
-
+		//Set cursor
+		/*if (menu.draw.getGlobalBounds().contains(mouse)) {
+			if (handstate == false && cursor.loadFromSystem(Cursor::Hand)) {
+				window.setMouseCursor(cursor);
+			}
+			handstate = true;
+		}
+		else if (isHere(setting.bound, mouse)) {
+			if (handstate == false && cursor.loadFromSystem(Cursor::Hand)) {
+				window.setMouseCursor(cursor);
+			}
+			handstate = true;
+		}
+		else if (isHere(favor.bound, mouse)) {
+			if (handstate == false && cursor.loadFromSystem(Cursor::Hand)) {
+				window.setMouseCursor(cursor);
+			}
+			handstate = true;
+		}
+		else if (isHere(history.bound, mouse)) {
+			if (handstate == false && cursor.loadFromSystem(Cursor::Hand)) {
+				window.setMouseCursor(cursor);
+			}
+			handstate = true;
+		}
+		else if (isHere(searchWord.bound, mouse)) {
+			if (handstate == false && cursor.loadFromSystem(Cursor::Hand)) {
+				window.setMouseCursor(cursor);
+			}
+			handstate = true;
+		}
+		else if (isHere(game.bound, mouse)) {
+			if (handstate == false && cursor.loadFromSystem(Cursor::Hand)) {
+				window.setMouseCursor(cursor);
+			}
+			handstate = true;
+		}
+		else if (isHere(back.bound, mouse)) {
+			if (handstate == false && cursor.loadFromSystem(Cursor::Hand)) {
+				window.setMouseCursor(cursor);
+			}
+			handstate = true;
+		}
+		else if (isHere(engeng.bound, mouse) && rect.getPosition().x >= 700) {
+			if (handstate == false && cursor.loadFromSystem(Cursor::Hand)) {
+				window.setMouseCursor(cursor);
+			}
+			handstate = true;
+		}
+		else if (isHere(engvie.bound, mouse) && rect.getPosition().x >= 700) {
+			if (handstate == false && cursor.loadFromSystem(Cursor::Hand)) {
+				window.setMouseCursor(cursor);
+			}
+			handstate = true;
+		}
+		else if (isHere(vieeng.bound, mouse) && rect.getPosition().x >= 700) {
+			if (handstate == false && cursor.loadFromSystem(Cursor::Hand)) {
+				window.setMouseCursor(cursor);
+			}
+			handstate = true;
+		}
+		else if (isHere(slang.bound, mouse) && rect.getPosition().x >= 700) {
+			if (handstate == false && cursor.loadFromSystem(Cursor::Hand)) {
+				window.setMouseCursor(cursor);
+			}
+			handstate = true;
+		}
+		else if (isHere(emo.bound, mouse) && rect.getPosition().x >= 700) {
+			if (handstate == false && cursor.loadFromSystem(Cursor::Hand)) {
+				window.setMouseCursor(cursor);
+			}
+			handstate = true;
+		}
+		else {
+			if (handstate == true && cursor.loadFromSystem(Cursor::Arrow)) {
+				window.setMouseCursor(cursor);
+			}
+			handstate = false;
+		}*/
+		setCursor(window, button, handstate, mouse, cursor);
 		window.clear();
 
 		window.draw(screen.draw);

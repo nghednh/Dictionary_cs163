@@ -180,16 +180,22 @@ void search_addfavorite(RenderWindow& window, Trie* trie, string typeDictionary,
     bool enter = false;
     bool display_star = false;
     bool choose = false;
-    sf::Cursor cursor;
+
+    Cursor cursor;
+    vector<Sprite> button1 {back.draw, spr_favor, editDef.draw};
+    bool handstate = false;
+    if (cursor.loadFromSystem(Cursor::Arrow)) {
+        window.setMouseCursor(cursor);
+    }
     while (window.isOpen())
     {
         sf::Event event;
         if (!enter && user_text == "") {
             dis_text.setString("Search");
         }
+        Vector2f mousePos = window.mapPixelToCoords(sf::Mouse::getPosition(window));
         while (window.pollEvent(event))
         {
-            Vector2f mousePos = window.mapPixelToCoords(sf::Mouse::getPosition(window));
             if (event.type == sf::Event::Closed) window.close();
             else if (event.type == Event::KeyPressed && event.key.code == Keyboard::Escape) {
                 backState = 2;
@@ -357,9 +363,6 @@ void search_addfavorite(RenderWindow& window, Trie* trie, string typeDictionary,
             }
             //Press favorite button
             if (spr_favor.getGlobalBounds().contains(mousePos)) {
-                if (cursor.loadFromSystem(sf::Cursor::Hand)) {
-                    window.setMouseCursor(cursor);
-                }
                 if (event.type == sf::Event::MouseButtonPressed && sf::Mouse::isButtonPressed(sf::Mouse::Left)) {
                     if (trie->searchWordNode(user_text)->isFavorite == false) {
                         trie->searchWordNode(user_text)->isFavorite = true;
@@ -375,11 +378,6 @@ void search_addfavorite(RenderWindow& window, Trie* trie, string typeDictionary,
                         spr_favor.setTexture(star);
                         display_star = true;
                     }
-                }
-            }
-            else {
-                if (cursor.loadFromSystem(sf::Cursor::Arrow)) {
-                    window.setMouseCursor(cursor);
                 }
             }
         }
@@ -412,6 +410,7 @@ void search_addfavorite(RenderWindow& window, Trie* trie, string typeDictionary,
                 }
             }
         }
+        setCursor(window, button1, handstate, mousePos, cursor);
         window.clear();
         window.draw(spr_scene);
         window.draw(spr_bar);
