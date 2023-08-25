@@ -78,6 +78,7 @@ void searchMenu(RenderWindow& window, string typeDictionary, Trie* trie, Trie& f
 	if (cursor.loadFromSystem(Cursor::Arrow)) {
 		window.setMouseCursor(cursor);
 	}
+
 	while (window.isOpen())
 	{
 		Vector2f mouse = window.mapPixelToCoords(Mouse::getPosition(window));

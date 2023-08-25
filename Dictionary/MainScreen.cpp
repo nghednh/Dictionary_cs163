@@ -40,6 +40,12 @@ void mainScreen(RenderWindow& window, Trie* trie, Trie& favor_trie, Trie& histor
 	int exitState = 0;
 
 	Event e;
+	Cursor cursor;
+	vector<Sprite> button {engEng.draw, engVie.draw, vieEng.draw, slang.draw, emo.draw, exit.draw};
+	bool handstate = false;
+	if (cursor.loadFromSystem(Cursor::Arrow)) {
+		window.setMouseCursor(cursor);
+	}
 
 	while (window.isOpen())
 	{
@@ -143,7 +149,7 @@ void mainScreen(RenderWindow& window, Trie* trie, Trie& favor_trie, Trie& histor
 		if (exitState == 2 && clickClock.getElapsedTime().asMilliseconds() >= 100) {
 			window.close();
 		}
-
+		setCursor(window, button, handstate, mouse, cursor);
 		window.clear();
 
 		window.draw(screen.draw);

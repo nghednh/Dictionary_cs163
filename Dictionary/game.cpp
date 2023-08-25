@@ -100,6 +100,13 @@ void gameMenu(RenderWindow& window, string typeDictionary, Trie* trie, Trie& fav
 	float xVelocity = 0;
 
 	Event e;
+	Cursor cursor;
+	vector<Sprite> button {menu.draw, emo.draw, engeng.draw, engvie.draw, slang.draw,
+		back.draw, word.draw, def.draw, fcdef.draw, fcword.draw, scramble.draw};
+	bool handstate = false;
+	if (cursor.loadFromSystem(Cursor::Arrow)) {
+		window.setMouseCursor(cursor);
+	}
 
 	while (window.isOpen())
 	{
@@ -291,7 +298,7 @@ void gameMenu(RenderWindow& window, string typeDictionary, Trie* trie, Trie& fav
 				menuState = 0;
 			}
 		}
-
+		setCursor(window, button, handstate, mouse, cursor);
 		window.clear();
 
 		window.draw(screen.draw);
