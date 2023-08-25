@@ -13,7 +13,7 @@ void search_editDefinition(RenderWindow& window, Trie* trie, string typeDictiona
 	float scale = 1.5f;
 	bool entered1 = 0;
 	int ableEdit = 0, ableAdd = 0, ableDelete = 0;
-	int change = 0, count = def.size() - 1;
+	int change = 0, count = def.size();
 	bool trigger_page = true;
 	Info* abs[8], * full[8];
 	Object* bar_blue[8];
@@ -71,7 +71,23 @@ void search_editDefinition(RenderWindow& window, Trie* trie, string typeDictiona
 				if (event.mouseButton.button == Mouse::Left)
 				{
 					if (isHere(return1.bound, mouse)) {
-						state = 1;
+						def.pop_back();
+						string str = "";
+						ofstream fout;
+						if (favor_trie.searchWord(word)) {
+							favor_trie.searchWordNode(word)->meaning.swap(def);
+							str = "";
+							fout.open("Data/" + typeDictionary + "/favorite.txt");
+							if (fout.is_open()) display(favor_trie.getRoot(), str, fout);
+							fout.close();
+						}
+						if (history_trie.searchWord(word)) {
+							history_trie.searchWordNode(word)->meaning.swap(def);
+							str = "";
+							fout.open("Data/" + typeDictionary + "/history.txt");
+							if (fout.is_open()) display(history_trie.getRoot(), str, fout);
+							fout.close();
+						}state = 1;
 						for (int i = 0; i < 8; i++) {
 							delete abs[i];
 							delete bar_blue[i];
@@ -161,11 +177,6 @@ void search_editDefinition(RenderWindow& window, Trie* trie, string typeDictiona
 							fout.open("Data/" + typeDictionary + "/document.txt");
 							if (fout.is_open()) display(trie->getRoot(), str, fout);
 							fout.close();
-							str = "";
-							fout.open("Data/" + typeDictionary + "/history.txt");
-							if (fout.is_open()) display(history_trie.getRoot(), str, fout);
-							fout.close();
-
 							if (favor_trie.searchWord(word)) {
 								favor_trie.searchWordNode(word)->meaning.swap(def);
 								str = "";
@@ -200,10 +211,6 @@ void search_editDefinition(RenderWindow& window, Trie* trie, string typeDictiona
 							ofstream fout;
 							fout.open("Data/" + typeDictionary + "/document.txt");
 							if (fout.is_open()) display(trie->getRoot(), str, fout);
-							fout.close();
-							str = "";
-							fout.open("Data/" + typeDictionary + "/history.txt");
-							if (fout.is_open()) display(history_trie.getRoot(), str, fout);
 							fout.close();
 							
 							if (favor_trie.searchWord(word)) {
@@ -250,10 +257,6 @@ void search_editDefinition(RenderWindow& window, Trie* trie, string typeDictiona
 							if (fout.is_open()) display(trie->getRoot(), str, fout);
 							fout.close();
 							str = "";
-							fout.open("Data/" + typeDictionary + "/history.txt");
-							if (fout.is_open()) display(history_trie.getRoot(), str, fout);
-							fout.close();
-
 							if (favor_trie.searchWord(word)) {
 								favor_trie.searchWordNode(word)->meaning.swap(def);
 								str = "";
