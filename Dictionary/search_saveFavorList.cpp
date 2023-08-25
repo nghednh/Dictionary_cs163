@@ -401,6 +401,8 @@ void search_addfavorite(RenderWindow& window, Trie* trie, string typeDictionary,
             ofstream fout;
             fout.open("Data/" + typeDictionary + "/favorite.txt");
             if (fout.is_open()) display(favor_trie.getRoot(), str, fout);
+            fout.close();
+            str = "";
             fout.open("Data/" + typeDictionary + "/history.txt");
             if (fout.is_open()) display(history_trie.getRoot(), str, fout);
             fout.close();

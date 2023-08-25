@@ -40,7 +40,7 @@ void historyScene(RenderWindow& window, string typedictionary, Trie * trie, Trie
 	Object right_point = createObject("content/right_point.png", 825, 966);
 	Object right_valid = createObject("content/right_valid.png", 825, 966);
 	Event event;
-	int change = 0, count = his_word.size();
+	int change = 0, count = his_word.size()-1;
 	bool trigger_page = true;
 	Info* inf[8], * def[8];
 	Object* bar_blue[8];
