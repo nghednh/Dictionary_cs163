@@ -68,7 +68,13 @@ void removeWordScreen(RenderWindow& window, string typeDictionary, Trie* trie, T
     float xVelocity = 0;
 
     Event e;
-
+    Cursor cursor;
+    vector<Sprite> button {menu.draw, emo.draw, engeng.draw, engvie.draw, slang.draw,
+        back.draw, enterWordBar.draw, submit.draw};
+    bool handstate = false;
+    if (cursor.loadFromSystem(Cursor::Arrow)) {
+        window.setMouseCursor(cursor);
+    }
     while (window.isOpen()) {
         Vector2f mouse = window.mapPixelToCoords(Mouse::getPosition(window));
         while (window.pollEvent(e)) {
@@ -273,7 +279,7 @@ void removeWordScreen(RenderWindow& window, string typeDictionary, Trie* trie, T
                 menuState = 0;
             }
         }
-
+        setCursor(window, button, handstate, mouse, cursor);
         window.clear();
 
         window.draw(screen.draw);

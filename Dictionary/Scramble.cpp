@@ -4,9 +4,10 @@
 
 void gameScrumble(RenderWindow& window, string input, string meaning, string typeDictionary, Trie* trie, Trie& favor_trie, Trie& history_trie) {
     Clock clickClock;
-
+    vector<Sprite> buttonSpr;
     //Back
     Object back = createObject("content/back.png", 200, 900);
+    buttonSpr.push_back(back.draw);
     Object backMove = createObject("content/backMove.png", 200, 900);
     Object backPressed = createObject("content/backPressed.png", 200, 900);
     int backState = 0;
@@ -41,9 +42,11 @@ void gameScrumble(RenderWindow& window, string input, string meaning, string typ
     hint.loadFromFile("../Dictionary/content/Scrumble/Hint.png");
 
     Sprite hnt;
+    buttonSpr.push_back(hnt);
     hnt.setPosition(1300, 700);
 
     Sprite link;
+    buttonSpr.push_back(link);
     link.setPosition(1300, 900);
 
     Sprite but[4];
@@ -53,6 +56,7 @@ void gameScrumble(RenderWindow& window, string input, string meaning, string typ
     but[3].setTexture(but3);
 
     Sprite state;
+    buttonSpr.push_back(state);
     state.setTexture(non);
     state.setPosition(1300, 800);
 
@@ -116,18 +120,25 @@ void gameScrumble(RenderWindow& window, string input, string meaning, string typ
         cur.second.set_up(tmp, font1, 35, color, x, 600, x + 25, 610, Vector2f(50, 50), but[0]);
         curAns.second.set_up("", font1, 35, color, x, 350, x + 25, 360, Vector2f(50, 50), but[0]);
         list.push_back(cur);
+        buttonSpr.push_back(cur.second.but);
         listAns.push_back(curAns);
+        buttonSpr.push_back(curAns.second.but);
         x += 80;
     }
     int cnt = 0;
     Cursor mou;
+    bool handstate = false;
+    if (mou.loadFromSystem(Cursor::Arrow)) {
+        window.setMouseCursor(mou);
+    }
     while (window.isOpen())
     {
         sf::Event event;
 
+        Vector2f mousePos = window.mapPixelToCoords(sf::Mouse::getPosition(window));
         while (window.pollEvent(event))
         {
-            Vector2f mousePos = window.mapPixelToCoords(sf::Mouse::getPosition(window));
+            //Vector2f mousePos = window.mapPixelToCoords(sf::Mouse::getPosition(window));
             if (event.type == sf::Event::Closed) window.close();
             else if (event.type == Event::KeyPressed && event.key.code == Keyboard::Escape) {
                 backState = 2;
@@ -135,12 +146,10 @@ void gameScrumble(RenderWindow& window, string input, string meaning, string typ
             }
             else if (event.type == Event::MouseMoved) {
                 if (isHere(back.bound, mousePos)) {
-                    if (mou.loadFromSystem(Cursor::Hand)) window.setMouseCursor(mou);
                     backState = 1;
                 }
                 else if (isHere(back.bound, mousePos) == false){
                     backState = 0;
-                    if (mou.loadFromSystem(Cursor::Arrow)) window.setMouseCursor(mou);
                 }
             }
             if (event.type == sf::Event::MouseButtonPressed) {
@@ -151,7 +160,6 @@ void gameScrumble(RenderWindow& window, string input, string meaning, string typ
             }
             for (int i = 0; i < list.size(); i++) {
                 if (list[i].second.but.getGlobalBounds().contains(mousePos)) {
-                    //if (mou.loadFromSystem(Cursor::Hand)) window.setMouseCursor(mou);
                     list[i].second.but.setTexture(but1);
                     if (event.type == sf::Event::MouseButtonPressed) {
                         gaming = true;
@@ -171,11 +179,9 @@ void gameScrumble(RenderWindow& window, string input, string meaning, string typ
                     }
                 }
                 else if (list[i].second.but.getGlobalBounds().contains(mousePos) == false) {
-                    //if (mou.loadFromSystem(Cursor::Arrow)) window.setMouseCursor(mou);
                     list[i].second.but.setTexture(but0);
                 }
                 if (listAns[i].second.but.getGlobalBounds().contains(mousePos)) {
-                    //if (mou.loadFromSystem(Cursor::Hand)) window.setMouseCursor(mou);
                     listAns[i].second.but.setTexture(but1);
                     string tmp = listAns[i].second.text.getString();
                     if (tmp != "" && event.type == sf::Event::MouseButtonPressed) {
@@ -191,7 +197,6 @@ void gameScrumble(RenderWindow& window, string input, string meaning, string typ
                     }
                 }
                 else if (listAns[i].second.but.getGlobalBounds().contains(mousePos) == false) {
-                    //if (mou.loadFromSystem(Cursor::Arrow)) window.setMouseCursor(mou);
                     listAns[i].second.but.setTexture(but0);
                 }
             }
@@ -210,16 +215,10 @@ void gameScrumble(RenderWindow& window, string input, string meaning, string typ
                 
                 hnt.setTexture(non);
                 if (link.getGlobalBounds().contains(mousePos)) {
-                    if (mou.loadFromSystem(Cursor::Hand)) {
-                        window.setMouseCursor(mou);
-                    }
                     if (event.type == Event::MouseButtonPressed) {
                         TrieNode* scrambleWord = trie->getRandomWordTrue();
                         gameScrumble(window, scrambleWord->word, buffer(scrambleWord), typeDictionary, trie, favor_trie, history_trie);
                     }
-                }
-                else if (mou.loadFromSystem(Cursor::Arrow)) {
-                    window.setMouseCursor(mou);
                 }
             }
             else if (cur != input && cnt == siz) { //Incorrect
@@ -229,25 +228,16 @@ void gameScrumble(RenderWindow& window, string input, string meaning, string typ
                 ansWord.setString("");
                 hnt.setTexture(hint);
                 if (hnt.getGlobalBounds().contains(mousePos)) {
-                    if (mou.loadFromSystem(Cursor::Hand)) {
-                        window.setMouseCursor(mou);
-                    }
                     if (event.type == Event::MouseButtonPressed) {
                         ht.setString(input);
                     }
                     else ht.setString("");
                 }
                 else if (link.getGlobalBounds().contains(mousePos)) {
-                    if (mou.loadFromSystem(Cursor::Hand)) {
-                        window.setMouseCursor(mou);
-                    }
                     if (event.type == Event::MouseButtonPressed) {
                         TrieNode* scrambleWord = trie->getRandomWordTrue();
                         gameScrumble(window, scrambleWord->word, buffer(scrambleWord), typeDictionary, trie, favor_trie, history_trie);
                     }
-                }
-                else if (mou.loadFromSystem(Cursor::Arrow)) {
-                    window.setMouseCursor(mou);
                 }
             }
             else { // Playing
@@ -259,9 +249,9 @@ void gameScrumble(RenderWindow& window, string input, string meaning, string typ
             }
         }
         if (backState == 2 && clickClock.getElapsedTime().asMilliseconds() >= 100) {
-            if (mou.loadFromSystem(Cursor::Arrow)) window.setMouseCursor(mou);
             gameMenu(window, typeDictionary, trie, favor_trie, history_trie);
         }
+        setCursor(window, buttonSpr, handstate, mousePos, mou);
         window.clear();
         window.draw(spr_scene);
         for (int i = 0; i < list.size(); i++) {

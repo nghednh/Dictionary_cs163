@@ -7,6 +7,7 @@
 void historyScene(RenderWindow& window, string typedictionary, Trie * trie, Trie favor_trie, Trie history_trie) {
 	vector<string> his_word;
 	vector<string> his_def;
+	vector<Sprite> button;
 	ifstream fin;
 	fin.open("Data/" + typedictionary + "/history.txt");
 	while (!fin.eof()) {
@@ -28,24 +29,34 @@ void historyScene(RenderWindow& window, string typedictionary, Trie * trie, Trie
 	Object book_dis = createObject("content/book_image.png", 798, 375);
 	Object screen = createObject("content/historyScene.png");
 	Object return1 = createObject("content/return.png", 150, 83);
+	button.push_back(return1.draw);
 	Object return2 = createObject("content/return1.png", 150, 83);
 	Object left = createObject("content/left.png", 798, 966);
+	button.push_back(left.draw);
 	Object left_point = createObject("content/left_point.png", 798, 966);
 	Object left_valid = createObject("content/left_valid.png", 798, 966);
 	Object right = createObject("content/right.png", 825, 966);
+	button.push_back(right.draw);
 	Object right_point = createObject("content/right_point.png", 825, 966);
 	Object right_valid = createObject("content/right_valid.png", 825, 966);
 	Event event;
-	int change = 0, count = his_word.size()-1;
+	int change = 0, count = his_word.size();
 	bool trigger_page = true;
 	Info* inf[8], * def[8];
 	Object* bar_blue[8];
 	Object* bar_red[8];
+
 	for (int i = 0; i < 8; i++) {
 		inf[i] = createInfoTest("content/Oswald-Light.ttf", "demo_text", 210, (323 + 75 * i), 38);
 		bar_blue[i] = createObjectTest("content/bar1.png", 203, (315 + 75 * i));
 		bar_red[i] = createObjectTest("content/bar2.png", 203, (315 + 75 * i));
+		button.push_back(bar_blue[i]->draw);
 		def[i] = createInfoTest("content/Oswald-Light.ttf", "demo_text", 814, 420, 25);
+	}
+	Cursor cursor;
+	bool handstate = false;
+	if (cursor.loadFromSystem(Cursor::Arrow)) {
+		window.setMouseCursor(cursor);
 	}
 	while (window.isOpen())
 	{
@@ -90,6 +101,7 @@ void historyScene(RenderWindow& window, string typedictionary, Trie * trie, Trie
 			}
 			default: break;
 			}
+			setCursor(window, button, handstate, mouse, cursor);
 			window.clear();
 			window.draw(screen.draw);
 			drawWhich(window, return2, return1, mouse);

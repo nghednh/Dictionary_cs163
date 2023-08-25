@@ -1,5 +1,2 @@
 	
-a b c	() The first three letters of the alphabet, used for the whole alphabet.
-a b c	() A primer for teaching the alphabet and first elements of reading.
-a b c	() The simplest rudiments of any subject; as, the A B C of finance.
-a b c	a b c
+hoker	(n.) Scorn; derision; abusive talk.

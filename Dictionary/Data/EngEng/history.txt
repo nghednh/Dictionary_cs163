@@ -2,6 +2,7 @@
 a b c	() The first three letters of the alphabet, used for the whole alphabet.
 a b c	() A primer for teaching the alphabet and first elements of reading.
 a b c	() The simplest rudiments of any subject; as, the A B C of finance.
+hoker	(n.) Scorn; derision; abusive talk.
 huanaco	(n.) See Guanaco.
 khan	(n.) A king; a prince; a chief; a governor; -- so called among the Tartars, Turks, and Persians, and in countries now or formerly governed by them.
 khan	(n.) An Eastern inn or caravansary.

@@ -73,7 +73,14 @@ void changeMenu(RenderWindow& window, string typeDictionary, Trie* trie, Trie& f
 	float xVelocity = 0;
 
 	Event e;
-
+	//Set cursor
+	Cursor cursor;
+	vector<Sprite> button {menu.draw, emo.draw, engeng.draw, engvie.draw,
+		back.draw, slang.draw, addWord.draw, remove.draw, resetDicitonary.draw};
+	if (cursor.loadFromSystem(Cursor::Arrow)) {
+		window.setMouseCursor(cursor);
+	}
+	bool handstate = false;
 	while (window.isOpen())
 	{
 		Vector2f mouse = window.mapPixelToCoords(Mouse::getPosition(window));
@@ -238,7 +245,7 @@ void changeMenu(RenderWindow& window, string typeDictionary, Trie* trie, Trie& f
 				menuState = 0;
 			}
 		}
-
+		setCursor(window, button, handstate, mouse, cursor);
 		window.clear();
 
 		window.draw(screen.draw);
