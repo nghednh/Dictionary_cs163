@@ -31,7 +31,7 @@ void searchMenu(RenderWindow& window, string typeDictionary, Trie* trie, Trie& f
 
 	Object ran = createObject("content/random.png", 200, 740);
 	Object ranMove = createObject("content/randomMove.png", 200, 740);
-	Object ranPressed = createObject("content/randomPressed.png", 200, 74);
+	Object ranPressed = createObject("content/randomPressed.png", 200, 740);
 	int ranState = 0;
 
 	Object engeng = createObject("content/engengMenu.png", 120, 30);
