@@ -142,7 +142,6 @@
     <ClCompile Include="History.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="MainScreen.cpp" />
-    <ClCompile Include="nghe_main.cpp" />
     <ClCompile Include="Operation.cpp" />
     <ClCompile Include="random.cpp" />
     <ClCompile Include="removeWordScreen.cpp" />
