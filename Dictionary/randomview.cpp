@@ -28,6 +28,13 @@ void randomView(RenderWindow& window, string typeDictionary, Trie* trie, Trie& f
     wrapped_text(box, wordText2.text);
     int backState = 0;
     Event e;
+    Cursor cursor;
+    vector<Sprite> button {back.draw, retry.draw};
+    bool handstate = false;
+    if (cursor.loadFromSystem(Cursor::Arrow)) {
+        window.setMouseCursor(cursor);
+    }
+
     while (window.isOpen()) {
         Vector2f mouse = window.mapPixelToCoords(Mouse::getPosition(window));
         while (window.pollEvent(e)) {
@@ -64,6 +71,7 @@ void randomView(RenderWindow& window, string typeDictionary, Trie* trie, Trie& f
                 }
             }
         }
+        setCursor(window, button, handstate, mouse, cursor);
         window.clear();
         
         window.draw(screen.draw);
@@ -134,6 +142,13 @@ void flashcardHideDef(RenderWindow& window, string typeDictionary, Trie* trie, T
     wrapped_text(box, wordText2.text);
     int backState = 0;
     Event e;
+    Cursor cursor;
+    vector<Sprite> button {appe.draw, back.draw, retry.draw};
+    bool handstate = false;
+    if (cursor.loadFromSystem(Cursor::Arrow)) {
+        window.setMouseCursor(cursor);
+    }
+
     while (window.isOpen()) {
         Vector2f mouse = window.mapPixelToCoords(Mouse::getPosition(window));
         while (window.pollEvent(e)) {
@@ -179,6 +194,7 @@ void flashcardHideDef(RenderWindow& window, string typeDictionary, Trie* trie, T
                 }
             }
         }
+        setCursor(window, button, handstate, mouse, cursor);
         window.clear();
 
         window.draw(screen.draw);
@@ -255,6 +271,13 @@ void flashcardHideWord(RenderWindow& window, string typeDictionary, Trie* trie, 
     wrapped_text(box, wordText2.text);
     int backState = 0;
     Event e;
+    Cursor cursor;
+    vector<Sprite> button {appe.draw, back.draw, retry.draw};
+    bool handstate = false;
+    if (cursor.loadFromSystem(Cursor::Arrow)) {
+        window.setMouseCursor(cursor);
+    }
+
     while (window.isOpen()) {
         Vector2f mouse = window.mapPixelToCoords(Mouse::getPosition(window));
         while (window.pollEvent(e)) {
@@ -300,6 +323,7 @@ void flashcardHideWord(RenderWindow& window, string typeDictionary, Trie* trie, 
                 }
             }
         }
+        setCursor(window, button, handstate, mouse, cursor);
         window.clear();
 
         window.draw(screen.draw);

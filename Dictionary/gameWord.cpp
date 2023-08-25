@@ -185,6 +185,16 @@ void gameWord(RenderWindow& window, string typeDictionary, Trie* trie, Trie& fav
 	createGameWord(ans, font, trie, ob, obMove, obPressed, obTrue, obFalse, opText, question, box);
 
 	Event e;
+	Cursor cursor;
+	vector<Sprite> button {menu.draw, emo.draw, engeng.draw, engvie.draw, slang.draw,
+		back.draw, retry.draw};
+	for (int i = 0; i < 5; ++i) {
+		button.push_back(ob[i].draw);
+	}
+	bool handstate = false;
+	if (cursor.loadFromSystem(Cursor::Arrow)) {
+		window.setMouseCursor(cursor);
+	}
 
 	while (window.isOpen())
 	{
@@ -365,7 +375,7 @@ void gameWord(RenderWindow& window, string typeDictionary, Trie* trie, Trie& fav
 				menuState = 0;
 			}
 		}
-
+		setCursor(window, button, handstate, mouse, cursor);
 		window.clear();
 
 		window.draw(screen.draw);

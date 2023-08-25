@@ -87,6 +87,9 @@ void Operation(RenderWindow& window, string typeDictionary, Trie* trie, Trie& fa
 	vector<Sprite> button {menu.draw, setting.draw, history.draw, searchWord.draw, emo.draw, engeng.draw, engvie.draw,
 							favor.draw, game.draw, back.draw, slang.draw, menu.draw};
 	bool handstate = false;
+	if (cursor.loadFromSystem(Cursor::Arrow)) {
+		window.setMouseCursor(cursor);
+	}
 	favor_trie.readDatasetToTrie("Data/" + typeDictionary + "/favorite.txt");
 
 	while (window.isOpen())
